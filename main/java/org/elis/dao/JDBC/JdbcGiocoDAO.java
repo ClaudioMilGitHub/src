@@ -6,10 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.elis.dao.GiocoDAO;
 import org.elis.model.Gioco;
+import org.elis.model.Libreria;
 import org.elis.model.Ruolo;
 import org.elis.model.Utente;
 
@@ -84,6 +86,10 @@ public class JdbcGiocoDAO implements GiocoDAO{
 				String descrizione = rs.getString("descrizione");
 				Integer idOfferta = (Integer) rs.getObject("id_offerta");
 				Integer idCasaEditrice = (Integer) rs.getObject("id_casa_editrice");
+				Timestamp dataC = rs.getTimestamp("data_creazione");
+				LocalDateTime dataCreazione = dataC.toLocalDateTime();
+				Timestamp dataM = rs.getTimestamp("data_ultima_modifica");
+				LocalDateTime dataUltimaModifica = dataM.toLocalDateTime();
 				
 				g.setId(id);
 				g.setDataRilascio(dataRilascio);
@@ -91,6 +97,8 @@ public class JdbcGiocoDAO implements GiocoDAO{
 				g.setIdCasaEditrice(idCasaEditrice);
 				g.setIdOfferta(idOfferta);
 				g.setNome(nome);			
+				g.setDataCreazione(dataCreazione);
+				g.setDataUltimaModifica(dataUltimaModifica);
 				return g;
 			}
 			
@@ -104,13 +112,78 @@ public class JdbcGiocoDAO implements GiocoDAO{
 
 	@Override
 	public Gioco getByName(String nome) {
-		// TODO Auto-generated method stub
+		String query = "SELECT * FROM gioco WHERE nome = ?";
+		
+		try(
+				Connection c = JdbcDAOfactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				) {
+			ps.setString(1, nome);
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				Gioco g = new Gioco();
+				
+				long id = rs.getLong("id");
+				Timestamp dataR = rs.getTimestamp("data_rilascio");
+				LocalDateTime dataRilascio = dataR.toLocalDateTime();
+				String descrizione = rs.getString("descrizione");
+				Integer idOfferta = (Integer) rs.getObject("id_offerta");
+				Integer idCasaEditrice = (Integer) rs.getObject("id_casa_editrice");
+				Timestamp dataC = rs.getTimestamp("data_creazione");
+				LocalDateTime dataCreazione = dataC.toLocalDateTime();
+				Timestamp dataM = rs.getTimestamp("data_ultima_modifica");
+				LocalDateTime dataUltimaModifica = dataM.toLocalDateTime();
+				
+				g.setId(id);
+				g.setDataRilascio(dataRilascio);
+				g.setDescrizione(descrizione);
+				g.setIdCasaEditrice(idCasaEditrice);
+				g.setIdOfferta(idOfferta);
+				g.setNome(nome);			
+				g.setDataCreazione(dataCreazione);
+				g.setDataUltimaModifica(dataUltimaModifica);
+				return g;
+			}
+			
+		}catch(Exception e) {
+				e.printStackTrace();
+			}
+		
+		
 		return null;
 	}
 
 	@Override
 	public List<Gioco> getAll() {
-		// TODO Auto-generated method stub
+		List<Gioco> giochi = new ArrayList<>();
+		String query = "SELECT * FROM gioco";
+		
+		try(
+				Connection  c = JdbcDAOfactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				){
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				Gioco g = new Gioco();
+				String nome = rs.getString("nome");
+				
+				g.setNome(nome);
+				
+				giochi.add(g);
+			}
+			
+			if(!giochi.isEmpty()) {
+				return giochi;
+			}		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -122,7 +195,19 @@ public class JdbcGiocoDAO implements GiocoDAO{
 
 	@Override
 	public Gioco deleteByNome(String nome) {
-		// TODO Auto-generated method stub
+		String query = "DELETE FROM gioco WHERE nome = ?";
+		
+		try(
+				Connection  c = JdbcDAOfactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				){
+			ps.setString(1, nome);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
 		return null;
 	}
 

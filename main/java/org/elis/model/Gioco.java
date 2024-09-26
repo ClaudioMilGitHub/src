@@ -1,43 +1,27 @@
 package org.elis.model;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Gioco {
 	
-	private Timestamp dataCreazione;
-	private Timestamp dataUltimaModifica;
-	private Timestamp dataRilascio;
+	private long id;
+	private LocalDateTime dataCreazione;
+	private LocalDateTime  dataUltimaModifica;
+	private LocalDateTime  dataRilascio;
 	
 	private String nome;
 	private String descrizione;
 	private double prezzo;
 	
-	private Integer idOffera;
+	private Integer idOfferta;
 	private Integer idCasaEditrice;
 	
 	private List<Genere> generi = new ArrayList<>();
 	private List<Libreria> librerie = new ArrayList<>();
 	
-	public Timestamp getDataCreazione() {
-		return dataCreazione;
-	}
-	public void setDataCreazione(Timestamp dataCreazione) {
-		this.dataCreazione = dataCreazione;
-	}
-	public Timestamp getDataUltimaModifica() {
-		return dataUltimaModifica;
-	}
-	public void setDataUltimaModifica(Timestamp dataUltimaModifica) {
-		this.dataUltimaModifica = dataUltimaModifica;
-	}
-	public Timestamp getDataRilascio() {
-		return dataRilascio;
-	}
-	public void setDataRilascio(Timestamp dataRilascio) {
-		this.dataRilascio = dataRilascio;
-	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -56,11 +40,11 @@ public class Gioco {
 	public void setPrezzo(double prezzo) {
 		this.prezzo = prezzo;
 	}
-	public Integer getIdOffera() {
-		return idOffera;
+	public Integer getIdOfferta() {
+		return idOfferta;
 	}
-	public void setIdOffera(Integer idOffera) {
-		this.idOffera = idOffera;
+	public void setIdOfferta(Integer idOffera) {
+		this.idOfferta = idOffera;
 	}
 	public Integer getIdCasaEditrice() {
 		return idCasaEditrice;
@@ -79,5 +63,29 @@ public class Gioco {
 	}
 	public void setLibrerie(List<Libreria> librerie) {
 		this.librerie = librerie;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public LocalDateTime getDataCreazione() {
+		return dataCreazione;
+	}
+	public void setDataCreazione(LocalDateTime dataCreazione) {
+		this.dataCreazione = dataCreazione;
+	}
+	public LocalDateTime getDataUltimaModifica() {
+		return dataUltimaModifica;
+	}
+	public void setDataUltimaModifica(LocalDateTime dataUltimaModifica) {
+		this.dataUltimaModifica = dataUltimaModifica;
+	}
+	public LocalDateTime getDataRilascio() {
+		return dataRilascio;
+	}
+	public void setDataRilascio(LocalDateTime dataRilascio) {
+		this.dataRilascio = dataRilascio;
 	}
 }
