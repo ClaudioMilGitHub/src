@@ -1,6 +1,7 @@
 package org.elis.model;
 
 public class Libreria {
+	
 	private String nome;
 	private Utente utente;
 	private Gioco gioco;
