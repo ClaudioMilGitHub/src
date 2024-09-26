@@ -5,6 +5,8 @@ import org.elis.dao.JDBC.*;
 public abstract class DAOfactory {
 	
 	public abstract UtenteDAO getUtenteDAO();
+	public abstract GiocoDAO getGiocoDAO();
+	public abstract LibreriaDAO getLibreriaDAO();
 
 	public static JdbcDAOfactory getDaoFactory() {
 		return new JdbcDAOfactory();

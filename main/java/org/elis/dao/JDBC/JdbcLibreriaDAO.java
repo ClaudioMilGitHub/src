@@ -4,13 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.elis.dao.LibreriaDAO;
 import org.elis.model.Gioco;
 import org.elis.model.Libreria;
-import org.elis.model.Ruolo;
 import org.elis.model.Utente;
 
 public class JdbcLibreriaDAO implements LibreriaDAO{
@@ -27,13 +28,15 @@ public class JdbcLibreriaDAO implements LibreriaDAO{
 	}
 
 	@Override
-	public Libreria add(String nome, Utente utente, Gioco gioco) {
+	public Libreria addLibreria(String nome, Utente utente, Gioco gioco) {
 		String query = "INSERT INTO libreria (nome,utente,gioco) VALUES (?,?,?)";
 		
 		Libreria l = new Libreria();
+		List<Gioco> giochi = new ArrayList<>();
+		
 		l.setNome(nome);
 		l.setUtente(utente);
-		l.setGioco(gioco);
+		l.setGiochi(giochi);
 		
 		try(
 				Connection  c = JdbcDAOfactory.getConnection();
@@ -56,8 +59,11 @@ public class JdbcLibreriaDAO implements LibreriaDAO{
 	}
 
 	@Override
-	public Libreria getByName(String nome) {
-		String query = "SELECT * FROM libreria WHERE nome = ?";
+	public Libreria getLibreriaByName(String nome) {
+		String query = "SELECT * FROM libreria JOIN libreria_gioco ON libreria.id = id_libreria JOIN gioco ON gioco.id = id_gioco WHERE libreria.nome = ?";
+		
+		List<Gioco> giochi = new ArrayList<>();
+		Libreria l = new Libreria();
 		
 		try(
 				Connection c = JdbcDAOfactory.getConnection();
@@ -66,32 +72,45 @@ public class JdbcLibreriaDAO implements LibreriaDAO{
 			ps.setString(1, nome);
 			ResultSet rs = ps.executeQuery();
 			
-			if(rs.next()) {
-				Libreria l = new Libreria();
-				long id = rs.getLong("id");
-				long idUtente = rs.getLong("id_utente");
-				Utente u = JdbcUtenteDAO.getInstance().getById(idUtente);
-				long idGioco = rs.getLong("id_gioco");
-				Gioco g = JdbcGiocoDAO.getInstance().getById(idGioco);
+			while(rs.next()) {
 				
-				l.setNome(nome);
+				
+				
+				long id = rs.getLong("id");
+				Timestamp dataCreazioneTimestamp = rs.getTimestamp("data_creazione");
+				LocalDateTime dataCreazione = dataCreazioneTimestamp.toLocalDateTime();
+				Timestamp dataUltimaModificaTimestamp = rs.getTimestamp("data_ultima_modifica");
+				LocalDateTime dataUltimaModifica = dataUltimaModificaTimestamp.toLocalDateTime();
+				String nomeLibreria = rs.getString("nome");
+				long idUtente = rs.getLong("id_utente");
+				long idGioco = rs.getLong("id_gioco");
+				
+				
+				
+				l.setId(id);
+				l.setNome(nomeLibreria);
+				l.setDataCreazione(dataCreazione);
+				l.setDataUltimaModifica(dataUltimaModifica);
+				Utente u = JdbcUtenteDAO.getInstance().getUtenteById(idUtente);
 				l.setUtente(u);
-				l.setGioco(g);
-				return l;
+				Gioco g = JdbcGiocoDAO.getInstance().getGiocoById(idGioco);
+				giochi.add(g);
+				l.setGiochi(giochi);
+				
+				
 			}
 			
+			return l;
 		}catch(Exception e) {
 				e.printStackTrace();
 			}
-		
-		
 		return null;
 	}
 
 	@Override
-	public List<Libreria> getAll() {
+	public List<Libreria> getAllLibrerie() {
 		List<Libreria> librerie = new ArrayList<>();
-		String query = "SELECT * FROM libreria";
+		String query = "select * from libreria JOIN libreria_gioco ON libreria.id = id_libreria;";
 		
 		try(
 				Connection  c = JdbcDAOfactory.getConnection();
@@ -103,9 +122,25 @@ public class JdbcLibreriaDAO implements LibreriaDAO{
 			while(rs.next()) {
 				
 				Libreria l = new Libreria();
+				long id = rs.getLong("id");
+				Timestamp dataCreazioneTimestamp = rs.getTimestamp("data_creazione");
+				LocalDateTime dataCreazione = dataCreazioneTimestamp.toLocalDateTime();
+				Timestamp dataUltimaModificaTimestamp = rs.getTimestamp("data_ultima_modifica");
+				LocalDateTime dataUltimaModifica = dataUltimaModificaTimestamp.toLocalDateTime();
 				String nome = rs.getString("nome");
-				
+				long idUtente = rs.getLong("id_utente");
+				long idGioco = rs.getLong("id_gioco");
+				List<Gioco> giochi = new ArrayList<>();
+
+				l.setId(id);
 				l.setNome(nome);
+				l.setDataCreazione(dataCreazione);
+				l.setDataUltimaModifica(dataUltimaModifica);
+				Utente u = JdbcUtenteDAO.getInstance().getUtenteById(idUtente);
+				l.setUtente(u);
+				Gioco g = JdbcGiocoDAO.getInstance().getGiocoById(idGioco);
+				giochi.add(g);
+				l.setGiochi(giochi);
 				
 				librerie.add(l);
 			}
@@ -122,13 +157,13 @@ public class JdbcLibreriaDAO implements LibreriaDAO{
 	}
 
 	@Override
-	public Libreria update(String nome) {
+	public Libreria updateLibreria(String nome) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Libreria deleteByNome(String nome) {
+	public Libreria deleteLibreriaByNome(String nome) {
 		String query = "DELETE FROM libreria WHERE nome = ?";
 		
 		try(

@@ -24,7 +24,7 @@ public class JdbcUtenteDAO implements UtenteDAO{
 	}
 
 	@Override
-	public Utente add(int ruoloIntValue, String username, String email, String password) {
+	public Utente addUtente(int ruoloIntValue, String username, String email, String password) {
 		
 		String query = "INSERT INTO utente (ruolo, username, email, password) VALUES (?,?,?,?)";
 		
@@ -58,7 +58,7 @@ public class JdbcUtenteDAO implements UtenteDAO{
 	}
 	
 	@Override
-	public Utente getByName(String nome) {
+	public Utente getUtenteByName(String nome) {
 		String query = "SELECT * FROM UTENTE WHERE USERNAME = ?";
 		
 		try(
@@ -93,7 +93,7 @@ public class JdbcUtenteDAO implements UtenteDAO{
 		return null;
 	}
 	
-	public Utente getById(long id) {
+	public Utente getUtenteById(long id) {
 		String query = "SELECT * FROM UTENTE WHERE id = ?";
 		
 		try(
@@ -128,7 +128,7 @@ public class JdbcUtenteDAO implements UtenteDAO{
 	}
 
 	@Override
-	public List<Utente> getAll() {
+	public List<Utente> getAllUtenti() {
 		
 		List<Utente> utenti = new ArrayList<>();
 		String query = "SELECT * FROM UTENTE";
@@ -168,12 +168,12 @@ public class JdbcUtenteDAO implements UtenteDAO{
 	}
 
 	@Override
-	public Utente update(String nome) {
+	public Utente updateUtente(String nome) {
 		return null;
 	}
 
 	@Override
-	public Utente deleteByNome(String nome) {
+	public Utente deleteUtenteByNome(String nome) {
 		
 		String query = "DELETE FROM UTENTE WHERE USERNAME = ?";
 		

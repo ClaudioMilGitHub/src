@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 import org.elis.dao.DAOfactory;
+import org.elis.dao.GiocoDAO;
+import org.elis.dao.LibreriaDAO;
 import org.elis.dao.UtenteDAO;
 
 public class JdbcDAOfactory extends DAOfactory{
@@ -22,5 +24,15 @@ public class JdbcDAOfactory extends DAOfactory{
 	@Override
 	public UtenteDAO getUtenteDAO() {
 		return JdbcUtenteDAO.getInstance();
+	}
+	
+	@Override
+	public GiocoDAO getGiocoDAO() {
+		return JdbcGiocoDAO.getInstance();
+	}
+	
+	@Override
+	public LibreriaDAO getLibreriaDAO() {
+		return JdbcLibreriaDAO.getInstance();
 	}
 }

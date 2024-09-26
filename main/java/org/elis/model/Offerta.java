@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 
 public class Offerta {
 	
+	private long id;
+	
 	private String nome;
 	private double sconto;
 	private Timestamp dataInizio;
@@ -41,5 +43,13 @@ public class Offerta {
 
 	public void setDataFine(Timestamp dataFine) {
 		this.dataFine = dataFine;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 }

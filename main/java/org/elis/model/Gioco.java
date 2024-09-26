@@ -15,8 +15,8 @@ public class Gioco {
 	private String descrizione;
 	private double prezzo;
 	
-	private Integer idOfferta;
-	private Integer idCasaEditrice;
+	private long idOfferta;
+	private long idCasaEditrice;
 	
 	private List<Genere> generi = new ArrayList<>();
 	private List<Libreria> librerie = new ArrayList<>();
@@ -40,15 +40,7 @@ public class Gioco {
 	public void setPrezzo(double prezzo) {
 		this.prezzo = prezzo;
 	}
-	public Integer getIdOfferta() {
-		return idOfferta;
-	}
-	public void setIdOfferta(Integer idOffera) {
-		this.idOfferta = idOffera;
-	}
-	public Integer getIdCasaEditrice() {
-		return idCasaEditrice;
-	}
+
 	public void setIdCasaEditrice(Integer idCasaEditrice) {
 		this.idCasaEditrice = idCasaEditrice;
 	}
@@ -87,5 +79,17 @@ public class Gioco {
 	}
 	public void setDataRilascio(LocalDateTime dataRilascio) {
 		this.dataRilascio = dataRilascio;
+	}
+	public long getIdOfferta() {
+		return idOfferta;
+	}
+	public void setIdOfferta(long idOfferta) {
+		this.idOfferta = idOfferta;
+	}
+	public long getIdCasaEditrice() {
+		return idCasaEditrice;
+	}
+	public void setIdCasaEditrice(long idCasaEditrice) {
+		this.idCasaEditrice = idCasaEditrice;
 	}
 }

@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Genere {
 	
+	private long id;
+	
 	private String nome;
 	private Offerta offerta;
 	private List<Gioco> giochi = new ArrayList<>();
@@ -25,5 +27,11 @@ public class Genere {
 	}
 	public void setGiochi(List<Gioco> giochi) {
 		this.giochi = giochi;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
 }

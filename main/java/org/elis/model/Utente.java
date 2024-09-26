@@ -1,8 +1,7 @@
 package org.elis.model;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.ArrayList;
 
 public class Utente {
 
@@ -14,11 +13,11 @@ public class Utente {
 	private String email;
 	private String password;
 	
-	private List<Recensione> recensioni = new ArrayList<>();
-	private List<Libreria> librerie = new ArrayList<>();
+	private List<Recensione> recensioni;
+	private List<Libreria> librerie;
 	
-	private Timestamp dataCreazione;
-	private Timestamp dataUltimaModifica;
+	private LocalDateTime dataCreazione;
+	private LocalDateTime dataUltimaModifica;
 	
 	public Utente(long id, Ruolo ruolo, String username, String email, String password) {
 		this.id = id;
@@ -86,19 +85,19 @@ public class Utente {
 		this.librerie = librerie;
 	}
 
-	public Timestamp getDataCreazione() {
+	public LocalDateTime getDataCreazione() {
 		return dataCreazione;
 	}
 
-	public void setDataCreazione(Timestamp dataCreazione) {
+	public void setDataCreazione(LocalDateTime dataCreazione) {
 		this.dataCreazione = dataCreazione;
 	}
 
-	public Timestamp getDataUltimaModifica() {
+	public LocalDateTime getDataUltimaModifica() {
 		return dataUltimaModifica;
 	}
 
-	public void setDataUltimaModifica(Timestamp dataUltimaModifica) {
+	public void setDataUltimaModifica(LocalDateTime dataUltimaModifica) {
 		this.dataUltimaModifica = dataUltimaModifica;
 	}
 }

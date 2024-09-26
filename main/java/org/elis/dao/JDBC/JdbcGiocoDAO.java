@@ -11,9 +11,6 @@ import java.util.List;
 
 import org.elis.dao.GiocoDAO;
 import org.elis.model.Gioco;
-import org.elis.model.Libreria;
-import org.elis.model.Ruolo;
-import org.elis.model.Utente;
 
 public class JdbcGiocoDAO implements GiocoDAO{
 	
@@ -30,8 +27,8 @@ public class JdbcGiocoDAO implements GiocoDAO{
 	}
 	
 	@Override
-	public Gioco addGioco(String nome, LocalDateTime dataRilascio, String descrizione, double prezzo, Integer idOfferta,
-			Integer idCasaEditrice) {
+	public Gioco addGioco(String nome, LocalDateTime dataRilascio, String descrizione, double prezzo, long idOfferta,
+			long idCasaEditrice) {
 		String query = "SELECT * FROM gioco WHERE nome = ?";
 		
 		Gioco g = new Gioco();
@@ -51,8 +48,8 @@ public class JdbcGiocoDAO implements GiocoDAO{
 			ps.setTimestamp(2, Timestamp.valueOf(dataRilascio));
 			ps.setString(3, descrizione);
 			ps.setDouble(4, prezzo);
-			ps.setObject(5, idOfferta, java.sql.Types.INTEGER);
-			ps.setObject(6, idCasaEditrice, java.sql.Types.INTEGER);
+			ps.setLong(5, idOfferta);
+			ps.setLong(6, idCasaEditrice);
 			
 			ps.executeUpdate();
 			
@@ -68,7 +65,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 		
 	}
 	
-	public Gioco getById(long id) {
+	public Gioco getGiocoById(long id) {
 		String query = "SELECT * FROM gioco WHERE id = ?";
 		
 		try(
@@ -84,8 +81,8 @@ public class JdbcGiocoDAO implements GiocoDAO{
 				Timestamp dataR = rs.getTimestamp("data_rilascio");
 				LocalDateTime dataRilascio = dataR.toLocalDateTime();
 				String descrizione = rs.getString("descrizione");
-				Integer idOfferta = (Integer) rs.getObject("id_offerta");
-				Integer idCasaEditrice = (Integer) rs.getObject("id_casa_editrice");
+				long idOfferta = rs.getLong("id_offerta");
+				long idCasaEditrice =  rs.getLong("id_casa_editrice");
 				Timestamp dataC = rs.getTimestamp("data_creazione");
 				LocalDateTime dataCreazione = dataC.toLocalDateTime();
 				Timestamp dataM = rs.getTimestamp("data_ultima_modifica");
@@ -111,7 +108,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 	}
 
 	@Override
-	public Gioco getByName(String nome) {
+	public Gioco getGiocoByName(String nome) {
 		String query = "SELECT * FROM gioco WHERE nome = ?";
 		
 		try(
@@ -128,8 +125,8 @@ public class JdbcGiocoDAO implements GiocoDAO{
 				Timestamp dataR = rs.getTimestamp("data_rilascio");
 				LocalDateTime dataRilascio = dataR.toLocalDateTime();
 				String descrizione = rs.getString("descrizione");
-				Integer idOfferta = (Integer) rs.getObject("id_offerta");
-				Integer idCasaEditrice = (Integer) rs.getObject("id_casa_editrice");
+				long idOfferta = rs.getLong("id_offerta");
+				long idCasaEditrice =  rs.getLong("id_casa_editrice");
 				Timestamp dataC = rs.getTimestamp("data_creazione");
 				LocalDateTime dataCreazione = dataC.toLocalDateTime();
 				Timestamp dataM = rs.getTimestamp("data_ultima_modifica");
@@ -155,7 +152,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 	}
 
 	@Override
-	public List<Gioco> getAll() {
+	public List<Gioco> getAllGiochi() {
 		List<Gioco> giochi = new ArrayList<>();
 		String query = "SELECT * FROM gioco";
 		
@@ -188,13 +185,13 @@ public class JdbcGiocoDAO implements GiocoDAO{
 	}
 
 	@Override
-	public Gioco update(String nome) {
+	public Gioco updateGioco(String nome) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Gioco deleteByNome(String nome) {
+	public Gioco deleteGiocoByNome(String nome) {
 		String query = "DELETE FROM gioco WHERE nome = ?";
 		
 		try(
