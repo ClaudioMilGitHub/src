@@ -92,6 +92,40 @@ public class JdbcUtenteDAO implements UtenteDAO{
 		
 		return null;
 	}
+	
+	public Utente getById(long id) {
+		String query = "SELECT * FROM UTENTE WHERE id = ?";
+		
+		try(
+				Connection c = JdbcDAOfactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				) {
+			ps.setLong(1, id);
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				Utente u = new Utente();
+				String username = rs.getString("username");
+				String email = rs.getString("email");
+				String password = rs.getString("password");
+				int indiceRuolo = rs.getInt("ruolo");
+				Ruolo[] ruoli = Ruolo.values();
+				Ruolo ruolo = ruoli[indiceRuolo];
+				u.setId(id);
+				u.setUsername(username);
+				u.setEmail(email);
+				u.setPassword(password);
+				u.setRuolo(ruolo);
+				return u;
+			}
+			
+		}catch(Exception e) {
+				e.printStackTrace();
+			}
+		
+		
+		return null;
+	}
 
 	@Override
 	public List<Utente> getAll() {
