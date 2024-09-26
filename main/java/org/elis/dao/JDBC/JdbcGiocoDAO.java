@@ -2,11 +2,16 @@ package org.elis.dao.JDBC;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.elis.dao.GiocoDAO;
 import org.elis.model.Gioco;
+import org.elis.model.Ruolo;
+import org.elis.model.Utente;
 
 public class JdbcGiocoDAO implements GiocoDAO{
 	
@@ -21,10 +26,11 @@ public class JdbcGiocoDAO implements GiocoDAO{
 		
 		return instance;
 	}
-
+	
 	@Override
-	public Gioco addGioco(String nome, LocalDateTime dataRilascio, String descrizione, double prezzo, Integer idOfferta, Integer idCasaEditrice) {
-		String query = "INSERT INTO gioco (nome, data_Rilascio, descrizione, prezzo, id_Offerta, id_Casa_Editrice) VALUES (?,?,?,?,?,?)";
+	public Gioco addGioco(String nome, LocalDateTime dataRilascio, String descrizione, double prezzo, Integer idOfferta,
+			Integer idCasaEditrice) {
+		String query = "SELECT * FROM gioco WHERE nome = ?";
 		
 		Gioco g = new Gioco();
 		g.setNome(nome);
@@ -40,10 +46,9 @@ public class JdbcGiocoDAO implements GiocoDAO{
 				PreparedStatement ps = c.prepareStatement(query);
 				){
 			ps.setString(1, nome);
-			ps.setTimestamp(2, dataRilascio);
+			ps.setTimestamp(2, Timestamp.valueOf(dataRilascio));
 			ps.setString(3, descrizione);
 			ps.setDouble(4, prezzo);
-			
 			ps.setObject(5, idOfferta, java.sql.Types.INTEGER);
 			ps.setObject(6, idCasaEditrice, java.sql.Types.INTEGER);
 			
@@ -57,6 +62,43 @@ public class JdbcGiocoDAO implements GiocoDAO{
 			e.printStackTrace();
 		}
 
+		return null;
+		
+	}
+	
+	public Gioco getById(long id) {
+		String query = "SELECT * FROM gioco WHERE id = ?";
+		
+		try(
+				Connection c = JdbcDAOfactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				) {
+			ps.setLong(1, id);
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				Gioco g = new Gioco();
+				String nome = rs.getString("nome");
+				Timestamp dataR = rs.getTimestamp("data_rilascio");
+				LocalDateTime dataRilascio = dataR.toLocalDateTime();
+				String descrizione = rs.getString("descrizione");
+				Integer idOfferta = (Integer) rs.getObject("id_offerta");
+				Integer idCasaEditrice = (Integer) rs.getObject("id_casa_editrice");
+				
+				g.setId(id);
+				g.setDataRilascio(dataRilascio);
+				g.setDescrizione(descrizione);
+				g.setIdCasaEditrice(idCasaEditrice);
+				g.setIdOfferta(idOfferta);
+				g.setNome(nome);			
+				return g;
+			}
+			
+		}catch(Exception e) {
+				e.printStackTrace();
+			}
+		
+		
 		return null;
 	}
 
@@ -83,6 +125,8 @@ public class JdbcGiocoDAO implements GiocoDAO{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 	
 
 }
