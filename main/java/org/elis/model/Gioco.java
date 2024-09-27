@@ -7,7 +7,7 @@ import java.util.List;
 public class Gioco {
 	
 	private long id;
-	private LocalDateTime dataCreazione;
+	private LocalDateTime  dataCreazione;
 	private LocalDateTime  dataUltimaModifica;
 	private LocalDateTime  dataRilascio;
 	

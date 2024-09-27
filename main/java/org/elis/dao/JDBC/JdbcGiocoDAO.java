@@ -5,12 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.sql.Types;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.elis.dao.GiocoDAO;
 import org.elis.model.Gioco;
+import org.elis.model.Offerta;
+import org.elis.model.Utente;
 
 public class JdbcGiocoDAO implements GiocoDAO{
 	
@@ -27,30 +30,50 @@ public class JdbcGiocoDAO implements GiocoDAO{
 	}
 	
 	@Override
-	public Gioco addGioco(String nome, LocalDateTime dataRilascio, String descrizione, double prezzo, long idOfferta,
-			long idCasaEditrice) {
-		String query = "SELECT * FROM gioco WHERE nome = ?";
+	public Gioco addGioco(String nome, LocalDateTime dataRilascio, String descrizione, double prezzo, Offerta offerta,
+			Utente utente) {
+		String query = "INSERT INTO gioco (nome, data_rilascio, descrizione, prezzo, id_offerta, id_casa_editrice)"
+				+ "VALUES (?,?,?,?,?,?)";
 		
 		Gioco g = new Gioco();
+		
 		g.setNome(nome);
 		g.setDataRilascio(dataRilascio);
 		g.setDescrizione(descrizione);
 		g.setPrezzo(prezzo);
-		g.setIdOfferta(idOfferta);
-		g.setIdCasaEditrice(idCasaEditrice);
+		
+		if(offerta != null) {
+			g.setIdOfferta(offerta.getId());
+		}
+		if(utente != null) {
+			g.setIdCasaEditrice(utente.getId());
+		}
+		
 		
 		
 		try(
 				Connection c = JdbcDAOfactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
+			
 			ps.setString(1, nome);
 			ps.setTimestamp(2, Timestamp.valueOf(dataRilascio));
 			ps.setString(3, descrizione);
 			ps.setDouble(4, prezzo);
-			ps.setLong(5, idOfferta);
-			ps.setLong(6, idCasaEditrice);
 			
+			if(offerta != null) {
+				ps.setLong(5, offerta.getId());
+			} else {
+				ps.setNull(5, Types.INTEGER);
+			}
+				
+
+			if(utente != null) {
+				ps.setLong(6, utente.getId());
+			} else {
+				ps.setNull(6, Types.INTEGER);
+			}
+	
 			ps.executeUpdate();
 			
 			return g;
@@ -207,8 +230,4 @@ public class JdbcGiocoDAO implements GiocoDAO{
 		}	
 		return null;
 	}
-
-	
-	
-
 }

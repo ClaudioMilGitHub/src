@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.elis.dao.UtenteDAO;
@@ -43,6 +42,7 @@ public class JdbcUtenteDAO implements UtenteDAO{
 		try(
 				Connection  c = JdbcDAOfactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
+				
 				){
 			
 			ps.setInt(1, ruoloIntValue);
@@ -154,6 +154,7 @@ public class JdbcUtenteDAO implements UtenteDAO{
 			while(rs.next()) {
 				
 				Utente u = new Utente();
+				long id = rs.getLong("id");
 				String email = rs.getString("email");
 				String username = rs.getString("username");
 				String password = rs.getString("password");
@@ -162,6 +163,7 @@ public class JdbcUtenteDAO implements UtenteDAO{
 				Ruolo ruolo = ruoli[roleIntValue];
 				Timestamp dataN = rs.getTimestamp("data_nascita");
 				LocalDate dataNascita = dataN.toLocalDateTime().toLocalDate();
+				u.setId(id); 
 				u.setEmail(email);
 				u.setUsername(username);
 				u.setPassword(password);
