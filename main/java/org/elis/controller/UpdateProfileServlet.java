@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -49,7 +50,7 @@ public class UpdateProfileServlet extends HttpServlet {
         // Ottieni i dati dal form inviato
         String newUsername = request.getParameter("username");
         String newPassword = request.getParameter("password");
-        String newDataNascita = request.getParameter("dataNascita");
+        LocalDate newDataNascita = request.getParameter("dataNascita");
 
         // Otteniamo l'utente loggato dalla sessione
         HttpSession session = request.getSession(false);
