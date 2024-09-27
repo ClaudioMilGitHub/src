@@ -6,7 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body> la logica è questa
+
 	   <form action="LogicaLogin" method="post">
             <input type="email" placeholder="mario.rossi@gmail.com" name="emailLogin">
             <br>
