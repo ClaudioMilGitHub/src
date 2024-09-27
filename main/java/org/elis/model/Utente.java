@@ -1,5 +1,6 @@
 package org.elis.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class Utente {
 	private String username;
 	private String email;
 	private String password;
+	private LocalDate dataNascita; 
 	
 	private List<Recensione> recensioni;
 	private List<Libreria> librerie;
@@ -19,12 +21,13 @@ public class Utente {
 	private LocalDateTime dataCreazione;
 	private LocalDateTime dataUltimaModifica;
 	
-	public Utente(long id, Ruolo ruolo, String username, String email, String password) {
+	public Utente(long id, Ruolo ruolo, String username, String email, String password, LocalDate dataNascita) {
 		this.id = id;
 		this.ruolo = ruolo;
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.dataNascita = dataNascita;
 	}
 
 	public Utente() {}
@@ -99,5 +102,13 @@ public class Utente {
 
 	public void setDataUltimaModifica(LocalDateTime dataUltimaModifica) {
 		this.dataUltimaModifica = dataUltimaModifica;
+	}
+
+	public LocalDate getDataNascita() {
+		return dataNascita;
+	}
+
+	public void setDataNascita(LocalDate dataNascita) {
+		this.dataNascita = dataNascita;
 	}
 }

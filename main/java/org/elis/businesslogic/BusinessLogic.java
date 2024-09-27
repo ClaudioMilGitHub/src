@@ -1,5 +1,6 @@
 package org.elis.businesslogic;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.elis.dao.DAOfactory;
@@ -9,6 +10,17 @@ import org.elis.model.Utente;
 
 public class BusinessLogic {
 	
+	public static Utente loginUtente(String email, String password) {
+		
+		for(Utente u : getAllUtenti()) {
+			if(u.getEmail().equals(email) && u.getPassword().equals(password)) {
+				System.out.println("Email e password corrette!");
+				return u;
+			}
+		}
+		return null;
+	}
+	
 	public static Utente getUtenteByName(String nome) {
 		return DAOfactory.getDaoFactory().getUtenteDAO().getUtenteByName(nome);
 	}
@@ -17,8 +29,8 @@ public class BusinessLogic {
 		return DAOfactory.getDaoFactory().getUtenteDAO().getAllUtenti();
 	}
 	
-	public static Utente addUtente(int ruolo, String username, String email, String password) {
-		return DAOfactory.getDaoFactory().getUtenteDAO().addUtente(ruolo, username, email, password);
+	public static Utente addUtente(int ruolo, String username, String email, String password, LocalDate dataNascita) {
+		return DAOfactory.getDaoFactory().getUtenteDAO().addUtente(ruolo, username, email, password, dataNascita);
 	}
 	
 	public static Gioco addGioco(String nome, LocalDateTime dataRilascio, String descrizione, double prezzo, Integer idOfferta, Integer idCasaEditrice) {

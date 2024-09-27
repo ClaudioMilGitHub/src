@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.elis.dao.UtenteDAO;
@@ -24,9 +27,9 @@ public class JdbcUtenteDAO implements UtenteDAO{
 	}
 
 	@Override
-	public Utente addUtente(int ruoloIntValue, String username, String email, String password) {
+	public Utente addUtente(int ruoloIntValue, String username, String email, String password, LocalDate dataNascita) {
 		
-		String query = "INSERT INTO utente (ruolo, username, email, password) VALUES (?,?,?,?)";
+		String query = "INSERT INTO utente (ruolo, username, email, password, data_nascita) VALUES (?,?,?,?,?)";
 		
 		Utente u = new Utente();
 		Ruolo[] ruoli = Ruolo.values();
@@ -35,6 +38,7 @@ public class JdbcUtenteDAO implements UtenteDAO{
 		u.setUsername(username);
 		u.setEmail(email);
 		u.setPassword(password);
+		u.setDataNascita(dataNascita);
 		
 		try(
 				Connection  c = JdbcDAOfactory.getConnection();
@@ -45,6 +49,7 @@ public class JdbcUtenteDAO implements UtenteDAO{
 			ps.setString(2, username);
 			ps.setString(3, email);
 			ps.setString(4, password);
+			ps.setTimestamp(5, Timestamp.valueOf(dataNascita.toString()));
 			
 			ps.executeUpdate();
 			
@@ -77,11 +82,14 @@ public class JdbcUtenteDAO implements UtenteDAO{
 				int indiceRuolo = rs.getInt("ruolo");
 				Ruolo[] ruoli = Ruolo.values();
 				Ruolo ruolo = ruoli[indiceRuolo];
+				Timestamp dataN = rs.getTimestamp("data_nascita");
+				LocalDate dataNascita = dataN.toLocalDateTime().toLocalDate();
 				u.setId(id);
 				u.setUsername(username);
 				u.setEmail(email);
 				u.setPassword(password);
 				u.setRuolo(ruolo);
+				u.setDataNascita(dataNascita);
 				return u;
 			}
 			
@@ -111,11 +119,14 @@ public class JdbcUtenteDAO implements UtenteDAO{
 				int indiceRuolo = rs.getInt("ruolo");
 				Ruolo[] ruoli = Ruolo.values();
 				Ruolo ruolo = ruoli[indiceRuolo];
+				Timestamp dataN = rs.getTimestamp("data_nascita");
+				LocalDate dataNascita = dataN.toLocalDateTime().toLocalDate();
 				u.setId(id);
 				u.setUsername(username);
 				u.setEmail(email);
 				u.setPassword(password);
 				u.setRuolo(ruolo);
+				u.setDataNascita(dataNascita);
 				return u;
 			}
 			
@@ -149,10 +160,13 @@ public class JdbcUtenteDAO implements UtenteDAO{
 				int roleIntValue = rs.getInt("ruolo");
 				Ruolo[] ruoli = Ruolo.values();
 				Ruolo ruolo = ruoli[roleIntValue];
+				Timestamp dataN = rs.getTimestamp("data_nascita");
+				LocalDate dataNascita = dataN.toLocalDateTime().toLocalDate();
 				u.setEmail(email);
 				u.setUsername(username);
 				u.setPassword(password);
 				u.setRuolo(ruolo);
+				u.setDataNascita(dataNascita);
 				utenti.add(u);
 			}
 			
