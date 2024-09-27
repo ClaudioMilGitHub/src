@@ -11,6 +11,8 @@ public interface UtenteDAO {
 	Utente getUtenteByName(String nome);
 	Utente getUtenteById(long id);
 	List<Utente> getAllUtenti();
-	Utente updateUtente(String nome);
 	Utente deleteUtenteByNome(String nome);
+	Utente updateUtenteUsername(Utente utenteLoggato, String newUsername);
+	Utente updateUtentePassword(Utente utenteLoggato, String newPassword);
+	Utente updateUtenteDataNascita(Utente utenteLoggato, LocalDate newDataNascita);
 }
