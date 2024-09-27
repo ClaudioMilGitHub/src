@@ -36,29 +36,39 @@ public class JdbcOffertaDAO implements OffertaDAO {
 			    e.printStackTrace();
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         return null;
     }
 
     @Override
-    public Offerta getById(int id) throws Exception {
+    public Offerta getOffertaById(long id) {
         String query = "SELECT * FROM OFFERTA WHERE ID = ?";
-        try (Connection c = JdbcDAOfactory.getConnection();
-             PreparedStatement ps = c.prepareStatement(query)) {
-            ps.setInt(1, id);
+        
+        try (
+        		Connection c = JdbcDAOfactory.getConnection();
+        		PreparedStatement ps = c.prepareStatement(query)
+        				
+        		) {
+        	
+            ps.setLong(1, id);
+            
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+            
+            if (rs.next()) 
+            {
                 Offerta offerta = new Offerta();
+                offerta.setId(id);
                 offerta.setNome(rs.getString("nome"));
                 offerta.setSconto(rs.getDouble("sconto"));
-                offerta.setDataInizio(rs.getTimestamp("dataInizio"));
-                offerta.setDataFine(rs.getTimestamp("dataFine"));
+                offerta.setDataInizio(rs.getTimestamp("data_inizio"));
+                offerta.setDataFine(rs.getTimestamp("data_fine"));
                 return offerta;
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+        	e.printStackTrace();
         }
         return null;
     }

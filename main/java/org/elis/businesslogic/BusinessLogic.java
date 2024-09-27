@@ -6,6 +6,7 @@ import java.util.List;
 import org.elis.dao.DAOfactory;
 import org.elis.model.Gioco;
 import org.elis.model.Libreria;
+import org.elis.model.Offerta;
 import org.elis.model.Utente;
 
 public class BusinessLogic {
@@ -21,6 +22,10 @@ public class BusinessLogic {
 		return null;
 	}
 	
+	public static Utente getUtenteById(long id) {
+		return DAOfactory.getDaoFactory().getUtenteDAO().getUtenteById(id);
+	}
+	
 	public static Utente getUtenteByName(String nome) {
 		return DAOfactory.getDaoFactory().getUtenteDAO().getUtenteByName(nome);
 	}
@@ -33,8 +38,8 @@ public class BusinessLogic {
 		return DAOfactory.getDaoFactory().getUtenteDAO().addUtente(ruolo, username, email, password, dataNascita);
 	}
 	
-	public static Gioco addGioco(String nome, LocalDateTime dataRilascio, String descrizione, double prezzo, Integer idOfferta, Integer idCasaEditrice) {
-		return DAOfactory.getDaoFactory().getGiocoDAO().addGioco(nome, dataRilascio, descrizione, prezzo, idOfferta, idCasaEditrice);
+	public static Gioco addGioco(String nome, LocalDateTime dataRilascio, String descrizione, double prezzo, Offerta offerta, Utente utente) {
+		return DAOfactory.getDaoFactory().getGiocoDAO().addGioco(nome, dataRilascio, descrizione, prezzo, offerta, utente);
 	}
 	
 	public static Gioco getGiocoByName(String nome) {
@@ -51,5 +56,9 @@ public class BusinessLogic {
 	
 	public static List<Libreria> getAllLibrerie(){
 		return DAOfactory.getDaoFactory().getLibreriaDAO().getAllLibrerie();
+	}
+	
+	public static Offerta getOffertaById(long id) {
+		return DAOfactory.getDaoFactory().getOffertaDAO().getOffertaById(id);
 	}
 }
