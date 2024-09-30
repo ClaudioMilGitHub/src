@@ -7,8 +7,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Timestamp;
+import java.time.LocalDate;
 
 import org.elis.businesslogic.BusinessLogic;
+import org.elis.model.Utente;
 
 /**
  * Servlet implementation class RegistrationLogicServlet
@@ -40,14 +42,34 @@ public class RegistrationLogicServlet extends HttpServlet {
 		String username = request.getParameter("usernameFormInput");
 		String email = request.getParameter("emailFormInput");
 		String password= request.getParameter("passwordFormInput");
-		int ruolo = request.getParameter("ruoloFormInput");
-		String dataNascita= request.getParameter("dataNascitaFormInput");
+		int ruolo = Integer.parseInt(request.getParameter("ruoloFormInput"));
+		String data= request.getParameter("dataNascitaFormInput");
 		
-		if(username == null || email == null || password == null || dataNascita == null || username.isEmpty() || email.isEmpty() || password.isEmpty() || dataNascita.isEmpty()) {
+		if(username == null || email == null || password == null || data == null || username.isEmpty() || email.isEmpty() || password.isEmpty() || data.isEmpty()) {
 			request.getRequestDispatcher("public-jsp/PaginaRegistrazione.jsp").forward(request, response);
 			return;
 		}
 		
+		for(Utente u : BusinessLogic.getAllUtenti()) {
+			if(u.getEmail().equals(email) && u.getUsername().equals(username)) {
+				request.getRequestDispatcher("public-jsp/PaginaRegistrazione.jsp").forward(request, response);
+				return;
+			}
+		}
+		
+		if(password.length() < 8) {
+			request.getRequestDispatcher("public-jsp/PaginaRegistrazione.jsp").forward(request, response);
+			return;
+		}else if(password.equals(password.toLowerCase())) {
+			request.getRequestDispatcher("public-jsp/PaginaRegistrazione.jsp").forward(request, response);
+			return;
+		}else if(!password.contains("!") || !password.contains("?") || !password.contains("$")) {
+			request.getRequestDispatcher("public-jsp/PaginaRegistrazione.jsp").forward(request, response);
+			return;
+		}
+		
+		
+		LocalDate dataNascita = LocalDate.parse(data);
 		BusinessLogic.addUtente(ruolo, username, email, password, dataNascita);	
 		response.sendRedirect("public-jsp/PaginaLogin.jsp");
 	}
