@@ -36,7 +36,6 @@ public class UpdateProfileServlet extends HttpServlet {
 
         // Recupera l'azione specifica dal pulsante premuto
         String action = request.getParameter("action");
-        boolean isUpdated = false;
 
         // Verifica se il parametro action è nullo
         if (action == null || action.isEmpty()) {
@@ -51,7 +50,7 @@ public class UpdateProfileServlet extends HttpServlet {
                 String newUsername = request.getParameter("username");
                 if (newUsername != null && !newUsername.trim().isEmpty()) {
                     // Procedi con l'aggiornamento dell'username
-                    isUpdated = BusinessLogic.updateUtenteUsername(utenteLoggato, newUsername);
+                    BusinessLogic.updateUtenteUsername(utenteLoggato, newUsername);
                 } else {
                     request.setAttribute("error", "Il campo Username non può essere vuoto.");
                     request.getRequestDispatcher("private-jsp/ProfileUpdate.jsp").forward(request, response);
@@ -65,7 +64,7 @@ public class UpdateProfileServlet extends HttpServlet {
                     try {
                         LocalDate newDataNascita = LocalDate.parse(newDataNascitaStr);
                         // Procedi con l'aggiornamento della data di nascita
-                        isUpdated = BusinessLogic.updateUtenteDataNascita(utenteLoggato, newDataNascita);
+                        BusinessLogic.updateUtenteDataNascita(utenteLoggato, newDataNascita);
                     } catch (Exception e) {
                         request.setAttribute("error", "Formato della data non valido.");
                         request.getRequestDispatcher("private-jsp/ProfileUpdate.jsp").forward(request, response);
@@ -82,7 +81,7 @@ public class UpdateProfileServlet extends HttpServlet {
                 String newPassword = request.getParameter("password");
                 if (newPassword != null && !newPassword.trim().isEmpty()) {
                     // Procedi con l'aggiornamento della password
-                    isUpdated = BusinessLogic.updateUtentePassword(utenteLoggato, newPassword);
+                    BusinessLogic.updateUtentePassword(utenteLoggato, newPassword);
                 } else {
                     request.setAttribute("error", "Il campo Password non può essere vuoto.");
                     request.getRequestDispatcher("private-jsp/ProfileUpdate.jsp").forward(request, response);
@@ -96,14 +95,8 @@ public class UpdateProfileServlet extends HttpServlet {
                 return;
         }
 
-        if (isUpdated) {
-            // Se l'aggiornamento è riuscito, aggiorna l'utente nella sessione
-            session.setAttribute("utenteLoggato", utenteLoggato);
-            response.sendRedirect("private-jsp/ProfileUpdatedSuccess.jsp");
-        } else {
-            // Se l'aggiornamento fallisce, mostra un messaggio di errore
-            request.setAttribute("error", "Si è verificato un errore durante l'aggiornamento del profilo.");
-            request.getRequestDispatcher("private-jsp/ProfileUpdate.jsp").forward(request, response);
-        }
+        // Aggiornamento riuscito, aggiorna l'utente nella sessione
+        session.setAttribute("utenteLoggato", utenteLoggato);
+        response.sendRedirect("private-jsp/ProfileUpdatedSuccess.jsp");
     }
 }

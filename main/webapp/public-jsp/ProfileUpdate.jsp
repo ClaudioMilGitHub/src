@@ -12,26 +12,16 @@
         <h2 class="mt-5">Aggiorna il tuo profilo</h2>
 
         <% 
-            // Mostra eventuali messaggi di errore passati dal servlet
-            String errorMessage = (String) request.getAttribute("error");
-            if (errorMessage != null) {
-        %>
-            <div class="alert alert-danger"><%= errorMessage %></div>
-        <% } %>
-
-        <%
             // Recupera la sessione esistente
-            HttpSession currentSession = session;
+            HttpSession currentSession = request.getSession(false);
+            Utente utenteLoggato = (currentSession != null) ? (Utente) currentSession.getAttribute("utenteLoggato") : null;
 
-            if (currentSession == null || currentSession.getAttribute("utenteLoggato") == null) {
+            if (utenteLoggato == null) {
                 // Se la sessione non esiste o l'utente non è loggato, reindirizza al login
                 response.sendRedirect("public-jsp/PaginaLogin.jsp");
                 return;
             }
 
-            // Recupera l'utente loggato dalla sessione
-            Utente utenteLoggato = (Utente) currentSession.getAttribute("utenteLoggato");
-            
             // Recupera i dati dell'utente per mostrarli nel form
             String currentEmail = utenteLoggato.getEmail();
             String currentUsername = utenteLoggato.getUsername();
@@ -67,6 +57,13 @@
             </div>
         </form>
 
+        <% 
+            // Mostra eventuali messaggi di errore passati dal servlet
+            String errorMessage = (String) request.getAttribute("error");
+            if (errorMessage != null) {
+        %>
+            <div class="alert alert-danger mt-3"><%= errorMessage %></div>
+        <% } %>
     </div>
 </body>
 </html>
