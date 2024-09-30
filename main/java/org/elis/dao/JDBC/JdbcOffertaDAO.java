@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import org.elis.dao.OffertaDAO;
@@ -94,11 +95,7 @@ public class JdbcOffertaDAO implements OffertaDAO {
         return offerte;
     }
 
-    @Override
-    public Offerta update(Offerta offerta) {
-        // Implementa la logica di aggiornamento se necessario
-        return null;
-    }
+ 
 
     @Override
     public void deleteById(int id) throws Exception {
@@ -111,4 +108,98 @@ public class JdbcOffertaDAO implements OffertaDAO {
             e.printStackTrace();
         }
     }
+
+	@Override
+	public Offerta updateOffertaNome(Offerta offerta, String nome) throws Exception {
+		 String query = "UPDATE offerta SET nome = ? WHERE id = ?";
+		    try (
+		    		Connection c = JdbcDAOfactory.getConnection();
+		         PreparedStatement ps = c.prepareStatement(query)
+		        		 ) {
+		        
+		        ps.setString(1, nome);
+		        ps.setLong(2, offerta.getId());
+
+		        int rowsUpdated = ps.executeUpdate();
+		        if (rowsUpdated > 0) {
+		            offerta.setNome(nome);
+		            return offerta;
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return null;
+		}
+
+	@Override
+	public Offerta updateOffertaDataInizio(Offerta offerta, Timestamp dataInizio) {
+	    String query = "UPDATE offerta SET dataInizio = ? WHERE id = ?";
+	    try (
+	    		Connection c = JdbcDAOfactory.getConnection();
+	         PreparedStatement ps = c.prepareStatement(query)
+	        		 ) {
+	        
+	        ps.setTimestamp(1, dataInizio);
+	        ps.setLong(2, offerta.getId());
+
+	        int rowsUpdated = ps.executeUpdate();
+	        if (rowsUpdated > 0) {
+	            offerta.setDataInizio(dataInizio);
+	            return offerta;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } catch (Exception e) {
+			e.printStackTrace();
+	    }
+	    return null;
+	}
+	@Override
+	public Offerta updateOffertaDataFine(Offerta offerta, Timestamp dataFine) {
+	    String query = "UPDATE offerta SET dataFine = ? WHERE id = ?";
+	    try (
+	    		Connection c = JdbcDAOfactory.getConnection();
+	         PreparedStatement ps = c.prepareStatement(query)
+	        		 ) {
+	        
+	        ps.setTimestamp(1, dataFine);
+	        ps.setLong(2, offerta.getId());
+
+	        int rowsUpdated = ps.executeUpdate();
+	        if (rowsUpdated > 0) {
+	            offerta.setDataFine(dataFine); 
+	            return offerta;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } catch (Exception e) {
+			e.printStackTrace();
+	    }
+	    return null;
+	}
+	@Override
+	public Offerta updateOffertaSconto(Offerta offerta, double sconto) {
+	    String query = "UPDATE offerta SET sconto = ? WHERE id = ?";
+	    try (
+	    		
+	    		Connection c = JdbcDAOfactory.getConnection();
+	    		PreparedStatement ps = c.prepareStatement(query)
+	    				) {
+	        
+	        ps.setDouble(1, sconto);
+	        ps.setLong(2, offerta.getId());
+
+	        int rowsUpdated = ps.executeUpdate();
+	        if (rowsUpdated > 0) {
+	            offerta.setSconto(sconto); 
+	            return offerta;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } catch (Exception e) {
+			e.printStackTrace();
+	    }
+	    return null;
+	}
+	
 }
