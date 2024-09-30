@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 import org.elis.dao.DAOfactory;
+import org.elis.dao.GenereDAO;
 import org.elis.dao.GiocoDAO;
 import org.elis.dao.LibreriaDAO;
 import org.elis.dao.OffertaDAO;
@@ -40,5 +41,10 @@ public class JdbcDAOfactory extends DAOfactory{
 	@Override
 	public OffertaDAO getOffertaDAO() {
 		return JdbcOffertaDAO.getInstance();
+	}
+	
+	@Override
+	public GenereDAO getGenereDAO() {
+		return JdbcGenereDAO.getInstance();
 	}
 }

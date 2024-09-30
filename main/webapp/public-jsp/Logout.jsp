@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h2 class="mt-5">Logout completato</h2>
-        <p>Hai effettuato il logout correttamente. <a href="Login.jsp">Effettua il login di nuovo</a>.</p>
+        <p>Hai effettuato il logout correttamente. <a href="/PaginaLogin.jsp">Effettua il login di nuovo</a>.</p>
     </div>
 </body>
 </html>

@@ -21,7 +21,9 @@
                 <h1>STEAM FARLOCCO</h1>
             </div>
             <div class="col-xl-3">
-                <button type="button">Logout</button>
+                <a href="<%=request.getContextPath()%>/public-jsp/Logout.jsp">
+                	<button type="button">Logout</button>
+                </a>
                 <button type="button">Offerte</button>
                 
             </div>

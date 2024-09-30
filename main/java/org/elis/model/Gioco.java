@@ -1,5 +1,6 @@
 package org.elis.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ public class Gioco {
 	private long id;
 	private LocalDateTime  dataCreazione;
 	private LocalDateTime  dataUltimaModifica;
-	private LocalDateTime  dataRilascio;
+	private LocalDate dataRilascio;
 	
 	private String nome;
 	private String descrizione;
@@ -74,10 +75,10 @@ public class Gioco {
 	public void setDataUltimaModifica(LocalDateTime dataUltimaModifica) {
 		this.dataUltimaModifica = dataUltimaModifica;
 	}
-	public LocalDateTime getDataRilascio() {
+	public LocalDate getDataRilascio() {
 		return dataRilascio;
 	}
-	public void setDataRilascio(LocalDateTime dataRilascio) {
+	public void setDataRilascio(LocalDate dataRilascio) {
 		this.dataRilascio = dataRilascio;
 	}
 	public long getIdOfferta() {

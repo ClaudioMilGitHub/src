@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.sql.Types;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 	}
 	
 	@Override
-	public Gioco addGioco(String nome, LocalDateTime dataRilascio, String descrizione, double prezzo, Offerta offerta,
+	public Gioco addGioco(String nome, LocalDate dataRilascio, String descrizione, double prezzo, Offerta offerta,
 			Utente utente) {
 		String query = "INSERT INTO gioco (nome, data_rilascio, descrizione, prezzo, id_offerta, id_casa_editrice)"
 				+ "VALUES (?,?,?,?,?,?)";
@@ -57,7 +58,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 				){
 			
 			ps.setString(1, nome);
-			ps.setTimestamp(2, Timestamp.valueOf(dataRilascio));
+			ps.setDate(2, java.sql.Date.valueOf(dataRilascio));
 			ps.setString(3, descrizione);
 			ps.setDouble(4, prezzo);
 			
@@ -102,7 +103,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 				Gioco g = new Gioco();
 				String nome = rs.getString("nome");
 				Timestamp dataR = rs.getTimestamp("data_rilascio");
-				LocalDateTime dataRilascio = dataR.toLocalDateTime();
+				LocalDate dataRilascio = dataR.toLocalDateTime().toLocalDate();
 				String descrizione = rs.getString("descrizione");
 				long idOfferta = rs.getLong("id_offerta");
 				long idCasaEditrice =  rs.getLong("id_casa_editrice");
@@ -146,7 +147,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 				
 				long id = rs.getLong("id");
 				Timestamp dataR = rs.getTimestamp("data_rilascio");
-				LocalDateTime dataRilascio = dataR.toLocalDateTime();
+				LocalDate dataRilascio = dataR.toLocalDateTime().toLocalDate();
 				String descrizione = rs.getString("descrizione");
 				long idOfferta = rs.getLong("id_offerta");
 				long idCasaEditrice =  rs.getLong("id_casa_editrice");
@@ -208,8 +209,132 @@ public class JdbcGiocoDAO implements GiocoDAO{
 	}
 
 	@Override
-	public Gioco updateGioco(String nome) {
-		// TODO Auto-generated method stub
+	public Gioco updateGiocoNome(Gioco gioco, String nome) {
+		
+		String query = "UPDATE gioco SET nome = ? WHERE ID = ?";
+		
+		try(
+				Connection  c = JdbcDAOfactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				){
+			
+			ps.setString(1, nome);
+			ps.setLong(2, gioco.getId());
+			
+			ps.executeUpdate();
+			
+			gioco.setNome(nome);
+			return gioco;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public Gioco updateGiocoImmagine(Gioco gioco, String path) {
+		
+		String query = "UPDATE gioco SET immagine = ? WHERE ID = ?";
+		
+		try(
+				Connection  c = JdbcDAOfactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				){
+			
+			ps.setString(1, path);
+			ps.setLong(2, gioco.getId());
+			
+			ps.executeUpdate();
+			
+			gioco.setNome(path);
+			return gioco;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public Gioco updateGiocoDataRilascio(Gioco gioco, LocalDate dataRilascio) {
+		
+		String query = "UPDATE gioco SET data_rilascio = ? WHERE ID = ?";
+		
+		try(
+				Connection  c = JdbcDAOfactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				){
+			
+			ps.setTimestamp(1, Timestamp.valueOf(dataRilascio.toString()));
+			ps.setLong(2, gioco.getId());
+			
+			ps.executeUpdate();
+			
+			gioco.setDataRilascio(dataRilascio);
+			return gioco;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public Gioco updateGiocoDescrizione(Gioco gioco, String descrizione) {
+		
+		String query = "UPDATE gioco SET descrizione = ? WHERE ID = ?";
+		
+		try(
+				Connection  c = JdbcDAOfactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				){
+			
+			ps.setString(1, descrizione);
+			ps.setLong(2, gioco.getId());
+			
+			ps.executeUpdate();
+			
+			gioco.setDescrizione(descrizione);
+			return gioco;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public Gioco updateGiocoPrezzo(Gioco gioco, double prezzo) {
+		
+		String query = "UPDATE gioco SET prezzo = ? WHERE ID = ?";
+		
+		try(
+				Connection  c = JdbcDAOfactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				){
+			
+			ps.setDouble(1, prezzo);
+			ps.setLong(2, gioco.getId());
+			
+			ps.executeUpdate();
+			
+			gioco.setPrezzo(prezzo);
+			return gioco;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 

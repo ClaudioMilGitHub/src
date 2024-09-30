@@ -8,11 +8,11 @@ import org.elis.model.Offerta;
 
 
 public interface OffertaDAO {
-    Offerta add(Offerta offerta) throws Exception;
+    Offerta addOfferta(Offerta offerta);
     Offerta getOffertaById(long id);
-    List<Offerta> getAll() throws Exception;
-    void deleteById(int id) throws Exception;
-    Offerta updateOffertaNome(Offerta offerta, String nome) throws Exception;
+    List<Offerta> getAllOfferta();
+    Offerta deleteOffertaById(long id);
+    Offerta updateOffertaNome(Offerta offerta, String nome);
 	Offerta updateOffertaDataInizio(Offerta offerta, Timestamp dataInizio);
 	Offerta updateOffertaDataFine(Offerta offerta, Timestamp dataFine);
 	Offerta updateOffertaSconto(Offerta offerta, double sconto);

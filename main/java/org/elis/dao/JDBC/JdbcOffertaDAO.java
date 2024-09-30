@@ -22,7 +22,7 @@ public class JdbcOffertaDAO implements OffertaDAO {
     }
 
     @Override
-    public Offerta add(Offerta offerta) throws Exception {
+    public Offerta addOfferta(Offerta offerta) {
         String query = "INSERT INTO offerta (nome, sconto, dataInizio, dataFine) VALUES (?, ?, ?, ?)";
         try {
 			try (Connection c = JdbcDAOfactory.getConnection();
@@ -75,7 +75,7 @@ public class JdbcOffertaDAO implements OffertaDAO {
     }
 
     @Override
-    public List<Offerta> getAll() throws Exception {
+    public List<Offerta> getAllOfferta() {
         List<Offerta> offerte = new ArrayList<>();
         String query = "SELECT * FROM OFFERTA";
         try (Connection c = JdbcDAOfactory.getConnection();
@@ -91,26 +91,38 @@ public class JdbcOffertaDAO implements OffertaDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         return offerte;
     }
 
  
 
     @Override
-    public void deleteById(int id) throws Exception {
+    public Offerta deleteOffertaById(long id) {
         String query = "DELETE FROM OFFERTA WHERE ID = ?";
+        
         try (Connection c = JdbcDAOfactory.getConnection();
-             PreparedStatement ps = c.prepareStatement(query)) {
-            ps.setInt(1, id);
+             PreparedStatement ps = c.prepareStatement(query)
+            		 
+        	){
+        	
+            ps.setLong(1, id);
             ps.executeUpdate();
+            
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        return null;
     }
 
 	@Override
-	public Offerta updateOffertaNome(Offerta offerta, String nome) throws Exception {
+	public Offerta updateOffertaNome(Offerta offerta, String nome) {
 		 String query = "UPDATE offerta SET nome = ? WHERE id = ?";
 		    try (
 		    		Connection c = JdbcDAOfactory.getConnection();
@@ -127,7 +139,9 @@ public class JdbcOffertaDAO implements OffertaDAO {
 		        }
 		    } catch (SQLException e) {
 		        e.printStackTrace();
-		    }
+		    } catch (Exception e1) {
+				e1.printStackTrace();
+			}
 		    return null;
 		}
 
@@ -201,5 +215,4 @@ public class JdbcOffertaDAO implements OffertaDAO {
 	    }
 	    return null;
 	}
-	
 }

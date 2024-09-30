@@ -4,8 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +12,6 @@ import org.elis.businesslogic.BusinessLogic;
 import org.elis.dao.GenereDAO;
 import org.elis.model.Genere;
 import org.elis.model.Offerta;
-import org.elis.model.Ruolo;
-import org.elis.model.Utente;
 
 public class JdbcGenereDAO implements GenereDAO {
     private static JdbcGenereDAO instance;
@@ -29,7 +26,7 @@ public class JdbcGenereDAO implements GenereDAO {
     }
 
     @Override
-    public Genere add(String nome) throws Exception {
+    public Genere addGenere(String nome) {
         String query = "INSERT INTO genere (nome) VALUES (?)";
         try (Connection c = JdbcDAOfactory.getConnection();
              PreparedStatement ps = c.prepareStatement(query)) {
@@ -40,12 +37,15 @@ public class JdbcGenereDAO implements GenereDAO {
             return genere;
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         return null;
     }
 
     @Override
-    public Genere getByName(String nome) throws Exception {
+    public Genere getGenereByName(String nome) {
         String query = "SELECT * FROM GENERE WHERE NOME = ?";
         try (Connection c = JdbcDAOfactory.getConnection();
              PreparedStatement ps = c.prepareStatement(query)) {
@@ -59,12 +59,15 @@ public class JdbcGenereDAO implements GenereDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         return null;
     }
 
     @Override
-    public List<Genere> getAllGeneri() {
+    public List<Genere> getAllGenere() {
         List<Genere> generi = new ArrayList<>();
         String query = "SELECT * FROM genere";
         
@@ -115,6 +118,8 @@ public class JdbcGenereDAO implements GenereDAO {
 			
 			ps.executeUpdate();
 			
+			LocalDateTime dataUltimaModifica = LocalDateTime.now();
+			genere.setDataUltimaModifica(dataUltimaModifica);
 			genere.setNome(nuovoNome);
 			return genere;
 			
@@ -142,6 +147,8 @@ public class JdbcGenereDAO implements GenereDAO {
 			
 			ps.executeUpdate();
 			
+			LocalDateTime dataUltimaModifica = LocalDateTime.now();
+			genere.setDataUltimaModifica(dataUltimaModifica);
 			genere.setOfferta(nuovaOfferta);
 			return genere;
 			

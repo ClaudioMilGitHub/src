@@ -8,6 +8,7 @@ public abstract class DAOfactory {
 	public abstract GiocoDAO getGiocoDAO();
 	public abstract LibreriaDAO getLibreriaDAO();
 	public abstract OffertaDAO getOffertaDAO();
+	public abstract GenereDAO getGenereDAO();
 
 	public static JdbcDAOfactory getDaoFactory() {
 		return new JdbcDAOfactory();
