@@ -9,4 +9,24 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>LoginLogicServlet</display-name>
+    <servlet-name>LoginLogicServlet</servlet-name>
+    <servlet-class>org.elis.controller.LoginLogicServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginLogicServlet</servlet-name>
+    <url-pattern>/LoginLogicServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RegistrationLogicServlet</display-name>
+    <servlet-name>RegistrationLogicServlet</servlet-name>
+    <servlet-class>org.elis.controller.RegistrationLogicServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegistrationLogicServlet</servlet-name>
+    <url-pattern>/RegistrationLogicServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
