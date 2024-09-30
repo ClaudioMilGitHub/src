@@ -1,11 +1,14 @@
 package org.elis.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Genere {
 	
 	private long id;
+	private LocalDateTime  dataCreazione;
+	private LocalDateTime  dataUltimaModifica;
 	
 	private String nome;
 	private Offerta offerta;
@@ -33,5 +36,17 @@ public class Genere {
 	}
 	public void setId(long id) {
 		this.id = id;
+	}
+	public LocalDateTime getDataCreazione() {
+		return dataCreazione;
+	}
+	public void setDataCreazione(LocalDateTime dataCreazione) {
+		this.dataCreazione = dataCreazione;
+	}
+	public LocalDateTime getDataUltimaModifica() {
+		return dataUltimaModifica;
+	}
+	public void setDataUltimaModifica(LocalDateTime dataUltimaModifica) {
+		this.dataUltimaModifica = dataUltimaModifica;
 	}
 }
