@@ -80,9 +80,11 @@ public class JdbcGenereDAO implements GenereDAO {
 				Genere g = new Genere();
 				long id = rs.getLong("id");
 				String nome = rs.getString("nome");
-				
+				long id_offerta = rs.getLong("id_offerta");
+				Offerta offerta = BusinessLogic.getOffertaById(id_offerta);
 				g.setId(id);
 				g.setNome(nome);
+				g.setOfferta(offerta);
 				
 				generi.add(g);
 			}
@@ -99,7 +101,7 @@ public class JdbcGenereDAO implements GenereDAO {
     }
 
     @Override
-    public Genere updateGenereNome(String nome, String nuovoNome) {
+    public Genere updateGenereNome(Genere genere, String nuovoNome) {
     	String query = "UPDATE genere SET nome = ? WHERE ID = ?";
     	
 		
@@ -107,14 +109,14 @@ public class JdbcGenereDAO implements GenereDAO {
 				Connection  c = JdbcDAOfactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
-			Genere g = getByName(nome);
+			
 			ps.setString(1, nuovoNome);
-			ps.setLong(2, g.getId());
+			ps.setLong(2, genere.getId());
 			
 			ps.executeUpdate();
 			
-			g.setNome(nuovoNome);
-			return g;
+			genere.setNome(nuovoNome);
+			return genere;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -126,7 +128,7 @@ public class JdbcGenereDAO implements GenereDAO {
     }
     
     @Override
-    public Genere updateGenereOfferta(String nome, Offerta nuovaOfferta) {
+    public Genere updateGenereOfferta(Genere genere, Offerta nuovaOfferta) {
     	String query = "UPDATE genere SET id_offerta = ? WHERE ID = ?";
     	
 		
@@ -134,14 +136,14 @@ public class JdbcGenereDAO implements GenereDAO {
 				Connection  c = JdbcDAOfactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
-			Genere g = getByName(nome);
+			
 			ps.setLong(1, nuovaOfferta.getId());
-			ps.setLong(2, g.getId());
+			ps.setLong(2, genere.getId());
 			
 			ps.executeUpdate();
 			
-			g.setOfferta(nuovaOfferta);
-			return g;
+			genere.setOfferta(nuovaOfferta);
+			return genere;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

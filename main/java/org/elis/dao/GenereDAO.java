@@ -8,7 +8,7 @@ public interface GenereDAO {
     Genere add(String nome) throws Exception;
     Genere getByName(String nome) throws Exception;
     List<Genere> getAllGeneri();
-    Genere updateGenereNome(String nome, String nuovoNome);
-    Genere updateGenereOfferta(String nome, Offerta nuovaOfferta);
+    Genere updateGenereNome(Genere genere, String nuovoNome);
+    Genere updateGenereOfferta(Genere genere, Offerta nuovaOfferta);
     Genere deleteByName(String nome);
 }
