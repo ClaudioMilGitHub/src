@@ -59,7 +59,7 @@
             <div class="col-xl-12" >  
                 <div class ="Dati">  
                     <p style="color:rgb(45, 47, 91);" id="selezioneU">Che tipo di utente sei?</p>
-                    <select>
+                    <select id="ruoloFormInput">
                         <option value="UTENTE_BASE">Utente</option>
                         <option value="PUBLISHER">Publisher</option>
                     </select> 
