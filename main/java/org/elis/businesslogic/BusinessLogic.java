@@ -38,6 +38,18 @@ public class BusinessLogic {
 		return DAOfactory.getDaoFactory().getUtenteDAO().addUtente(ruolo, username, email, password, dataNascita);
 	}
 	
+	public static Utente updateUtenteUsername(Utente utenteLoggato, String newUsername) {
+		return DAOfactory.getDaoFactory().getUtenteDAO().updateUtenteUsername(utenteLoggato, newUsername);
+	}
+	
+	public static Utente updateUtentePassword(Utente utenteLoggato, String newPassword) {
+		return DAOfactory.getDaoFactory().getUtenteDAO().updateUtentePassword(utenteLoggato, newPassword);
+	}
+	
+	public static Utente updateUtenteDataNascita(Utente utenteLoggato, LocalDate newDataNascita) {
+		return DAOfactory.getDaoFactory().getUtenteDAO().updateUtenteDataNascita(utenteLoggato, newDataNascita);
+	}
+	
 	public static Gioco addGioco(String nome, LocalDateTime dataRilascio, String descrizione, double prezzo, Offerta offerta, Utente utente) {
 		return DAOfactory.getDaoFactory().getGiocoDAO().addGioco(nome, dataRilascio, descrizione, prezzo, offerta, utente);
 	}

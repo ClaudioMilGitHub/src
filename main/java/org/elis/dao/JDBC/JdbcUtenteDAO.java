@@ -184,7 +184,83 @@ public class JdbcUtenteDAO implements UtenteDAO{
 	}
 
 	@Override
-	public Utente updateUtente(String nome) {
+	public Utente updateUtenteUsername(Utente utenteLoggato, String newUsername) {
+		
+		String query = "UPDATE utente SET username = ? WHERE ID = ?";
+		
+		try(
+				Connection  c = JdbcDAOfactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				){
+			
+			ps.setString(1, newUsername);
+			ps.setLong(2, utenteLoggato.getId());
+			
+			ps.executeUpdate();
+			
+			utenteLoggato.setUsername(newUsername);
+			return utenteLoggato;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	@Override
+	public Utente updateUtentePassword(Utente utenteLoggato, String newPassword) {
+		
+		String query = "UPDATE utente SET password = ? WHERE ID = ?";
+		
+		try(
+				Connection  c = JdbcDAOfactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				){
+			
+			ps.setString(1, newPassword);
+			ps.setLong(2, utenteLoggato.getId());
+			
+			ps.executeUpdate();
+			
+			utenteLoggato.setPassword(newPassword);
+			return utenteLoggato;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	@Override
+	public Utente updateUtenteDataNascita(Utente utenteLoggato, LocalDate newDataNascita) {
+		
+		String query = "UPDATE utente SET data_nascita = ? WHERE ID = ?";
+		
+		try(
+				Connection  c = JdbcDAOfactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				){
+			
+			ps.setTimestamp(1, Timestamp.valueOf(newDataNascita.toString()));
+			ps.setLong(2, utenteLoggato.getId());
+			
+			ps.executeUpdate();
+			
+			utenteLoggato.setDataNascita(newDataNascita);
+			return utenteLoggato;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 
