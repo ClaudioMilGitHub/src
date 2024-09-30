@@ -1,4 +1,4 @@
-<%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
 <%@ page import="org.elis.model.Utente" %>
 <!DOCTYPE html>
 <html>
@@ -20,13 +20,22 @@
         <% } %>
 
         <%
-            HttpSession session = request.getSession(false);
-            Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");
+            // Recupera la sessione esistente
+            HttpSession currentSession = session;
 
-            if (utenteLoggato != null) {
-                String currentEmail = utenteLoggato.getEmail();
-                String currentUsername = utenteLoggato.getUsername();
-                String currentDataNascita = utenteLoggato.getDataNascita();
+            if (currentSession == null || currentSession.getAttribute("utenteLoggato") == null) {
+                // Se la sessione non esiste o l'utente non è loggato, reindirizza al login
+                response.sendRedirect("public-jsp/PaginaLogin.jsp");
+                return;
+            }
+
+            // Recupera l'utente loggato dalla sessione
+            Utente utenteLoggato = (Utente) currentSession.getAttribute("utenteLoggato");
+            
+            // Recupera i dati dell'utente per mostrarli nel form
+            String currentEmail = utenteLoggato.getEmail();
+            String currentUsername = utenteLoggato.getUsername();
+            String currentDataNascita = (utenteLoggato.getDataNascita() != null) ? utenteLoggato.getDataNascita().toString() : "";
         %>
         
         <form action="UpdateProfileServlet" method="post">
@@ -57,13 +66,6 @@
                 <button type="submit" name="action" value="updatePassword" class="btn btn-primary mt-2">Aggiorna Password</button>
             </div>
         </form>
-
-        <%
-            } else {
-                // Se l'utente non è loggato, reindirizzalo al login
-                response.sendRedirect("public-jsp/PaginaLogin.jsp");
-            }
-        %>
 
     </div>
 </body>
