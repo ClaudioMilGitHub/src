@@ -1,4 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="org.elis.model.Utente" %>
 <!DOCTYPE html>
@@ -27,7 +26,7 @@
             if (utenteLoggato != null) {
                 String currentEmail = utenteLoggato.getEmail();
                 String currentUsername = utenteLoggato.getUsername();
-                String currentDataNascita = utenteLoggato.getDataNascita();  // Assumendo che Utente abbia un campo dataNascita
+                String currentDataNascita = utenteLoggato.getDataNascita();
         %>
         
         <form action="UpdateProfileServlet" method="post">
@@ -40,28 +39,28 @@
             <!-- Campo per aggiornare l'username -->
             <div class="form-group mt-3">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" value="<%= currentUsername %>" required>
+                <input type="text" class="form-control" id="username" name="username" value="<%= currentUsername %>">
+                <button type="submit" name="action" value="updateUsername" class="btn btn-primary mt-2">Aggiorna Username</button>
             </div>
 
             <!-- Campo per aggiornare la data di nascita -->
             <div class="form-group mt-3">
                 <label for="dataNascita">Data di nascita</label>
-                <input type="date" class="form-control" id="dataNascita" name="dataNascita" value="<%= currentDataNascita %>" required>
+                <input type="date" class="form-control" id="dataNascita" name="dataNascita" value="<%= currentDataNascita %>">
+                <button type="submit" name="action" value="updateDataNascita" class="btn btn-primary mt-2">Aggiorna Data di Nascita</button>
             </div>
 
             <!-- Campo per aggiornare la password -->
             <div class="form-group mt-3">
                 <label for="password">Nuova Password</label>
                 <input type="password" class="form-control" id="password" name="password" placeholder="Inserisci nuova password (opzionale)">
+                <button type="submit" name="action" value="updatePassword" class="btn btn-primary mt-2">Aggiorna Password</button>
             </div>
-
-            <!-- Bottone di submit -->
-            <button type="submit" class="btn btn-primary mt-4">Aggiorna Profilo</button>
         </form>
 
         <%
             } else {
-                // Se l'utente non Ã¨ loggato, reindirizzalo al login
+                // Se l'utente non è loggato, reindirizzalo al login
                 response.sendRedirect("public-jsp/PaginaLogin.jsp");
             }
         %>

@@ -5,26 +5,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.time.LocalDate;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.io.IOException;
-import org.elis.businesslogic.BusinessLogic;
-import org.elis.model.Utente;
-
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.io.IOException;
 import org.elis.businesslogic.BusinessLogic;
 import org.elis.model.Utente;
 
@@ -34,24 +19,11 @@ import org.elis.model.Utente;
 @WebServlet("/UpdateProfileServlet")
 public class UpdateProfileServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UpdateProfileServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Ottieni i dati dal form inviato
-        String newUsername = request.getParameter("username");
-        String newPassword = request.getParameter("password");
-        LocalDate newDataNascita = request.getParameter("dataNascita");
-
         // Otteniamo l'utente loggato dalla sessione
         HttpSession session = request.getSession(false);
         Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");
@@ -62,28 +34,42 @@ public class UpdateProfileServlet extends HttpServlet {
             return;
         }
 
-        // Verifica che i campi obbligatori non siano vuoti
-        if (newUsername == null || newUsername.isEmpty() ||
-            newDataNascita == null || newDataNascita.isEmpty()) {
-            request.setAttribute("error", "I campi obbligatori non possono essere vuoti.");
-            request.getRequestDispatcher("private-jsp/ProfileUpdate.jsp").forward(request, response);
-            return;
+        // Recupera l'azione specifica dal pulsante premuto
+        String action = request.getParameter("action");
+        boolean isUpdated = false;
+
+        switch (action) {
+            case "updateUsername":
+                String newUsername = request.getParameter("username");
+                if (newUsername != null && !newUsername.isEmpty()) {
+                    isUpdated = BusinessLogic.updateUtenteUsername(utenteLoggato, newUsername);
+                }
+                break;
+
+            case "updateDataNascita":
+                String newDataNascitaStr = request.getParameter("dataNascita");
+                LocalDate newDataNascita = null;
+                if (newDataNascitaStr != null && !newDataNascitaStr.isEmpty()) {
+                    newDataNascita = LocalDate.parse(newDataNascitaStr);
+                    isUpdated = BusinessLogic.updateUtenteDataNascita(utenteLoggato, newDataNascita);
+                }
+                break;
+
+            case "updatePassword":
+                String newPassword = request.getParameter("password");
+                if (newPassword != null && !newPassword.isEmpty()) {
+                    isUpdated = BusinessLogic.updateUtentePassword(utenteLoggato, newPassword);
+                }
+                break;
+
+            default:
+                request.setAttribute("error", "Azione non valida.");
+                request.getRequestDispatcher("private-jsp/ProfileUpdate.jsp").forward(request, response);
+                return;
         }
-
-        // Aggiorna solo i campi modificati
-        utenteLoggato.setUsername(newUsername);
-        utenteLoggato.setDataNascita(newDataNascita);
-
-        // Se è stata inserita una nuova password, aggiorna anche quella
-        if (newPassword != null && !newPassword.isEmpty()) {
-            utenteLoggato.setPassword(newPassword);
-        }
-
-        // Salva le modifiche nel database tramite BusinessLogic
-        boolean isUpdated = BusinessLogic.updateUtente(utenteLoggato);
 
         if (isUpdated) {
-            // Se l'aggiornamento è riuscito, aggiorna l'utente nella sessione e reindirizza alla pagina di successo
+            // Se l'aggiornamento è riuscito, aggiorna l'utente nella sessione
             session.setAttribute("utenteLoggato", utenteLoggato);
             response.sendRedirect("private-jsp/ProfileUpdatedSuccess.jsp");
         } else {
@@ -92,5 +78,4 @@ public class UpdateProfileServlet extends HttpServlet {
             request.getRequestDispatcher("private-jsp/ProfileUpdate.jsp").forward(request, response);
         }
     }
-
 }
