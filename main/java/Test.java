@@ -10,13 +10,12 @@ public class Test {
 		
 			//BusinessLogic.add(1, "Rino", "rino@gmail.com", "rano1234!");
 			
-			utenti = BusinessLogic.getAllUser();
+			utenti = BusinessLogic.getAllUtenti();
 			
 			for (Utente utente : utenti) {
 				System.out.println(utente.getUsername());
 				System.out.println(utente.getRuolo());
+				System.out.println(utente.getDataNascita());
 			}
-			
-			System.out.println("Utente ricercato: " + BusinessLogic.getByName("Rino").getUsername());
 	}
 }

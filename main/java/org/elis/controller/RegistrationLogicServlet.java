@@ -42,7 +42,19 @@ public class RegistrationLogicServlet extends HttpServlet {
 		String username = request.getParameter("usernameFormInput");
 		String email = request.getParameter("emailFormInput");
 		String password= request.getParameter("passwordFormInput");
-		int ruolo = Integer.parseInt(request.getParameter("ruoloFormInput"));
+		String stringaRuolo = request.getParameter("ruoloFormInput");
+		int ruolo;
+		switch(stringaRuolo) {
+		case "UTENTE_BASE":
+			ruolo = 1;
+			break;
+		case "PUBLISHER":
+			ruolo = 2;
+			break;
+			default:
+				ruolo = 1;
+				
+		}
 		String data= request.getParameter("dataNascitaFormInput");
 		
 		if(username == null || email == null || password == null || data == null || username.isEmpty() || email.isEmpty() || password.isEmpty() || data.isEmpty()) {
@@ -53,18 +65,22 @@ public class RegistrationLogicServlet extends HttpServlet {
 		for(Utente u : BusinessLogic.getAllUtenti()) {
 			if(u.getEmail().equals(email) && u.getUsername().equals(username)) {
 				request.getRequestDispatcher("public-jsp/PaginaRegistrazione.jsp").forward(request, response);
+				System.out.println("Utente già presente");
 				return;
 			}
 		}
 		
 		if(password.length() < 8) {
 			request.getRequestDispatcher("public-jsp/PaginaRegistrazione.jsp").forward(request, response);
+			System.out.println("password meno di 8 caratteri");
 			return;
 		}else if(password.equals(password.toLowerCase())) {
 			request.getRequestDispatcher("public-jsp/PaginaRegistrazione.jsp").forward(request, response);
+			System.out.println("maiuscole e minuscole");
 			return;
 		}else if(!password.contains("!") || !password.contains("?") || !password.contains("$")) {
 			request.getRequestDispatcher("public-jsp/PaginaRegistrazione.jsp").forward(request, response);
+			System.out.println("carattere speciale");
 			return;
 		}
 		

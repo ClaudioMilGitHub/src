@@ -51,14 +51,14 @@ public class LoginLogicServlet extends HttpServlet {
 		Utente u = BusinessLogic.loginUtente(email, password);
 		if(u != null) {
 			if(u.getRuolo() == Ruolo.PUBLISHER) {
-				request.getRequestDispatcher("WEB-INF/HomePagePublisher.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/private-jsp/HomePagePublisher.jsp").forward(request, response);
 				return;
 			}
 			if(u.getRuolo() == Ruolo.ADMIN) {
-				request.getRequestDispatcher("WEB-INF/HomePageAdmin.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/private-jsp/HomePageAdmin.jsp").forward(request, response);
 				return;
 			}
-			request.getRequestDispatcher("WEB-INF/HomePage.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/private-jsp/HomePage.jsp").forward(request, response);
 		}else {
 			request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
 		}

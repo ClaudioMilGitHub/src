@@ -49,7 +49,7 @@ public class JdbcUtenteDAO implements UtenteDAO{
 			ps.setString(2, username);
 			ps.setString(3, email);
 			ps.setString(4, password);
-			ps.setTimestamp(5, Timestamp.valueOf(dataNascita.toString()));
+			ps.setDate(5, java.sql.Date.valueOf(dataNascita));
 			
 			ps.executeUpdate();
 			

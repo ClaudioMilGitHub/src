@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.elis.businesslogic.BusinessLogic;
 import org.elis.dao.LibreriaDAO;
 import org.elis.model.Gioco;
 import org.elis.model.Libreria;
@@ -92,15 +93,12 @@ public class JdbcLibreriaDAO implements LibreriaDAO{
 				l.setNome(nomeLibreria);
 				l.setDataCreazione(dataCreazione);
 				l.setDataUltimaModifica(dataUltimaModifica);
-				Utente u = JdbcUtenteDAO.getInstance().getUtenteById(idUtente);
+				Utente u = BusinessLogic.getUtenteById(idUtente);
 				l.setUtente(u);
-				Gioco g = JdbcGiocoDAO.getInstance().getGiocoById(idGioco);
+				Gioco g = BusinessLogic.getGiocoById(idGioco);
 				giochi.add(g);
-				l.setGiochi(giochi);
-				
-				
-			}
-			
+				l.setGiochi(giochi);				
+			}		
 			return l;
 		}catch(Exception e) {
 				e.printStackTrace();

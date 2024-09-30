@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>(login)Insert title here</title>
+<title>Pagina di Login</title>
 </head>
 <body>
-	   <form action="LogicaLogin" method="post">
+	   <form action="<%=request.getContextPath()%>/LoginLogicServlet" method="post">
             <input type="email" placeholder="mario.rossi@gmail.com" name="emailLogin">
             <br>
             <input type="password" name="passwordLogin">

@@ -3,7 +3,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>(registrazione)Pagina_Registrazione_SteamFarlocco</title>
+    <title>Pagina Registrazione SteamFarlocco</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <link rel="stylesheet" href="../CSS/SteamFarlocco.css">
@@ -21,7 +21,7 @@
             </div>
             <div class="row">
                     <div class="col-xl-12">
-                <form action="" method="post" class ="Dati">
+                <form action="<%=request.getContextPath()%>/RegistrationLogicServlet" method="post" class ="Dati">
                     <input type="email" placeholder="rino.rano@gmail.com" name="emailFormInput">
                 
                     <input type="text" placeholder="username" name="usernameFormInput">
@@ -29,6 +29,11 @@
                     <input type="date" name="dataNascitaFormInput">
                     
                     <input type="password" placeholder="password" name="passwordFormInput">
+                    
+                    <select id="ruoloFormInput" name="ruoloFormInput">
+                        <option value="UTENTE_BASE">Utente</option>
+                        <option value="PUBLISHER">Publisher</option>
+                    </select> 
                     
                     <input type="submit" value="Registrati">
                 </form>
