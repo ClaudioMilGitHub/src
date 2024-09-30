@@ -4,10 +4,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.elis.businesslogic.BusinessLogic;
 import org.elis.dao.GenereDAO;
 import org.elis.model.Genere;
+import org.elis.model.Offerta;
+import org.elis.model.Ruolo;
+import org.elis.model.Utente;
 
 public class JdbcGenereDAO implements GenereDAO {
     private static JdbcGenereDAO instance;
@@ -57,20 +64,109 @@ public class JdbcGenereDAO implements GenereDAO {
     }
 
     @Override
-    public List<Genere> getAll() {
+    public List<Genere> getAllGeneri() {
         List<Genere> generi = new ArrayList<>();
-        // Implementa la logica per recuperare tutti i generi
-        return generi;
+        String query = "SELECT * FROM genere";
+        
+        try(
+				Connection  c = JdbcDAOfactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				){
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				Genere g = new Genere();
+				long id = rs.getLong("id");
+				String nome = rs.getString("nome");
+				
+				g.setId(id);
+				g.setNome(nome);
+				
+				generi.add(g);
+			}
+			
+			if(!generi.isEmpty()) {
+				return generi;
+			}		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
     }
 
     @Override
-    public Genere update(String nome, String nuovoNome) {
-        // Implementa la logica di aggiornamento se necessario
-        return null;
+    public Genere updateGenereNome(String nome, String nuovoNome) {
+    	String query = "UPDATE genere SET nome = ? WHERE ID = ?";
+    	
+		
+		try(
+				Connection  c = JdbcDAOfactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				){
+			Genere g = getByName(nome);
+			ps.setString(1, nuovoNome);
+			ps.setLong(2, g.getId());
+			
+			ps.executeUpdate();
+			
+			g.setNome(nuovoNome);
+			return g;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+    }
+    
+    @Override
+    public Genere updateGenereOfferta(String nome, Offerta nuovaOfferta) {
+    	String query = "UPDATE genere SET id_offerta = ? WHERE ID = ?";
+    	
+		
+		try(
+				Connection  c = JdbcDAOfactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				){
+			Genere g = getByName(nome);
+			ps.setLong(1, nuovaOfferta.getId());
+			ps.setLong(2, g.getId());
+			
+			ps.executeUpdate();
+			
+			g.setOfferta(nuovaOfferta);
+			return g;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
     }
 
     @Override
-    public void deleteByName(String nome) {
-        // Implementa la logica di cancellazione se necessario
+    public Genere deleteByName(String nome) {
+    	String query = "DELETE FROM genere WHERE nome = ?";
+		
+		try(
+				Connection  c = JdbcDAOfactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				){
+			ps.setString(1, nome);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return null;
     }
 }
