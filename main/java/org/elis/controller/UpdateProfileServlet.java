@@ -38,27 +38,55 @@ public class UpdateProfileServlet extends HttpServlet {
         String action = request.getParameter("action");
         boolean isUpdated = false;
 
+        // Verifica se il parametro action è nullo
+        if (action == null || action.isEmpty()) {
+            request.setAttribute("error", "Azione non valida.");
+            request.getRequestDispatcher("private-jsp/ProfileUpdate.jsp").forward(request, response);
+            return;
+        }
+
+        // Controlli specifici per ogni campo nell'aggiornamento
         switch (action) {
             case "updateUsername":
                 String newUsername = request.getParameter("username");
-                if (newUsername != null && !newUsername.isEmpty()) {
+                if (newUsername != null && !newUsername.trim().isEmpty()) {
+                    // Procedi con l'aggiornamento dell'username
                     isUpdated = BusinessLogic.updateUtenteUsername(utenteLoggato, newUsername);
+                } else {
+                    request.setAttribute("error", "Il campo Username non può essere vuoto.");
+                    request.getRequestDispatcher("private-jsp/ProfileUpdate.jsp").forward(request, response);
+                    return;
                 }
                 break;
 
             case "updateDataNascita":
                 String newDataNascitaStr = request.getParameter("dataNascita");
-                LocalDate newDataNascita = null;
-                if (newDataNascitaStr != null && !newDataNascitaStr.isEmpty()) {
-                    newDataNascita = LocalDate.parse(newDataNascitaStr);
-                    isUpdated = BusinessLogic.updateUtenteDataNascita(utenteLoggato, newDataNascita);
+                if (newDataNascitaStr != null && !newDataNascitaStr.trim().isEmpty()) {
+                    try {
+                        LocalDate newDataNascita = LocalDate.parse(newDataNascitaStr);
+                        // Procedi con l'aggiornamento della data di nascita
+                        isUpdated = BusinessLogic.updateUtenteDataNascita(utenteLoggato, newDataNascita);
+                    } catch (Exception e) {
+                        request.setAttribute("error", "Formato della data non valido.");
+                        request.getRequestDispatcher("private-jsp/ProfileUpdate.jsp").forward(request, response);
+                        return;
+                    }
+                } else {
+                    request.setAttribute("error", "Il campo Data di Nascita non può essere vuoto.");
+                    request.getRequestDispatcher("private-jsp/ProfileUpdate.jsp").forward(request, response);
+                    return;
                 }
                 break;
 
             case "updatePassword":
                 String newPassword = request.getParameter("password");
-                if (newPassword != null && !newPassword.isEmpty()) {
+                if (newPassword != null && !newPassword.trim().isEmpty()) {
+                    // Procedi con l'aggiornamento della password
                     isUpdated = BusinessLogic.updateUtentePassword(utenteLoggato, newPassword);
+                } else {
+                    request.setAttribute("error", "Il campo Password non può essere vuoto.");
+                    request.getRequestDispatcher("private-jsp/ProfileUpdate.jsp").forward(request, response);
+                    return;
                 }
                 break;
 
