@@ -61,14 +61,16 @@ public class RegistrationLogicServlet extends HttpServlet {
 			request.getRequestDispatcher("public-jsp/PaginaRegistrazione.jsp").forward(request, response);
 			return;
 		}
-		
-		for(Utente u : BusinessLogic.getAllUtenti()) {
-			if(u.getEmail().equals(email) && u.getUsername().equals(username)) {
-				request.getRequestDispatcher("public-jsp/PaginaRegistrazione.jsp").forward(request, response);
-				System.out.println("Utente già presente");
-				return;
+		if(BusinessLogic.getAllUtenti() != null) {
+			for(Utente u : BusinessLogic.getAllUtenti()) {
+				if(u.getEmail().equals(email) || u.getUsername().equals(username)) {
+					request.getRequestDispatcher("public-jsp/PaginaRegistrazione.jsp").forward(request, response);
+					System.out.println("Utente già presente");
+					return;
+				}
 			}
 		}
+		
 		
 		if(password.length() < 8) {
 			request.getRequestDispatcher("public-jsp/PaginaRegistrazione.jsp").forward(request, response);
@@ -78,16 +80,19 @@ public class RegistrationLogicServlet extends HttpServlet {
 			request.getRequestDispatcher("public-jsp/PaginaRegistrazione.jsp").forward(request, response);
 			System.out.println("maiuscole e minuscole");
 			return;
-		}else if(!password.contains("!") || !password.contains("?") || !password.contains("$")) {
+		}else if(password.contains("!") || password.contains("?") || password.contains("$")) {
+			LocalDate dataNascita = LocalDate.parse(data);
+			BusinessLogic.addUtente(ruolo, username, email, password, dataNascita);	
+			response.sendRedirect("public-jsp/PaginaLogin.jsp");
+			return;
+		}else {
 			request.getRequestDispatcher("public-jsp/PaginaRegistrazione.jsp").forward(request, response);
 			System.out.println("carattere speciale");
 			return;
 		}
 		
 		
-		LocalDate dataNascita = LocalDate.parse(data);
-		BusinessLogic.addUtente(ruolo, username, email, password, dataNascita);	
-		response.sendRedirect("public-jsp/PaginaLogin.jsp");
+		
 	}
 
 }

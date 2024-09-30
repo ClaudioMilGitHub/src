@@ -17,7 +17,7 @@
             <div class="col-xl-8">
                 <p style="color:rgb(45, 47, 91);" class="descrizione">
                     Registrati sul nostro SteamFarlocco
-                 </p>
+                </p>
             </div>
             <div class="row">
                     <div class="col-xl-12">
@@ -38,6 +38,8 @@
                     <input type="submit" value="Registrati">
                 </form>
             </div>
+    </div>
+    </div>
     </div> 
 </body>
 </html>
