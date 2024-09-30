@@ -21,17 +21,17 @@
                 <h1>STEAM FARLOCCO</h1>
             </div>
             <div class="col-xl-3">
-                <button type="Logout">Logout</button>
-                <button type="Offerte">Offerte</button>
+                <button type="button">Logout</button>
+                <button type="button">Offerte</button>
                 
             </div>
         </div>
         <div class="row">
             <div class="col-xl-3" id="testo2">
               <div class="Comandi">
-                <button type="Profilo">Profilo</button>
-                <button type="Libreria">Libreria</button>
-                <button type="Negozio">Negozio</button>
+                <button type="button">Profilo</button>
+                <button type="button">Libreria</button>
+                <button type="button">Negozio</button>
              </div>
         
             </div>
@@ -62,5 +62,3 @@
 </body>
 </html>
     
-</body>
-</html>
