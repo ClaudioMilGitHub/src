@@ -8,9 +8,11 @@ import org.elis.model.Utente;
 
 public interface LibreriaDAO {
 
-	Libreria addLibreria(String nome, Utente utente, Gioco gioco);
-	Libreria getLibreriaByName(String nome);
-	List<Libreria> getAllLibrerie();
-	Libreria updateLibreria(String nome);
-	Libreria deleteLibreriaByNome(String nome);
+    Libreria addLibreria(String nome, Utente utente, Gioco gioco) throws Exception;
+    Libreria getLibreriaByName(String nome) throws Exception;
+    List<Libreria> getAllLibrerie() throws Exception;
+    Libreria updateLibreria(String nome);
+    Libreria deleteLibreriaByNome(String nome) throws Exception;
+    Libreria getLibreriaById(long id) throws Exception;
+    Libreria updateLibreria(long id, String nuovoNome) throws Exception;
 }
