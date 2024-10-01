@@ -48,7 +48,7 @@ public class JdbcLibreriaDAO implements LibreriaDAO {
 
         } catch (SQLException e) {
             System.err.println("Errore durante l'aggiunta della libreria: " + e.getMessage());
-            throw e; // Propaga l'eccezione
+            throw new Exception("Errore nell'inserimento della libreria.", e);
         }
     }
 
@@ -56,7 +56,7 @@ public class JdbcLibreriaDAO implements LibreriaDAO {
     public Libreria getLibreriaByName(String nome) throws Exception {
         String query = "SELECT * FROM libreria JOIN libreria_gioco ON libreria.id = id_libreria JOIN gioco ON gioco.id = id_gioco WHERE libreria.nome = ?";
         
-        Libreria libreria = null; // Inizializza come null
+        Libreria libreria = null;
         List<Gioco> giochi = new ArrayList<>();
 
         try (Connection c = JdbcDAOfactory.getConnection();
@@ -66,7 +66,7 @@ public class JdbcLibreriaDAO implements LibreriaDAO {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                libreria = new Libreria(); // Crea un nuovo oggetto Libreria
+                libreria = new Libreria();
                 long id = rs.getLong("id");
                 Timestamp dataCreazioneTimestamp = rs.getTimestamp("data_creazione");
                 LocalDateTime dataCreazione = dataCreazioneTimestamp.toLocalDateTime();
@@ -86,16 +86,16 @@ public class JdbcLibreriaDAO implements LibreriaDAO {
 
         } catch (SQLException e) {
             System.err.println("Errore durante il recupero della libreria: " + e.getMessage());
-            throw e; // Propaga l'eccezione
+            throw new Exception("Errore nel recupero della libreria.", e);
         }
-        return libreria; // Restituisce null se non trovata
+        return libreria;
     }
 
     @Override
     public Libreria getLibreriaById(long id) throws Exception {
         String query = "SELECT * FROM libreria WHERE id = ?";
         
-        Libreria libreria = null; // Inizializza come null
+        Libreria libreria = null;
 
         try (Connection c = JdbcDAOfactory.getConnection();
              PreparedStatement ps = c.prepareStatement(query)) {
@@ -104,7 +104,7 @@ public class JdbcLibreriaDAO implements LibreriaDAO {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                libreria = new Libreria(); // Crea un nuovo oggetto Libreria
+                libreria = new Libreria();
                 long libreriaId = rs.getLong("id");
                 String nome = rs.getString("nome");
                 Timestamp dataCreazioneTimestamp = rs.getTimestamp("data_creazione");
@@ -118,14 +118,13 @@ public class JdbcLibreriaDAO implements LibreriaDAO {
                 libreria.setDataCreazione(dataCreazione);
                 libreria.setDataUltimaModifica(dataUltimaModifica);
                 libreria.setUtente(JdbcUtenteDAO.getInstance().getUtenteById(idUtente));
-                // Non gestiamo i giochi in questa funzione, ma potresti aggiungerli se necessario
             }
 
         } catch (SQLException e) {
             System.err.println("Errore durante il recupero della libreria per ID: " + e.getMessage());
-            throw e; // Propaga l'eccezione
+            throw new Exception("Errore nel recupero della libreria per ID.", e);
         }
-        return libreria; // Restituisce null se non trovata
+        return libreria;
     }
 
     @Override
@@ -162,32 +161,32 @@ public class JdbcLibreriaDAO implements LibreriaDAO {
 
         } catch (SQLException e) {
             System.err.println("Errore durante il recupero delle librerie: " + e.getMessage());
-            throw e; // Propaga l'eccezione
+            throw new Exception("Errore nel recupero delle librerie.", e);
         }
-        return librerie; // Restituisce una lista vuota se non trovate
+        return librerie;
     }
 
     @Override
     public Libreria updateLibreria(long id, String nuovoNome) throws Exception {
         String query = "UPDATE libreria SET nome = ? WHERE id = ?";
-        Libreria libreria = null; // Inizializza come null
+        Libreria libreria = null;
 
         try (Connection c = JdbcDAOfactory.getConnection();
              PreparedStatement ps = c.prepareStatement(query)) {
 
-            ps.setString(1, nuovoNome); // Imposta il nuovo nome
-            ps.setLong(2, id); // Imposta l'ID per la condizione
+            ps.setString(1, nuovoNome);
+            ps.setLong(2, id);
 
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected > 0) {
-                libreria = getLibreriaById(id); // Recupera la libreria aggiornata
+                libreria = getLibreriaById(id);
             }
 
         } catch (SQLException e) {
             System.err.println("Errore durante l'aggiornamento della libreria: " + e.getMessage());
-            throw e; // Propaga l'eccezione
+            throw new Exception("Errore nell'aggiornamento della libreria.", e);
         }
-        return libreria; // Restituisce null se l'aggiornamento non ha avuto successo
+        return libreria;
     }
 
     @Override
@@ -200,17 +199,16 @@ public class JdbcLibreriaDAO implements LibreriaDAO {
             ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Errore durante l'eliminazione della libreria: " + e.getMessage());
-            throw e; // Propaga l'eccezione
+            throw new Exception("Errore nell'eliminazione della libreria.", e);
         }
-        return null; // Non restituisce nulla per l'eliminazione
+        return null;
     }
 
     @Override
     public Libreria updateLibreria(String nome) {
-        // Implementazione del metodo non specificata. Se non è necessaria, puoi rimuoverlo dall'interfaccia.
-        return null; // Restituisce null per ora
+        // Implementazione non più necessaria, poiché abbiamo già il metodo update con l'ID
+        return null;
     }
 }
-
 
 
