@@ -90,7 +90,8 @@ public class JdbcGiocoDAO implements GiocoDAO{
 	}
 	
 	public Gioco getGiocoById(long id) {
-		String query = "SELECT * FROM gioco WHERE id = ?";
+		String query = "SELECT nome, data_rilascio, descrizione, id_offerta, id_casa_editrice, data_creazione, data_ultima_modifica FROM gioco WHERE id = ?";
+		//ora la select è più specifica
 		
 		try(
 				Connection c = JdbcDAOfactory.getConnection();
@@ -133,7 +134,8 @@ public class JdbcGiocoDAO implements GiocoDAO{
 
 	@Override
 	public Gioco getGiocoByName(String nome) {
-		String query = "SELECT * FROM gioco WHERE nome = ?";
+		String query = "SELECT id, nome, data_rilascio, descrizione, id_offerta, id_casa_editrice, data_creazione, data_ultima_modifica FROM gioco WHERE nome = ?";
+
 		
 		try(
 				Connection c = JdbcDAOfactory.getConnection();
@@ -178,7 +180,8 @@ public class JdbcGiocoDAO implements GiocoDAO{
 	@Override
 	public List<Gioco> getAllGiochi() {
 		List<Gioco> giochi = new ArrayList<>();
-		String query = "SELECT * FROM gioco";
+		String query = "SELECT nome FROM gioco";
+
 		
 		try(
 				Connection  c = JdbcDAOfactory.getConnection();
@@ -340,7 +343,8 @@ public class JdbcGiocoDAO implements GiocoDAO{
 
 	@Override
 	public Gioco deleteGiocoByNome(String nome) {
-		String query = "DELETE FROM gioco WHERE nome = ?";
+		String query = "DELETE FROM gioco WHERE nome = ? LIMIT 1";
+
 		
 		try(
 				Connection  c = JdbcDAOfactory.getConnection();

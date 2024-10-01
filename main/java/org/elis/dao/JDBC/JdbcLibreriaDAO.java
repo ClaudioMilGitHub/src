@@ -28,7 +28,9 @@ public class JdbcLibreriaDAO implements LibreriaDAO {
 
     @Override
     public Libreria addLibreria(String nome, Utente utente, Gioco gioco) throws Exception {
-        String query = "INSERT INTO libreria (nome, utente, gioco) VALUES (?, ?, ?)";
+    	String query = "INSERT INTO libreria (nome, id_utente, id_gioco) VALUES (?, ?, ?)";
+
+    	//ho sostituito UTENTE e GIOCO con i loto ID per evitare fraintendimenti ed essere più specifici
         
         Libreria libreria = new Libreria();
         List<Gioco> giochi = new ArrayList<>();
@@ -168,7 +170,10 @@ public class JdbcLibreriaDAO implements LibreriaDAO {
 
     @Override
     public Libreria updateLibreria(long id, String nuovoNome) throws Exception {
-        String query = "UPDATE libreria SET nome = ? WHERE id = ?";
+    	String query = "UPDATE libreria SET nome = ?, data_ultima_modifica = NOW() WHERE id = ?";
+    	//ho aggiunto la data di ultima modifica applicando il now() per cambiarla simultaneamente alla modifica, 
+    	//su W3 School ho trovato questa definizione:
+    	//"The NOW() function returns the current date and time."
         Libreria libreria = null;
 
         try (Connection c = JdbcDAOfactory.getConnection();

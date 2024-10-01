@@ -46,7 +46,8 @@ public class JdbcGenereDAO implements GenereDAO {
 
     @Override
     public Genere getGenereByName(String nome) {
-        String query = "SELECT * FROM GENERE WHERE NOME = ?";
+    	String query = "SELECT nome FROM genere WHERE nome = ?";
+
         try (Connection c = JdbcDAOfactory.getConnection();
              PreparedStatement ps = c.prepareStatement(query)) {
             ps.setString(1, nome);
@@ -69,7 +70,8 @@ public class JdbcGenereDAO implements GenereDAO {
     @Override
     public List<Genere> getAllGenere() {
         List<Genere> generi = new ArrayList<>();
-        String query = "SELECT * FROM genere";
+        String query = "SELECT id, nome, id_offerta FROM genere";
+
         
         try(
 				Connection  c = JdbcDAOfactory.getConnection();
@@ -163,7 +165,8 @@ public class JdbcGenereDAO implements GenereDAO {
 
     @Override
     public Genere deleteByName(String nome) {
-    	String query = "DELETE FROM genere WHERE nome = ?";
+    	String query = "DELETE FROM genere WHERE nome = ? LIMIT 1";
+
 		
 		try(
 				Connection  c = JdbcDAOfactory.getConnection();
