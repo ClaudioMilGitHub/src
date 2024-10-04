@@ -15,8 +15,7 @@ public class BusinessLogic {
 	public static Utente loginUtente(String email, String password) {
 		
 		for(Utente u : getAllUtenti()) {
-			if(u.getEmail().equals(email) && u.getPassword().equals(password)) {
-				System.out.println("Email e password corrette!");
+			if(u.getEmail().equals(email) && u.getPassword().equals(password)) {	
 				return u;
 			}
 		}

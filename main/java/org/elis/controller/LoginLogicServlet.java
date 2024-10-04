@@ -41,6 +41,9 @@ public class LoginLogicServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
+		
 		String email = request.getParameter("emailLogin");
 		String password= request.getParameter("passwordLogin");
 		
@@ -51,7 +54,9 @@ public class LoginLogicServlet extends HttpServlet {
 		}
 		
 		Utente u = BusinessLogic.loginUtente(email, password);
+		
 		if(u != null) {
+
 			if(u.getRuolo() == Ruolo.PUBLISHER) {
 				request.getRequestDispatcher("WEB-INF/private-jsp/HomePagePublisher.jsp").forward(request, response);
 				return;
@@ -60,7 +65,11 @@ public class LoginLogicServlet extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/private-jsp/HomePageAdmin.jsp").forward(request, response);
 				return;
 			}
-			request.getRequestDispatcher("public-jsp/HomePage.jsp").forward(request, response);
+			
+			session.setAttribute("utenteLoggato", u);
+			request.getRequestDispatcher("public-jsp/HomePageUtente.jsp").forward(request, response);
+			return;
+			
 		}else {
 			request.setAttribute("messaggioDiErrore", "Credenziali Errate.");
 			request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
