@@ -71,3 +71,8 @@ div{
     font-size: 12px;
     line-height: 16px;
 }
+
+.action-link{
+    text-decoration: none;
+    color: #b8b6b4;
+}

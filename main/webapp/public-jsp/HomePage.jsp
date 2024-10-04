@@ -35,6 +35,11 @@
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
                     </div>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <div class="global-action">
+                            <a class="action-link" href="<%=request.getContextPath()%>/LoginLogicServlet">Accedi</a>
+                        </div>  
+                    </div>
                 </div>
             </nav>
              

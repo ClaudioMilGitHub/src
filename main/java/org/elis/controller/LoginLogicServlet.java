@@ -33,7 +33,8 @@ public class LoginLogicServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.sendRedirect("public-jsp/PaginaLogin.jsp");
+		return;
 	}
 
 	/**
@@ -59,7 +60,7 @@ public class LoginLogicServlet extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/private-jsp/HomePageAdmin.jsp").forward(request, response);
 				return;
 			}
-			request.getRequestDispatcher("WEB-INF/private-jsp/HomePage.jsp").forward(request, response);
+			request.getRequestDispatcher("public-jsp/HomePage.jsp").forward(request, response);
 		}else {
 			request.setAttribute("messaggioDiErrore", "Credenziali Errate.");
 			request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
