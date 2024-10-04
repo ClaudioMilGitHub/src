@@ -75,7 +75,7 @@
                         <div class="col gutter_header">
                             Sfoglia per genere
                         </div>
-                            <a href="#" class="gutter_item">
+                            <a href="<%=request.getContextPath()%>/SfogliaGenereServlet" class="gutter_item">
                                 Avventura
                             </a>
                             <a href="#" class="gutter_item">

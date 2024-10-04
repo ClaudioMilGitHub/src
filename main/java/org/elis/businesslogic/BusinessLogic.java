@@ -59,8 +59,8 @@ public class BusinessLogic {
 	public static List<Gioco> getAllGiochi(){
 		return DAOfactory.getDaoFactory().getGiocoDAO().getAllGiochi();
 	}
-	public static List<Gioco> getAllGiochiByGenere(int genere){
-		return DAOfactory.getDaoFactory().getGiocoDAO().getAllGiochiByGenere(genere);
+	public static List<Gioco> getAllGiochiByGenere(long genereId){
+		return DAOfactory.getDaoFactory().getGiocoDAO().getAllGiochiByGenere(genereId);
 	}
 	public static Gioco updateGiocoNome(Gioco gioco, String nome) {
 		return DAOfactory.getDaoFactory().getGiocoDAO().updateGiocoNome(gioco, nome);

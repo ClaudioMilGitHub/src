@@ -8,12 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/HomePageUtenteStyle.css">
+    
     <title>Benvenuto su STEAM</title>
 </head>
 <body>
 
 	<%Utente utenteLoggato = (Utente) request.getAttribute("utenteLoggato");%>
-
+	<%String imagePath = "https://wallpapers.com/images/hd/death-stranding-hd-e8t319t8a7c2e1w3.jpg";%>
 
     <div class="container-fluid">
         <!-- Navigation bar row-->
@@ -75,7 +76,7 @@
                         <div class="col gutter_header">
                             Sfoglia per genere
                         </div>
-                            <a href="<%=request.getContextPath()%>/SfogliaGenereServlet" class="gutter_item">
+                            <a href="<%=request.getContextPath()%>/SfogliaAvventuraGiochiServlet" class="gutter_item">
                                 Avventura
                             </a>
                             <a href="#" class="gutter_item">
@@ -96,7 +97,7 @@
             <div class="col-lg-6 card-container ">
                 <div class="content-cards mb-3">
                     <div class="card m-auto" style="width: 80%;">
-                        <img src="https://wallpapers.com/images/hd/death-stranding-hd-e8t319t8a7c2e1w3.jpg" class="card-img-top" alt="...">
+                        <img src="<%=imagePath%>" class="card-img-top" alt="...">
                         <div class="card-body">
                           <h3 class="card-title">Death Stranding</h3>
                           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>

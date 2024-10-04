@@ -1,24 +1,25 @@
 package org.elis.controller;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 import org.elis.businesslogic.BusinessLogic;
+import org.elis.model.*;
 
 /**
  * Servlet implementation class SfogliaAvventuraServlet
  */
-public class SfogliaAvventuraServlet extends HttpServlet {
+public class SfogliaAvventuraGiochiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SfogliaAvventuraServlet() {
+    public SfogliaAvventuraGiochiServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +28,12 @@ public class SfogliaAvventuraServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("GiochiAvventura", BusinessLogic.getGenereByName("Avventura"));
+		
+		List<Gioco> listaGiochi = BusinessLogic.getAllGiochiByGenere(1);
+		Genere g = BusinessLogic.getGenereByName("avventura");
+
+		request.setAttribute("genere", g);
+		request.setAttribute("listaGiochi", listaGiochi);
 		request.getRequestDispatcher("WEB-INF/private-jsp/SfogliaGiochi.jsp").forward(request, response);
 	}
 
@@ -35,7 +41,6 @@ public class SfogliaAvventuraServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

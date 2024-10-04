@@ -210,14 +210,14 @@ public class JdbcGiocoDAO implements GiocoDAO{
 	}
 	
 	@Override
-	public List<Gioco> getAllGiochiByGenere(int genere){
+	public List<Gioco> getAllGiochiByGenere(long genere){
 		List<Gioco> giochi = new ArrayList<>();
 		String query = "SELECT * from gioco JOIN genere_gioco ON gioco.id = id_gioco WHERE id_genere = ?";
 		try(
 				Connection  c = JdbcDAOfactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
-			
+			ps.setLong(1, genere);
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {

@@ -1,6 +1,8 @@
 import java.util.List;
 
 import org.elis.businesslogic.BusinessLogic;
+import org.elis.model.Genere;
+import org.elis.model.Gioco;
 import org.elis.model.Utente;
 
 public class Test {
@@ -10,12 +12,7 @@ public class Test {
 		
 			//BusinessLogic.add(1, "Rino", "rino@gmail.com", "rano1234!");
 			
-			utenti = BusinessLogic.getAllUtenti();
-			
-			for (Utente utente : utenti) {
-				System.out.println(utente.getUsername());
-				System.out.println(utente.getRuolo());
-				System.out.println(utente.getDataNascita());
-			}
+		Genere genere = BusinessLogic.getGenereByName("avventura");
+		System.out.println(genere.getNome());
 	}
 }
