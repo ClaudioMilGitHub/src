@@ -44,6 +44,7 @@ public class LoginLogicServlet extends HttpServlet {
 		String password= request.getParameter("passwordLogin");
 		
 		if(email == null || password == null || email.isBlank() || password.isBlank()) {
+			request.setAttribute("messaggioDiErrore", "Riempire correttamente i campi.");
 			request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
 			return;
 		}
@@ -60,6 +61,7 @@ public class LoginLogicServlet extends HttpServlet {
 			}
 			request.getRequestDispatcher("WEB-INF/private-jsp/HomePage.jsp").forward(request, response);
 		}else {
+			request.setAttribute("messaggioDiErrore", "Credenziali Errate.");
 			request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
 		}
 	}

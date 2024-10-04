@@ -58,12 +58,14 @@ public class RegistrationLogicServlet extends HttpServlet {
 		String data= request.getParameter("dataNascitaFormInput");
 		
 		if(username == null || email == null || password == null || data == null || username.isEmpty() || email.isEmpty() || password.isEmpty() || data.isEmpty()) {
+			request.setAttribute("messaggioDiErrore", "Riempire correttamente i campi. La Passuord deve contenere almeno un carattere speciale, un minimo di 8 caratteri e almeno una lettera maiuscola.");
 			request.getRequestDispatcher("public-jsp/PaginaRegistrazione.jsp").forward(request, response);
 			return;
 		}
 		if(BusinessLogic.getAllUtenti() != null) {
 			for(Utente u : BusinessLogic.getAllUtenti()) {
 				if(u.getEmail().equals(email) || u.getUsername().equals(username)) {
+					request.setAttribute("messaggioDiErrore", "Credenziali inserite già esistenti.");
 					request.getRequestDispatcher("public-jsp/PaginaRegistrazione.jsp").forward(request, response);
 					System.out.println("Utente già presente");
 					return;
@@ -73,19 +75,22 @@ public class RegistrationLogicServlet extends HttpServlet {
 		
 		
 		if(password.length() < 8) {
+			request.setAttribute("messaggioDiErrore", "Riempire correttamente i campi. La password contiene meno di otto caratteri.");
 			request.getRequestDispatcher("public-jsp/PaginaRegistrazione.jsp").forward(request, response);
 			System.out.println("password meno di 8 caratteri");
 			return;
 		}else if(password.equals(password.toLowerCase())) {
+			request.setAttribute("messaggioDiErrore", "Riempire correttamente i campi. La password deve contenere almeno una lettera maiuscola.");
 			request.getRequestDispatcher("public-jsp/PaginaRegistrazione.jsp").forward(request, response);
 			System.out.println("maiuscole e minuscole");
 			return;
 		}else if(password.contains("!") || password.contains("?") || password.contains("$")) {
 			LocalDate dataNascita = LocalDate.parse(data);
 			BusinessLogic.addUtente(ruolo, username, email, password, dataNascita);	
-			response.sendRedirect("public-jsp/PaginaLogin.jsp");
+			response.sendRedirect("public-jsp/SuccessoRegistrazione.jsp");
 			return;
 		}else {
+			request.setAttribute("messaggioDiErrore", "Riempire correttamente i campi. La password deve contenere almeno un carattere speciale [!, ?, $].");
 			request.getRequestDispatcher("public-jsp/PaginaRegistrazione.jsp").forward(request, response);
 			System.out.println("carattere speciale");
 			return;
