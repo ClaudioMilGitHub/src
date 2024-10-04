@@ -88,8 +88,8 @@ public class BusinessLogic {
 	public static List<Libreria> getAllLibrerie(){
 		return DAOfactory.getDaoFactory().getLibreriaDAO().getAllLibrerie();
 	}
-	public static Libreria updateLibreria(String nome) {
-		return DAOfactory.getDaoFactory().getLibreriaDAO().updateLibreria(nome);
+	public static Libreria updateLibreriaById(long id, String nuovoNome) {
+		return DAOfactory.getDaoFactory().getLibreriaDAO().updateLibreriaById(id, nuovoNome);
 	}
 	public static Libreria deleteLibreriaByNome(String nome) {
 		return DAOfactory.getDaoFactory().getLibreriaDAO().deleteLibreriaByNome(nome);
