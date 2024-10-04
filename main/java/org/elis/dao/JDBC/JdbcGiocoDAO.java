@@ -180,9 +180,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 	@Override
 	public List<Gioco> getAllGiochi() {
 		List<Gioco> giochi = new ArrayList<>();
-		String query = "SELECT nome FROM gioco";
-
-		
+		String query = "SELECT nome FROM gioco";	
 		try(
 				Connection  c = JdbcDAOfactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
@@ -194,6 +192,46 @@ public class JdbcGiocoDAO implements GiocoDAO{
 				
 				Gioco g = new Gioco();
 				String nome = rs.getString("nome");
+				
+				g.setNome(nome);
+				
+				giochi.add(g);
+			}
+			
+			if(!giochi.isEmpty()) {
+				return giochi;
+			}		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public List<Gioco> getAllGiochiByGenere(int genere){
+		List<Gioco> giochi = new ArrayList<>();
+		String query = "SELECT * from gioco JOIN genere_gioco ON gioco.id = id_gioco WHERE id_genere = ?";
+		try(
+				Connection  c = JdbcDAOfactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				){
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				Gioco g = new Gioco();
+				long id_gioco = rs.getLong("id_gioco");
+				long id_casa_editrice = rs.getLong("id_casa_editrice");
+				long id_offerta = rs.getLong("id_offerta");
+				String nome = rs.getString("nome");
+				String descrizione = rs.getString("descrizione");
+				double prezzo = rs.getDouble("prezzo");
+				Timestamp data_rilascio = rs.getTimestamp("data_rilascio");
+				LocalDate dataRilascio = data_rilascio.toLocalDateTime().toLocalDate();
+				
 				
 				g.setNome(nome);
 				

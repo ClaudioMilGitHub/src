@@ -14,6 +14,7 @@ public interface GiocoDAO {
 	Gioco getGiocoByName(String nome);
 	Gioco getGiocoById(long id);
 	List<Gioco> getAllGiochi();
+	List<Gioco> getAllGiochiByGenere(int genere);
 	Gioco updateGiocoNome(Gioco gioco, String nome);
 	Gioco updateGiocoImmagine(Gioco gioco, String path);
 	Gioco updateGiocoDataRilascio(Gioco gioco, LocalDate dataRilascio);
