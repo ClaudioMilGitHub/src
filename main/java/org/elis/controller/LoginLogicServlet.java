@@ -65,5 +65,4 @@ public class LoginLogicServlet extends HttpServlet {
 			request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
 		}
 	}
-
 }
