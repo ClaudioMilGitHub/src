@@ -39,14 +39,26 @@ form{
     margin: 10px;
 }
 
+#div-4{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    color: #b5b5b5; 
+}
+
 label{
     color: #b5b5b5;
     
 }
 
+.err{
+    border: 2px solid red;
+}
+
 .form-control{
-    background-color: #b5b5b5;
-    color: #353535;
+    background-color: #67707B;
+    color: #292e39;
     
 }
 
@@ -57,17 +69,17 @@ label{
 
 #box-1{
    
-    border-radius: 10px;
+    border-radius: 5px;
     margin: 100px;
-    padding: 48px;
+    padding: 40px;
     background-color:#292e39;
 }
 
-#box-e{
+#box-3{
+   
     border-radius: 10px;
     margin: 100px;
     padding: 48px;
-   
 }
 
 #btn{

@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Pagina di Login</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/LoginStyle.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/PaginaLogin.css">
 </head>
 <body>
     <div class="container-fluid">
@@ -26,33 +26,57 @@
             </div>
             <div class="col-lg-6 ">
                 <div id="box-1">
-                    <form action="<%=request.getContextPath()%>/LoginLogicServlet" method="post">
-                        <div id="div-1">
-                            <label id="label-e" for="Email" class="form-label">EMAIL ADDRESS</label>
-                            <input type="email" class="form-control" id="Email" placeholder="mario.rossi@gmail.com" name="emailLogin">
-                                    
-                        </div>
+                	<%
+                	String email = "";
+                	String password = "";
+                	Cookie [] cookies = request.getCookies();
+                	for(Cookie c : cookies){
+                		if(c.getName().equals("emailKey")){
+                			email = c.getValue();
+                		}
+                		if(c.getName().equals("passwordKey")){
+                			email = c.getValue();
+                		}
+                	}
+                	%>
+                    <form action="<%=request.getContextPath()%>/LoginLogicServlet" method="post" class ="row g-3">
+                        
+                        <div class="col-mb-12 ">
+                            <label for="emailFormLogin" class="form-label">EMAIL ADDRESS</label>
+                            <input value="<%=email %>" id="emailFormLogin" class="form-control" type="email" placeholder="rino.rano@gmail.com" name="emailFormLogin">
+                       </div>
                                 
-                        <div id="div-1">
-                            <label id="label-p" for="Password" class="form-label">PASSWORD</label>
-                            <input type="password" id="Password" class="form-control" name="passwordLogin">                
+                        <div class="col-mb-12 ">
+                            <label for="passwordFormLogin" class="form-label">PASSWORD</label>
+                            <input value="<%=password %>" id="passwordFormLogin" type="password" placeholder="password" name="passwordFormLogin" class="form-control">
+                          </div>
+    					<div class="col-mb-12 " style="color: #b5b5b5;">
+                            <label for="checkboxFormLogin">Ricordami</label>
+                            <input id="checkboxFormLogin" <%if(!email.isBlank()&&!password.isBlank()){%>checked<%} %> type="checkbox" name="chackboxFormLogin">
+                          </div>
+                    
+                        <div id="div-2" class="col-md-12">
+                            <input type="submit" value="ACCEDI"  class="btn btn-outline-primary" id="btn">
+                          
                         </div>
-    
-                        <div id="div-2">
-                            <input type="submit" value="LOGIN"  class="btn btn-outline-primary" id="btn">
-                            
-                        </div>
-                        <div>
-                        <%String messaggio = (String)request.getAttribute("messaggioDiErrore");
+                        <div id="div-2" class="col-md-12 mt-5 text-danger">
+                  			<%String messaggio = (String)request.getAttribute("messaggioDiErrore");
 					        if(messaggio != null){ %>
-					        <div>
+					        
 					        	<p><%=messaggio %></p>
-					        </div>
+					       
 					        <%} %>
-                        </div>
-                     
+                     	</div>
                     </form>
-            </div> 
+                    <div id="div-3" class="col-mb-12 ">
+                    	<%if(messaggio != null){ %>
+					        <p>Non sei ancora Registrato? Clicca qui per <a href="public-jsp/PaginaRegistrazione.jsp">Registrarti</a>.</p>
+					    <%}else{ %>
+                            <p>Non sei ancora Registrato? Clicca qui per <a href="PaginaRegistrazione.jsp">Registrarti</a>.</p>
+                            
+                        <%} %>
+                   </div>
+            	</div> 
                            
             </div>
             <div class="col-lg-3">
