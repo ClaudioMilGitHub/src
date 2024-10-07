@@ -1,0 +1,81 @@
+body{
+    background-image: url("https://store.akamai.steamstatic.com/public/images/v6/colored_body_top.png?v=2");
+    background-size: cover;
+}
+legend{
+    color: white;
+}
+
+.navbar{
+    background-color: #171a21;
+}
+
+
+footer{
+    background-color: #171a21;
+    background-size: auto;
+    
+}
+
+.btn{
+    color: white;
+    border: 2px white solid;
+  
+   
+    
+}
+
+
+a[class^="nav-link"]{
+    color: #F5F5F6;
+}
+
+#footer_text{
+    color: #8F98A0;
+    font-size: 12px;
+   
+}
+
+.action-link{
+    text-decoration: none;
+    color: #b8b6b4;
+}
+
+footer{
+
+    display: flex;
+    margin-top: 23.5vh;
+}
+
+.form-group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#Bottone{
+    margin-top: 5vh;
+}
+
+.Prezzo{
+    align-items:first baseline;
+}
+
+#footer_text{
+    color: #8F98A0;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.Range{
+    margin-bottom: 2.5vh;
+}
