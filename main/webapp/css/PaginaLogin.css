@@ -30,23 +30,31 @@ div{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px;
+    margin: 5px;
 }
 
-#label-p{
-    color: #b5b5b5;
-}
 
-#label-e{
-    color: #5555f0;
-}
 
-#Password, #Email{
-    background-color: #b5b5b5;
-    color: #353535;
+
+
+.form-control{
+    background-color: #67707B;
+    color: #292e39;
     
 }
 
+#div-3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    color: #b5b5b5; 
+}
+
+.form-label{
+    color: #b5b5b5;
+    
+}
 .container-fluid{
     background-image: url("https://gameworldobserver.com/wp-content/uploads/2021/02/steam-50.jpg");
     background-size: cover;
@@ -54,15 +62,10 @@ div{
 
 #box-1{
    
-    border-radius: 10px;
+    border-radius: 5px;
     margin: 100px;
     padding: 55px;
     background-color:#292e39;
-}
-
-p{
-    text-align: center;
-    color: red;
 }
 
 #btn{

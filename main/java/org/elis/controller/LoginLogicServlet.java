@@ -41,33 +41,41 @@ public class LoginLogicServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		HttpSession session = request.getSession();
 		
-		String email = request.getParameter("emailLogin");
-		String password= request.getParameter("passwordLogin");
 		
+		String email = request.getParameter("emailFormLogin");
+		String password= request.getParameter("passwordFormLogin");
+		String checkboxValue = request.getParameter("checkboxFormLogin");
+		
+		//Controllo che i campi non siano vuoti o nulli
 		if(email == null || password == null || email.isBlank() || password.isBlank()) {
 			request.setAttribute("messaggioDiErrore", "Riempire correttamente i campi.");
 			request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
 			return;
 		}
-		
+		//Controlla che le credenziali inserite siano corrette
 		Utente u = BusinessLogic.loginUtente(email, password);
-		
+		//Verifica se la checkbox sia checked, per i cookies
+		if(checkboxValue != null) {
+			Cookie emailCookie = new Cookie("emailKey", email);
+			Cookie passwordCookie = new Cookie("passwordKey", password);
+			response.addCookie(emailCookie);
+			response.addCookie(passwordCookie);
+		}
+		//In caso l'utente abbia inserito le credenziali corrette, indirizza alla home page
 		if(u != null) {
 
-			if(u.getRuolo() == Ruolo.PUBLISHER) {
+			/*if(u.getRuolo() == Ruolo.PUBLISHER) {
 				request.getRequestDispatcher("WEB-INF/private-jsp/HomePagePublisher.jsp").forward(request, response);
 				return;
 			}
 			if(u.getRuolo() == Ruolo.ADMIN) {
 				request.getRequestDispatcher("WEB-INF/private-jsp/HomePageAdmin.jsp").forward(request, response);
 				return;
-			}
-			
+			}*/
 			session.setAttribute("utenteLoggato", u);
-			request.getRequestDispatcher("public-jsp/HomePageUtente.jsp").forward(request, response);
+			response.sendRedirect("public-jsp/HomePageUtente.jsp");
 			return;
 			
 		}else {

@@ -22,31 +22,35 @@
     
         <!-- Content row-->
         <div class="row">
-            <div class="col-lg-1 ">
-                 
-            </div>
+           
             <div class="col-lg-6 ">
                 <div id="box-1">
-                    <form action="<%=request.getContextPath()%>/RegistrationLogicServlet" method="post" class ="row g-3">
+
+                    
+                    <form action="<%=request.getContextPath()%>/RegistrationLogicServlet" method="post"  class ="row g-3" id="frm">
                        
-                        <div class="col-mb-12 col-auto">
+                        <div class="col-mb-12 ">
                             <label for="emailFormInput" class="form-label">EMAIL ADDRESS</label>
-                            <input class="form-control" type="email" placeholder="rino.rano@gmail.com" name="emailFormInput">
+                            <input id="emailFormInput" class="form-control" type="email" placeholder="rino.rano@gmail.com" name="emailFormInput">
                           </div>
-                          <div class="col-mb-12 col-auto">
+                          <div class="col-mb-12 ">
+                            <label for="email2FormInput" class="form-label">CONFIRM EMAIL ADDRESS</label>
+                            <input id="email2FormInput" class="form-control" type="email" placeholder="rino.rano@gmail.com" name="email2FormInput">
+                          </div>
+                          <div class="col-mb-12 ">
                             <label for="usernameFormInput" class="form-label">USERNAME</label>
-                            <input class="form-control" type="text" placeholder="username" name="usernameFormInput">
+                            <input id="usernameFormInput" class="form-control" type="text" placeholder="username" name="usernameFormInput">
                           </div>
-                          <div class="col-mb-12 col-auto">
+                          <div class="col-mb-12 ">
                             <label for="passwordFormInput" class="form-label">PASSWORD</label>
-                            <input type="password" placeholder="password" name="passwordFormInput" class="form-control">
+                            <input id="passwordFormInput" type="password" placeholder="password" name="passwordFormInput" class="form-control">
                           </div>
                           
-                        <div class="col-md-7 col-auto">
+                        <div class="col-md-12 ">
                             <label for="dataNascitaFormInput" class="form-label">DATA DI NASCITA</label>
-                            <input type="date" name="dataNascitaFormInput" class="form-control">
+                            <input id="dataNascitaFormInput" type="date" name="dataNascitaFormInput" class="form-control">
                         </div>
-                        <div class="col-md-7 col-auto">
+                        <div class="col-md-12">
                             <label for="ruoloFormInput" class="form-label">RUOLO</label>
                             <select id="ruoloFormInput" name="ruoloFormInput" class="form-control">
                                 <option value="UTENTE_BASE">Utente</option>
@@ -56,17 +60,30 @@
                         <div id="div-2" class="col-md-12 col-auto">
                             <input type="submit" value="REGISTRATI"  class="btn btn-outline-primary" id="btn">
                         </div>
+                        
+                 
 
                     </form>
-            </div> 
+                    
+                    <div id="div-4" class="col-mb-12 ">
+                        <%String messaggio = (String)request.getAttribute("messaggioDiErrore");
+                        if(messaggio != null){ %>
+					        <p>Hai già un profilo? Clicca qui per <a href="public-jsp/PaginaLogin.jsp">Accedi</a>.</p>
+					    <%}else{ %>
+                            <p>Hai già un profilo? Clicca qui per <a href="PaginaLogin.jsp">Accedere</a>.</p>
+                            
+                        <%} %>
+                   </div>
+            	</div> 
                            
             </div>
-            <div class="col-lg-5">
-                <%String messaggio = (String)request.getAttribute("messaggioDiErrore");
+            <div class="col-lg-6 ">
+            <%
 					        if(messaggio != null){ %>
 					        
-					        <div id="box-e" class="p-3 mb-2 bg-dark text-white""><%=messaggio %></div>
+					        <div id="box-3" class="p-3 mb-2 bg-dark text-white"><%=messaggio %></div>
 					        <%} %>
+            </div>
             </div>
         </div>
     
@@ -87,6 +104,8 @@
             </footer>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
+ 

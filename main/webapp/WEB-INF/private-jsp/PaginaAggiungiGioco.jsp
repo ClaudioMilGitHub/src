@@ -12,7 +12,6 @@
 <body>
 <div class="container-fluid">
 <section>
-        
             <div class="row navbar mb-3" style="background-color: #171a21;">
                 <nav class="navbar navbar-expand-lg">
                     <div class="container">
@@ -31,8 +30,8 @@
                         </div>
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <form class="d-flex" role="search">
-                                <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Search">
-                                <button class="btn btn-outline-success" type="submit">Cerca</button>
+                                <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Search" style="margin: auto;">
+                                <button class="btn btn-outline-success" type="submit" style="margin: auto;">Cerca</button>
                             </form>
                         </div>
                        
@@ -52,31 +51,37 @@
                             <label for="FormControlTextarea1" style="color: white;">Descrizione</label>
                             <textarea class="form-control" id="FormControlTextarea1" rows="3" placeholder="Aggiungi una descrizione..."></textarea>
                           </div>
-                        </form>
-                            <div class="form-group">
-                                <p  style="color: white; margin-top: 2vh;">Prezzo</p>
-                                <input type="range" name="range" class="Range" step="0.1" min="0" max="80" value="" onchange="rangePrimary.value=value">
-                            <div class="Prezzo">
-                                <input type="text" id="rangePrimary" placeholder="€">€</input>
-                            
-                            </div>
-                        </div>
                           <div class="mb-3">
-                            <label for="Select" class="form-label" style="color: white;">Genere</label>
-                            <select id="Select" class="form-select">
+                            <label for="Select" class="form-label" style="color: white; margin-top: 2vh;">Genere</label>
+                            <select id="Select" class="form-select" >
                               <option></option>
-                              <option></option>
+                              <option>Strategia</option>
                               <option></option>
                               <option></option>
                             </select>
                           </div>
-                          <div>
-                            <label style="color: white;">Data di rilascio:
-                            <input type="date" name="rilascio">
+                        <div class="row">
+                    <div class="col-lg-6">
+                        <div style="display: flex;flex-direction: column;">
+                            <p  style="color: white; display: flex; justify-content: center;">Prezzo</p>
+                            <input type="range" name="range" class="Range" step="0.1" min="0" max="80" value="" onchange="rangePrimary.value=value">
+                            <input type="text" id="rangePrimary" placeholder="€" style="border-left: 2vh;border-radius: 4px;">€
+                            </input>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                            <div style="display: flex;flex-direction: column;">
+                            <label style="color: white; display: flex; justify-content: center; margin-bottom: 2vh;" >Data di rilascio
+                            <input type="date" id="releaseDate" name="releaseDate" style="border-radius: 4px;margin-top: 4vh;">
                             </label>
-                        </div>  
-                          <div class="mb-3" id="Bottone" style="display: flex; justify-content: center;">
-                          <button type="submit" class="btn btn-primary" style="background-color: #171a21;">Invia</button>
+                       
+                        </div>
+                       </div>
+              </div>
+            
+                          <div class="mb-3">
+                            <button type="submit" class="Invio">Invio</button>
+                          </div>
                         </fieldset>
                       </form>
                 </div>
