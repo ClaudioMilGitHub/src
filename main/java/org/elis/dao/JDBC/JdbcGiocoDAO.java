@@ -232,8 +232,13 @@ public class JdbcGiocoDAO implements GiocoDAO{
 				Timestamp data_rilascio = rs.getTimestamp("data_rilascio");
 				LocalDate dataRilascio = data_rilascio.toLocalDateTime().toLocalDate();
 				
-				
+				g.setId(id_gioco);
+				g.setIdCasaEditrice(id_casa_editrice);
+				g.setIdOfferta(id_offerta);
 				g.setNome(nome);
+				g.setDescrizione(descrizione);
+				g.setPrezzo(prezzo);
+				g.setDataRilascio(dataRilascio);
 				
 				giochi.add(g);
 			}

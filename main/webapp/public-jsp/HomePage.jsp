@@ -30,9 +30,6 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                       <div class="navbar-nav">
-                        <a class="nav-link" aria-current="page" href="#">Home</a>
-                        <a class="nav-link" href="#">Negozio</a>
-                        <a class="nav-link" href="#">Profilo</a>
                       </div>
                     </div>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -58,39 +55,43 @@
                 <div class="options-buttons">
                     <div class="col home_page_gutter-block ps-4">
                         <div class="col gutter_header">Sfoglia categorie</div>
-                            <a href="#" class="gutter_item">
-                                I più venduti
-                            </a>
-                            <a href="#" class="gutter_item">
-                                Nuove uscite
-                            </a>
-                            <a href="#" class="gutter_item">
-                                In arrivo
-                            </a>
-                            <a href="#" class="gutter_item">
-                                Offerte speciali
-                            </a>
-                            <a href="#" class="gutter_item">
-                                Titoli in VR
-                            </a>               
+                            <form action="CategorieServlet" method="POST">   
+                                <button class="gutter_item" type="submit" value="avventura" name="avventuraInputForm">
+                                    I più venduti
+                                </button>
+                                <button class="gutter_item" type="submit" value="ruolo" name="ruoloInputForm">
+                                    Nuove uscite
+                                </button>
+                                <button class="gutter_item" type="submit" value="strategia" name="strategiaInputForm">
+                                    In arrivo
+                                </button>
+                                <button class="gutter_item" type="submit" value="metroidvania" name="metroidvaniaInputForm">
+                                    Offerte speciali
+                                </button>
+                                <button class="gutter_item" type="submit" value="azione" name="azioneInputForm">
+                                    Titoli in VR
+                                </button>
+                            </form>        
                         <div class="col gutter_header">
                             Sfoglia per genere
                         </div>
-                            <a href="<%=request.getContextPath()%>/SfogliaAvventuraGiochiServlet" class="gutter_item">
-                                Avventura
-                            </a>
-                            <a href="#" class="gutter_item">
-                                Ruolo
-                            </a>
-                            <a href="#" class="gutter_item">
-                                Strategia
-                            </a>
-                            <a href="#" class="gutter_item">
-                                Metroidvania
-                            </a>
-                            <a href="#" class="gutter_item">
-                                Azione
-                            </a>                                   
+                            <form action="<%=request.getContextPath()%>/SfogliaGiochiServlet" method="POST">   
+                               <button class="gutter_item" type="submit" value="avventura" name="genereInputForm">
+                                   Avventura
+                               </button>
+                               <button class="gutter_item" type="submit" value="ruolo" name="genereInputForm">
+                                   Ruolo
+                               </button>
+                               <button class="gutter_item" type="submit" value="strategia" name="genereInputForm">
+                                   Strategia
+                               </button>
+                               <button class="gutter_item" type="submit" value="metroidvania" name="genereInputForm">
+                                   Metroidvania
+                               </button>
+                               <button class="gutter_item" type="submit" value="azione" name="genereInputForm">
+                                   Azione
+                               </button>
+                           </form>                                  
                     </div>        
                 </div>  
             </div>

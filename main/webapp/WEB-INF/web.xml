@@ -31,12 +31,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>SfogliaAvventuraGiochiServlet</display-name>
-    <servlet-name>SfogliaAvventuraGiochiServlet</servlet-name>
-    <servlet-class>org.elis.controller.SfogliaAvventuraGiochiServlet</servlet-class>
+    <display-name>SfogliaGiochiServlet</display-name>
+    <servlet-name>SfogliaGiochiServlet</servlet-name>
+    <servlet-class>org.elis.controller.SfogliaGiochiServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>SfogliaAvventuraGiochiServlet</servlet-name>
-    <url-pattern>/SfogliaAvventuraGiochiServlet</url-pattern>
+    <servlet-name>SfogliaGiochiServlet</servlet-name>
+    <url-pattern>/SfogliaGiochiServlet</url-pattern>
   </servlet-mapping>
 </web-app>

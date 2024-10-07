@@ -13,13 +13,13 @@ import org.elis.model.*;
 /**
  * Servlet implementation class SfogliaAvventuraServlet
  */
-public class SfogliaAvventuraGiochiServlet extends HttpServlet {
+public class SfogliaGiochiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SfogliaAvventuraGiochiServlet() {
+    public SfogliaGiochiServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,10 +29,20 @@ public class SfogliaAvventuraGiochiServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		List<Gioco> listaGiochi = BusinessLogic.getAllGiochiByGenere(1);
-		Genere g = BusinessLogic.getGenereByName("avventura");
-
-		request.setAttribute("genere", g);
+		String genereInput = request.getParameter("genereInputForm");
+		
+		Genere genere = BusinessLogic.getGenereByName(genereInput);
+		long idGenere = genere.getId();
+		
+		List<Gioco> listaGiochi = BusinessLogic.getAllGiochiByGenere(idGenere);
+		
+		for (Gioco gioco : listaGiochi) {
+			System.out.println(gioco.getNome());
+			System.out.println(gioco.getId());
+			System.out.println(gioco.getDescrizione());
+		}
+		
+		request.setAttribute("genere", genere);
 		request.setAttribute("listaGiochi", listaGiochi);
 		request.getRequestDispatcher("WEB-INF/private-jsp/SfogliaGiochi.jsp").forward(request, response);
 	}
@@ -43,5 +53,4 @@ public class SfogliaAvventuraGiochiServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }

@@ -2,6 +2,13 @@ body{
     font-family: Arial, Helvetica, sans-serif;
 }
 
+button {
+    background: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
 .navbar{
     background-color: #171a21;
 }
@@ -51,7 +58,7 @@ a{
     text-decoration: none;
 }
 
-a.gutter_item {
+button.gutter_item {
     display: block;
     padding: 2px;
     width: fit-content;
@@ -60,6 +67,10 @@ a.gutter_item {
     font-family: "Motiva Sans", Sans-serif;
     font-weight: normal;
     font-weight: 550;
+    background: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
 }
 
 div{
@@ -86,12 +97,3 @@ div{
     justify-content: space-evenly;
 }
 
-.btn-genere {
-	background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
-}

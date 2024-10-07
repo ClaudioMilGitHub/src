@@ -46,7 +46,7 @@ public class JdbcGenereDAO implements GenereDAO {
 
     @Override
     public Genere getGenereByName(String nome) {
-    	String query = "SELECT nome FROM genere WHERE nome = ?";
+    	String query = "SELECT * FROM genere WHERE nome = ?";
 
         try (Connection c = JdbcDAOfactory.getConnection();
              PreparedStatement ps = c.prepareStatement(query)) {
@@ -55,6 +55,10 @@ public class JdbcGenereDAO implements GenereDAO {
                 if (rs.next()) {
                     Genere genere = new Genere();
                     genere.setNome(rs.getString("nome"));
+                    genere.setId(rs.getLong("id"));
+                    long idOfferta = rs.getLong("id_offerta");
+                    
+                    genere.setOfferta(null);
                     return genere;
                 }
             }

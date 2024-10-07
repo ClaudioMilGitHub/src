@@ -30,8 +30,8 @@
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                       <div class="navbar-nav">
                         <a class="nav-link" aria-current="page" href="#">Home</a>
-                        <a class="nav-link" href="#">Negozio</a>
                         <a class="nav-link" href="<%=request.getContextPath()%>/ProfileLogicServlet"><%=utenteLoggato.getUsername() %></a>
+                        <a class="nav-link" href="#">Libreria</a>
                       </div>
                     </div>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -75,21 +75,23 @@
                         <div class="col gutter_header">
                             Sfoglia per genere
                         </div>
-                            <a href="<%=request.getContextPath()%>/SfogliaGenereServlet" class="gutter_item">
-                                Avventura
-                            </a>
-                            <a href="#" class="gutter_item">
-                                Ruolo
-                            </a>
-                            <a href="#" class="gutter_item">
-                                Strategia
-                            </a>
-                            <a href="#" class="gutter_item">
-                                Metroidvania
-                            </a>
-                            <a href="#" class="gutter_item">
-                                Azione
-                            </a>                                   
+                           <form action="<%=request.getContextPath()%>/SfogliaGiochiServlet" method="POST">   
+                              <button class="gutter_item" type="submit" value="avventura" name="genereInputForm">
+                                    Avventura
+                                </button>
+                                <button class="gutter_item" type="submit" value="ruolo" name="genereInputForm">
+                                    Ruolo
+                                </button>
+                                <button class="gutter_item" type="submit" value="strategia" name="genereInputForm">
+                                    Strategia
+                                </button>
+                                <button class="gutter_item" type="submit" value="metroidvania" name="genereInputForm">
+                                    Metroidvania
+                                </button>
+                                <button class="gutter_item" type="submit" value="azione" name="genereInputForm">
+                                    Azione
+                                </button>
+                           </form>     
                     </div>        
                 </div>  
             </div>
