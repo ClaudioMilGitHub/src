@@ -12,7 +12,6 @@
 <body>
 <div class="container-fluid">
 <section>
-        
             <div class="row navbar mb-3" style="background-color: #171a21;">
                 <nav class="navbar navbar-expand-lg">
                     <div class="container">
@@ -120,13 +119,13 @@
                 <div class="col-lg-12">
                     <div class="d-grid gap-2" style="background-color: #171a21;" >
                         <div id="btn2">
-                                    <button class="btn btn-primario" type="button" style="background-color: #536f86;">Aggiungi il tuo gioco</button>
-                                    <button class="btn btn-secondario" type="button" style="background-color:#2c3b47;">Aggiorna il tuo gioco</button>
-                                    <button class="btn btn-terziario" type="button" style="background-color: #171a21;">Rimuovi il tuo gioco</button>
+                                    <a href="PaginaAggiungiGioco.jsp"><button class="btn btn-primario" type="button" style="background-color: #536f86;">Aggiungi il tuo gioco</button></a>
+                                    <a href="PaginaModificaGioco.jsp"><button class="btn btn-secondario" type="button" style="background-color:#2c3b47;">Aggiorna il tuo gioco</button></a>
+                                    <a href="PaginaEliminaGioco.jsp"><button class="btn btn-terziario" type="button" style="background-color: #171a21;">Rimuovi il tuo gioco</button></a>
                         </div>
                     </div>  
                 </div>
-            <footer class="footer">
+            <footer class="footer" style="margin-top: 19vh;">
                 <div class="content-logo d-flex justify-content-between">
                     <div class="footer-logo-steam">
                         <img src="https://store.akamai.steamstatic.com/public/images/v6/logo_steam_footer.png" alt="logo steam">
