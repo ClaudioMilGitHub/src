@@ -72,16 +72,17 @@
                           </div>
                           <div class="row">
                             <div class="col-lg-6">
-                            <div style="display: flex;flex-direction: column;">
-                                <label for="cover" style="color: white;">Copertina (inserisci URL Immagine)</label>
-                                <input type="text" id="cover" name="cover" class="form-control" placeholder="Inserisci l'URL dell'immagine">
-                            </div>
+                           <form action="AddImage" method="post" enctype="multipart">
+                            <p style="color: white; display: flex;justify-content: center;">Carica copertina</p>
+                            <input type="file">
+                            <input type="submit" value="Aggiungi Immagine" style="border-radius: 5px;">
+                           </form>
                             </div>
                     <div class="col-lg-6">
                         <div style="display: flex;flex-direction: column;">
-                            <p  style="color: white; display: flex; justify-content: center; margin-bottom: auto;">Prezzo</p>
+                            <p  style="color: white; display: flex; justify-content: center; margin-bottom: 2%;">Prezzo</p>
                             <input type="range" name="range" class="Range" step="0.1" min="0" max="80" value="" onchange="rangePrimary.value=value">
-                            <input type="text" id="rangePrimary" placeholder="€" style="border-left: 2vh;border-radius: 5px;margin-top: -0.8vh;">
+                            <input type="text" id="rangePrimary" placeholder="€" style="border-left: 2vh;border-radius: 5px; margin-top: 2%;">
                             </input>
                         </div>
                     </div>

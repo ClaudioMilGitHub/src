@@ -4,7 +4,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Benvenuto su STEAM</title>
+    <title>Pagina_Modifica_Gioco</title>
   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -59,7 +59,9 @@
                 <label style="color: white;"><input type="checkbox" class="fieldCheckbox" value="description" style="color: white;"> Descrizione</label>
                 <label style="color: white;"><input type="checkbox" class="fieldCheckbox" value="price" style="color: white;"> Prezzo</label>
                 <label style="color: white;"><input type="checkbox" class="fieldCheckbox" value="genere" style="color: white;"> Genere</label>
+                <label style="color: white;"><input type="checkbox" class="fieldCheckbox" value="cover" style="color: white;">Copertina</label>
                 <label style="color: white;"><input type="checkbox" class="fieldCheckbox" value="releaseDate" style="color: white;"> Data di Rilascio</label>
+                <label style="color: white;"><input type="checkbox" class="fieldCheckbox" value="offers" style="color: white;">Offerte</label>
             </div>
         </div>
 
@@ -84,14 +86,41 @@
                 </div>
 
                 <div class="form-group hidden" id="field-genere">
-                    <label for="genere" style="color: white;">Genere</label>
-                    <input type="text" id="genere" name="genere">
+                    <label for="genere" class="form-label" style="color: white;">Genere</label>
+                    <select id="genere" name="genere" class="form-select">
+                        <option value="">Seleziona Genere...</option>
+                        <option value="Strategia">Strategia</option>
+                        <option value="Azione">Azione</option>
+                        <option value="RPG">RPG</option>
+                        <option value="Avventura">Avventura</option>
+                        <option value="Simulazione">Simulazione</option>
+                        <option value="Sport">Sport</option>
+                    </select>
                 </div>
+
+                        <div class="form-group hidden" id="field-cover">
+                            <label for="cover" style="color: white;">Copertina (inserisci URL Immagine)</label>
+                            <input type="text" id="cover" name="cover" class="form-control" placeholder="Inserisci l'URL dell'immagine">
+                        </div>
+
 
                
                 <div class="form-group hidden" id="field-releaseDate">
                     <label for="releaseDate" style="color: white;">Data di rilascio</label>
                     <input type="date" id="releaseDate" name="releaseDate">
+                </div>
+
+                <div class="form-group hidden" id="field-offers">
+                    <label for="offers" style="color: white;">Offerte</label>
+                    <select id="offers" name="offers" class="form-select" multiple>
+                        <option value="Sconto">Sconto</option>
+                        <option value="Natale">Natalizio</option>
+                        <option value="Halloween">Sconti dell'orrore</option>
+                        <option value="Black Friday">Black Friday</option>
+                        <option value="Blue Mondey">Blue Monday</option>
+                       
+                       
+                    </select>
                 </div>
 
                 <button type="submit" class="Invio">Salva Modifiche</button>
