@@ -47,6 +47,7 @@ public class LoginLogicServlet extends HttpServlet {
 		String email = request.getParameter("emailFormLogin");
 		String password= request.getParameter("passwordFormLogin");
 		String checkboxValue = request.getParameter("checkboxFormLogin");
+		System.out.println(checkboxValue);
 		
 		//Controllo che i campi non siano vuoti o nulli
 		if(email == null || password == null || email.isBlank() || password.isBlank()) {
@@ -56,15 +57,17 @@ public class LoginLogicServlet extends HttpServlet {
 		}
 		//Controlla che le credenziali inserite siano corrette
 		Utente u = BusinessLogic.loginUtente(email, password);
-		//Verifica se la checkbox sia checked, per i cookies
-		if(checkboxValue != null) {
-			Cookie emailCookie = new Cookie("emailKey", email);
-			Cookie passwordCookie = new Cookie("passwordKey", password);
-			response.addCookie(emailCookie);
-			response.addCookie(passwordCookie);
-		}
+		
 		//In caso l'utente abbia inserito le credenziali corrette, indirizza alla home page
 		if(u != null) {
+			//Verifica se la checkbox sia checked, per i cookies
+			if(checkboxValue != null) {
+				Cookie emailCookie = new Cookie("emailKey", email);
+				Cookie passwordCookie = new Cookie("passwordKey", password);
+				
+				response.addCookie(emailCookie);
+				response.addCookie(passwordCookie);
+			}
 
 			/*if(u.getRuolo() == Ruolo.PUBLISHER) {
 				request.getRequestDispatcher("WEB-INF/private-jsp/HomePagePublisher.jsp").forward(request, response);

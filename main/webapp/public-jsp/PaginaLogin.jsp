@@ -27,18 +27,18 @@
             <div class="col-lg-6 ">
                 <div id="box-1">
                 	<%
-                	String email = "";
-                	String password = "";
-                	Cookie [] cookies = request.getCookies();
-                	for(Cookie c : cookies){
-                		if(c.getName().equals("emailKey")){
-                			email = c.getValue();
-                		}
-                		if(c.getName().equals("passwordKey")){
-                			email = c.getValue();
-                		}
-                	}
-                	%>
+		String email = "";
+		String password = "";
+		Cookie [] cookies = request.getCookies();
+		for(Cookie c : cookies){
+			if(c.getName().equals("emailKey")){
+				email = c.getValue();
+			}
+			if(c.getName().equals("passwordKey")){
+				password = c.getValue();
+			}
+		}
+		%>
                     <form action="<%=request.getContextPath()%>/LoginLogicServlet" method="post" class ="row g-3">
                         
                         <div class="col-mb-12 ">
@@ -51,8 +51,8 @@
                             <input value="<%=password %>" id="passwordFormLogin" type="password" placeholder="password" name="passwordFormLogin" class="form-control">
                           </div>
     					<div class="col-mb-12 " style="color: #b5b5b5;">
-                            <label for="checkboxFormLogin">Ricordami</label>
-                            <input id="checkboxFormLogin" <%if(!email.isBlank()&&!password.isBlank()){%>checked<%} %> type="checkbox" name="chackboxFormLogin">
+                            <label from="checkboxFormLogin">Rimanere Connesso</label>
+							<input <%if(!email.isBlank() && !password.isBlank()){%>checked<%} %> type="checkbox" name="checkboxFormLogin">	
                           </div>
                     
                         <div id="div-2" class="col-md-12">
