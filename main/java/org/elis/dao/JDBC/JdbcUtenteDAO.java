@@ -24,11 +24,12 @@ public class JdbcUtenteDAO implements UtenteDAO{
 		
 		return instance;
 	}
+	
 
 	@Override
-	public Utente addUtente(int ruoloIntValue, String username, String email, String password, LocalDate dataNascita) {
+	public Utente addUtente(int ruoloIntValue, String username, String email, String password, String nome, String cognome, String telefono, String indirizzo, String sitoWeb, String comuneResidenza, LocalDate dataNascita) {
 		
-		String query = "INSERT INTO utente (ruolo, username, email, password, data_nascita) VALUES (?,?,?,?,?)";
+		String query = "INSERT INTO utente (ruolo, username, email, password, nome, cognome, telefono, indirizzo, sito_web, comune_residenza, data_nascita) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 		
 		Utente u = new Utente();
 		Ruolo[] ruoli = Ruolo.values();
@@ -37,6 +38,12 @@ public class JdbcUtenteDAO implements UtenteDAO{
 		u.setUsername(username);
 		u.setEmail(email);
 		u.setPassword(password);
+		u.setNome(nome);
+		u.setCognome(cognome);
+		u.setTelefono(telefono);
+		u.setIndirizzo(indirizzo);
+		u.setSitoWeb(sitoWeb);
+		u.setComuneResidenza(comuneResidenza);
 		u.setDataNascita(dataNascita);
 		
 		try(
@@ -49,7 +56,13 @@ public class JdbcUtenteDAO implements UtenteDAO{
 			ps.setString(2, username);
 			ps.setString(3, email);
 			ps.setString(4, password);
-			ps.setDate(5, java.sql.Date.valueOf(dataNascita));
+			ps.setString(5, nome);
+			ps.setString(6, cognome);
+			ps.setString(7, telefono);
+			ps.setString(8, indirizzo);
+			ps.setString(9, sitoWeb);
+			ps.setString(10, comuneResidenza);
+			ps.setDate(11, java.sql.Date.valueOf(dataNascita));
 			
 			ps.executeUpdate();
 			
@@ -63,33 +76,49 @@ public class JdbcUtenteDAO implements UtenteDAO{
 	}
 	
 	@Override
-	public Utente getUtenteByName(String nome) {
+	public Utente getUtenteByName(String usernameSearch) {
 		String query = "SELECT * FROM UTENTE WHERE USERNAME = ?";
 		
 		try(
 				Connection c = JdbcDAOfactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				) {
-			ps.setString(1, nome);
+			ps.setString(1, usernameSearch);
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()) {
 				Utente u = new Utente();
+				
 				long id = rs.getLong("id");
 				String username = rs.getString("username");
 				String email = rs.getString("email");
 				String password = rs.getString("password");
+				String nome = rs.getString("nome");
+				String cognome = rs.getString("cognome");
+				String telefono = rs.getString("telefono");
+				String indirizzo = rs.getString("indirizzo");
+				String sitoWeb = rs.getString("sito_web");
+				String comuneResidenza = rs.getString("comune_residenza");
+				
 				int indiceRuolo = rs.getInt("ruolo");
 				Ruolo[] ruoli = Ruolo.values();
 				Ruolo ruolo = ruoli[indiceRuolo];
 				Timestamp dataN = rs.getTimestamp("data_nascita");
 				LocalDate dataNascita = dataN.toLocalDateTime().toLocalDate();
+				
 				u.setId(id);
 				u.setUsername(username);
 				u.setEmail(email);
 				u.setPassword(password);
 				u.setRuolo(ruolo);
+				u.setNome(nome);
+				u.setCognome(cognome);
+				u.setTelefono(telefono);
+				u.setIndirizzo(indirizzo);
+				u.setSitoWeb(sitoWeb);
+				u.setComuneResidenza(comuneResidenza);
 				u.setDataNascita(dataNascita);
+				
 				return u;
 			}
 			
@@ -112,21 +141,39 @@ public class JdbcUtenteDAO implements UtenteDAO{
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()) {
+				
 				Utente u = new Utente();
+				
 				String username = rs.getString("username");
 				String email = rs.getString("email");
 				String password = rs.getString("password");
+				String nome = rs.getString("nome");
+				String cognome = rs.getString("cognome");
+				String telefono = rs.getString("telefono");
+				String indirizzo = rs.getString("indirizzo");
+				String sitoWeb = rs.getString("sito_web");
+				String comuneResidenza = rs.getString("comune_residenza");
+				
 				int indiceRuolo = rs.getInt("ruolo");
 				Ruolo[] ruoli = Ruolo.values();
 				Ruolo ruolo = ruoli[indiceRuolo];
 				Timestamp dataN = rs.getTimestamp("data_nascita");
+				
 				LocalDate dataNascita = dataN.toLocalDateTime().toLocalDate();
+				
 				u.setId(id);
 				u.setUsername(username);
 				u.setEmail(email);
 				u.setPassword(password);
 				u.setRuolo(ruolo);
+				u.setNome(nome);
+				u.setCognome(cognome);
+				u.setTelefono(telefono);
+				u.setIndirizzo(indirizzo);
+				u.setSitoWeb(sitoWeb);
+				u.setComuneResidenza(comuneResidenza);
 				u.setDataNascita(dataNascita);
+				
 				return u;
 			}
 			
@@ -155,19 +202,34 @@ public class JdbcUtenteDAO implements UtenteDAO{
 				
 				Utente u = new Utente();
 				long id = rs.getLong("id");
-				String email = rs.getString("email");
 				String username = rs.getString("username");
+				String email = rs.getString("email");
 				String password = rs.getString("password");
+				String nome = rs.getString("nome");
+				String cognome = rs.getString("cognome");
+				String telefono = rs.getString("telefono");
+				String indirizzo = rs.getString("indirizzo");
+				String sitoWeb = rs.getString("sito_web");
+				String comuneResidenza = rs.getString("comune_residenza");
+				
 				int roleIntValue = rs.getInt("ruolo");
 				Ruolo[] ruoli = Ruolo.values();
-				Ruolo ruolo = ruoli[roleIntValue];
+				Ruolo ruolo = ruoli[roleIntValue];				
 				Timestamp dataN = rs.getTimestamp("data_nascita");
+				
 				LocalDate dataNascita = dataN.toLocalDateTime().toLocalDate();
-				u.setId(id); 
-				u.setEmail(email);
+				
+				u.setId(id);
 				u.setUsername(username);
+				u.setEmail(email);
 				u.setPassword(password);
 				u.setRuolo(ruolo);
+				u.setNome(nome);
+				u.setCognome(cognome);
+				u.setTelefono(telefono);
+				u.setIndirizzo(indirizzo);
+				u.setSitoWeb(sitoWeb);
+				u.setComuneResidenza(comuneResidenza);
 				u.setDataNascita(dataNascita);
 				utenti.add(u);
 			}

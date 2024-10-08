@@ -36,15 +36,10 @@ public class SfogliaGiochiServlet extends HttpServlet {
 		
 		List<Gioco> listaGiochi = BusinessLogic.getAllGiochiByGenere(idGenere);
 		
-		for (Gioco gioco : listaGiochi) {
-			System.out.println(gioco.getNome());
-			System.out.println(gioco.getId());
-			System.out.println(gioco.getDescrizione());
-		}
 		
 		request.setAttribute("genere", genere);
 		request.setAttribute("listaGiochi", listaGiochi);
-		request.getRequestDispatcher("WEB-INF/private-jsp/SfogliaGiochi.jsp").forward(request, response);
+		request.getRequestDispatcher("public-jsp/SfogliaGiochi.jsp").forward(request, response);
 	}
 
 	/**

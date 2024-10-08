@@ -47,6 +47,13 @@ public class RegistrationLogicServlet extends HttpServlet {
 		String email2 = request.getParameter("email2FormInput");
 		String password= request.getParameter("passwordFormInput");
 		String stringaRuolo = request.getParameter("ruoloFormInput");
+		String nome = request.getParameter("nomeFormInput");
+		String cognome = request.getParameter("cognomeFormInput");
+		String telefono = request.getParameter("telefono");
+		String indirizzo = request.getParameter("indirizzoFormInput");
+		String sitoWeb = request.getParameter("sitoWebFormInput");
+		String comuneResidenza = request.getParameter("comuneResidenzaFormInput");
+		
 		int ruolo;
 		switch(stringaRuolo) {
 		case "UTENTE_BASE":
@@ -89,7 +96,7 @@ public class RegistrationLogicServlet extends HttpServlet {
 			return;
 		}
 		LocalDate dataNascita = LocalDate.parse(data);
-		BusinessLogic.addUtente(ruolo, username, email2, password, dataNascita);
+		BusinessLogic.addUtente(ruolo, username, email2, password, nome, cognome, telefono, indirizzo, sitoWeb, comuneResidenza, dataNascita);
 		request.getRequestDispatcher("public-jsp/SuccessoRegistrazione.jsp").forward(request, response);
 		
 		

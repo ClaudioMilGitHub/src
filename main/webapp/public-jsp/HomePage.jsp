@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
 <%@page import="org.elis.model.*"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,8 +15,9 @@
 </head>
 <body>
 
-	<%Utente utenteLoggato = (Utente) request.getAttribute("utenteLoggato");%>
-	<%String imagePath = "https://wallpapers.com/images/hd/death-stranding-hd-e8t319t8a7c2e1w3.jpg";%>
+	<%Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");%>
+	<%List<Gioco> listaGiochi = (List<Gioco>) request.getAttribute("listaGiochi");%>
+	<%System.out.println(request.getContextPath()); %>
 
     <div class="container-fluid">
         <!-- Navigation bar row-->
@@ -30,6 +33,14 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                       <div class="navbar-nav">
+                      <%if(utenteLoggato != null){%>
+	                       	<a class="nav-link" href="<%=request.getContextPath()%>/ProfileLogicServlet"><%=utenteLoggato.getUsername()%></a>
+	                        <a class="nav-link" href="#">Libreria</a>
+	                        <a class="nav-link" href="<%=request.getContextPath()%>/LogoutServlet">Logout</a>
+                      <%} else if(utenteLoggato == null){%>
+                          <a class="nav-link" href="<%=request.getContextPath()%>/LoginLogicServlet">Accedi</a>
+                          <a class="nav-link" href="<%=request.getContextPath()%>/RegistrationLogicServlet">Registrati</a>
+                        <%}%>
                       </div>
                     </div>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -37,12 +48,6 @@
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
-                    </div>
-                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                        <div class="global-action">
-                            <a class="action-link" href="<%=request.getContextPath()%>/LoginLogicServlet">Accedi</a>
-                            <a class="action-link" href="<%=request.getContextPath()%>/RegistrationLogicServlet">Registrati</a>
-                        </div>  
                     </div>
                 </div>
             </nav>
@@ -96,26 +101,23 @@
                 </div>  
             </div>
             <div class="col-lg-6 card-container ">
-                <div class="content-cards mb-3">
-                    <div class="card m-auto" style="width: 80%;">
-                        <img src="<%=imagePath%>" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h3 class="card-title">Death Stranding</h3>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="btn btn-outline-primary">Acquista</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="content-cards mb-3">
-                    <div class="card m-auto" style="width: 80%;">
-                        <img src="https://wallpapers.com/images/hd/death-stranding-hd-e8t319t8a7c2e1w3.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h3 class="card-title">Card title</h3>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="btn btn-outline-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>           
+                <%for(int i = 0; i < listaGiochi.size(); i++){%>				
+					<div class="col">
+						<div class="content-cards mb-3">
+							<div class="card m-auto" style="width: 80%;">
+								<img
+									src="<%=request.getContextPath()%>/res/<%=listaGiochi.get(i).getImagePath() %>"
+									class="card-img-top" alt="game_img">
+								<div class="card-body">
+									<h3 class="card-title"><%=listaGiochi.get(i).getNome() %></h3>
+									<p class="card-text"><%=listaGiochi.get(i).getDescrizione() %></p>
+									<a href="#" class="btn btn-outline-primary">Acquista</a>
+								</div>
+							</div>
+						</div>
+					</div>
+			   <%}%>
+         
             </div>
             <div class="col-lg-3">
                 

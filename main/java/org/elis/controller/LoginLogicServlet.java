@@ -9,8 +9,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.elis.businesslogic.BusinessLogic;
+import org.elis.model.Gioco;
 import org.elis.model.Ruolo;
 import org.elis.model.Utente;
 
@@ -47,7 +49,6 @@ public class LoginLogicServlet extends HttpServlet {
 		String email = request.getParameter("emailFormLogin");
 		String password= request.getParameter("passwordFormLogin");
 		String checkboxValue = request.getParameter("checkboxFormLogin");
-		System.out.println(checkboxValue);
 		
 		//Controllo che i campi non siano vuoti o nulli
 		if(email == null || password == null || email.isBlank() || password.isBlank()) {
@@ -78,7 +79,9 @@ public class LoginLogicServlet extends HttpServlet {
 				return;
 			}*/
 			session.setAttribute("utenteLoggato", u);
-			response.sendRedirect("public-jsp/HomePageUtente.jsp");
+			List<Gioco> listaGiochi = BusinessLogic.getAllGiochi();
+			request.setAttribute("listaGiochi", listaGiochi);
+			request.getRequestDispatcher("public-jsp/HomePage.jsp").forward(request, response);
 			return;
 			
 		}else {

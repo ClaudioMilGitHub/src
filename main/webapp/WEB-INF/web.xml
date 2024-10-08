@@ -39,4 +39,34 @@
     <servlet-name>SfogliaGiochiServlet</servlet-name>
     <url-pattern>/SfogliaGiochiServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>index</display-name>
+    <servlet-name>index</servlet-name>
+    <servlet-class>org.elis.controller.index</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>index</servlet-name>
+    <url-pattern>/index</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LogoutServlet</display-name>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>org.elis.controller.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/LogoutServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProfileLogicServlet</display-name>
+    <servlet-name>ProfileLogicServlet</servlet-name>
+    <servlet-class>org.elis.controller.ProfileLogicServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProfileLogicServlet</servlet-name>
+    <url-pattern>/ProfileLogicServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

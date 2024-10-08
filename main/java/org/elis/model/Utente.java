@@ -13,6 +13,13 @@ public class Utente {
 	private String username;
 	private String email;
 	private String password;
+	private String nome;
+	private String cognome;
+	private String telefono;
+	private String indirizzo;
+	private String sitoWeb;
+	private String comuneResidenza;
+	
 	private LocalDate dataNascita; 
 	
 	private List<Recensione> recensioni;
@@ -70,6 +77,54 @@ public class Utente {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCognome() {
+		return cognome;
+	}
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public String getIndirizzo() {
+		return indirizzo;
+	}
+
+	public void setIndirizzo(String indirizzo) {
+		this.indirizzo = indirizzo;
+	}
+
+	public String getSitoWeb() {
+		return sitoWeb;
+	}
+
+	public void setSitoWeb(String sitoWeb) {
+		this.sitoWeb = sitoWeb;
+	}
+
+	public String getComuneResidenza() {
+		return comuneResidenza;
+	}
+
+	public void setComuneResidenza(String comuneResidenza) {
+		this.comuneResidenza = comuneResidenza;
 	}
 
 	public List<Recensione> getRecensioni() {

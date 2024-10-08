@@ -14,6 +14,8 @@ public class Gioco {
 	
 	private String nome;
 	private String descrizione;
+	private String imagePath;
+	
 	private double prezzo;
 	
 	private long idOfferta;
@@ -34,6 +36,13 @@ public class Gioco {
 	}
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
+	}
+	
+	public String getImagePath() {
+		return imagePath;
+	}
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 	public double getPrezzo() {
 		return prezzo;

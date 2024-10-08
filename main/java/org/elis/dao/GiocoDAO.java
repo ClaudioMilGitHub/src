@@ -9,7 +9,7 @@ import org.elis.model.Utente;
 
 public interface GiocoDAO {
 	
-	Gioco addGioco(String nome, LocalDate dataRilascio, String descrizione, double prezzo, Offerta idOfferta,
+	Gioco addGioco(String nome, LocalDate dataRilascio, String descrizione, String imagePath, double prezzo, Offerta idOfferta,
 			Utente utente);
 	Gioco getGiocoByName(String nome);
 	Gioco getGiocoById(long id);

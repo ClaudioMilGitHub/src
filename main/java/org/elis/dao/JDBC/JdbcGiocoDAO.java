@@ -31,16 +31,17 @@ public class JdbcGiocoDAO implements GiocoDAO{
 	}
 	
 	@Override
-	public Gioco addGioco(String nome, LocalDate dataRilascio, String descrizione, double prezzo, Offerta offerta,
+	public Gioco addGioco(String nome, LocalDate dataRilascio, String descrizione, String imagePath, double prezzo, Offerta offerta,
 			Utente utente) {
-		String query = "INSERT INTO gioco (nome, data_rilascio, descrizione, prezzo, id_offerta, id_casa_editrice)"
-				+ "VALUES (?,?,?,?,?,?)";
+		String query = "INSERT INTO gioco (nome, data_rilascio, descrizione, immagine, prezzo, id_offerta, id_casa_editrice)"
+				+ "VALUES (?,?,?,?,?,?,?)";
 		
 		Gioco g = new Gioco();
 		
 		g.setNome(nome);
 		g.setDataRilascio(dataRilascio);
 		g.setDescrizione(descrizione);
+		g.setImagePath(imagePath);
 		g.setPrezzo(prezzo);
 		
 		if(offerta != null) {
@@ -60,19 +61,20 @@ public class JdbcGiocoDAO implements GiocoDAO{
 			ps.setString(1, nome);
 			ps.setDate(2, java.sql.Date.valueOf(dataRilascio));
 			ps.setString(3, descrizione);
-			ps.setDouble(4, prezzo);
+			ps.setString(4, imagePath);
+			ps.setDouble(5, prezzo);
 			
 			if(offerta != null) {
-				ps.setLong(5, offerta.getId());
+				ps.setLong(6, offerta.getId());
 			} else {
-				ps.setNull(5, Types.INTEGER);
+				ps.setNull(6, Types.INTEGER);
 			}
 				
 
 			if(utente != null) {
-				ps.setLong(6, utente.getId());
+				ps.setLong(7, utente.getId());
 			} else {
-				ps.setNull(6, Types.INTEGER);
+				ps.setNull(7, Types.INTEGER);
 			}
 	
 			ps.executeUpdate();
@@ -90,7 +92,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 	}
 	
 	public Gioco getGiocoById(long id) {
-		String query = "SELECT nome, data_rilascio, descrizione, id_offerta, id_casa_editrice, data_creazione, data_ultima_modifica FROM gioco WHERE id = ?";
+		String query = "SELECT * FROM gioco WHERE id = ?";
 		//ora la select è più specifica
 		
 		try(
@@ -102,10 +104,12 @@ public class JdbcGiocoDAO implements GiocoDAO{
 			
 			if(rs.next()) {
 				Gioco g = new Gioco();
+				
 				String nome = rs.getString("nome");
 				Timestamp dataR = rs.getTimestamp("data_rilascio");
 				LocalDate dataRilascio = dataR.toLocalDateTime().toLocalDate();
 				String descrizione = rs.getString("descrizione");
+				String imagePath = rs.getString("immagine");
 				long idOfferta = rs.getLong("id_offerta");
 				long idCasaEditrice =  rs.getLong("id_casa_editrice");
 				Timestamp dataC = rs.getTimestamp("data_creazione");
@@ -121,6 +125,8 @@ public class JdbcGiocoDAO implements GiocoDAO{
 				g.setNome(nome);			
 				g.setDataCreazione(dataCreazione);
 				g.setDataUltimaModifica(dataUltimaModifica);
+				g.setImagePath(imagePath);
+				
 				return g;
 			}
 			
@@ -151,6 +157,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 				Timestamp dataR = rs.getTimestamp("data_rilascio");
 				LocalDate dataRilascio = dataR.toLocalDateTime().toLocalDate();
 				String descrizione = rs.getString("descrizione");
+				String imagePath = rs.getString("immagine");
 				long idOfferta = rs.getLong("id_offerta");
 				long idCasaEditrice =  rs.getLong("id_casa_editrice");
 				Timestamp dataC = rs.getTimestamp("data_creazione");
@@ -161,6 +168,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 				g.setId(id);
 				g.setDataRilascio(dataRilascio);
 				g.setDescrizione(descrizione);
+				g.setImagePath(imagePath);
 				g.setIdCasaEditrice(idCasaEditrice);
 				g.setIdOfferta(idOfferta);
 				g.setNome(nome);			
@@ -180,7 +188,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 	@Override
 	public List<Gioco> getAllGiochi() {
 		List<Gioco> giochi = new ArrayList<>();
-		String query = "SELECT nome FROM gioco";	
+		String query = "SELECT * FROM gioco";	
 		try(
 				Connection  c = JdbcDAOfactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
@@ -191,9 +199,30 @@ public class JdbcGiocoDAO implements GiocoDAO{
 			while(rs.next()) {
 				
 				Gioco g = new Gioco();
-				String nome = rs.getString("nome");
 				
-				g.setNome(nome);
+				
+				long id = rs.getLong("id");
+				String nome = rs.getString("nome");
+				Timestamp dataR = rs.getTimestamp("data_rilascio");
+				LocalDate dataRilascio = dataR.toLocalDateTime().toLocalDate();
+				String descrizione = rs.getString("descrizione");
+				String imagePath = rs.getString("immagine");
+				long idOfferta = rs.getLong("id_offerta");
+				long idCasaEditrice =  rs.getLong("id_casa_editrice");
+				Timestamp dataC = rs.getTimestamp("data_creazione");
+				LocalDateTime dataCreazione = dataC.toLocalDateTime();
+				Timestamp dataM = rs.getTimestamp("data_ultima_modifica");
+				LocalDateTime dataUltimaModifica = dataM.toLocalDateTime();
+				
+				g.setId(id);
+				g.setDataRilascio(dataRilascio);
+				g.setDescrizione(descrizione);
+				g.setImagePath(imagePath);
+				g.setIdCasaEditrice(idCasaEditrice);
+				g.setIdOfferta(idOfferta);
+				g.setNome(nome);			
+				g.setDataCreazione(dataCreazione);
+				g.setDataUltimaModifica(dataUltimaModifica);
 				
 				giochi.add(g);
 			}
@@ -228,6 +257,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 				long id_offerta = rs.getLong("id_offerta");
 				String nome = rs.getString("nome");
 				String descrizione = rs.getString("descrizione");
+				String imagePath = rs.getString("immagine");
 				double prezzo = rs.getDouble("prezzo");
 				Timestamp data_rilascio = rs.getTimestamp("data_rilascio");
 				LocalDate dataRilascio = data_rilascio.toLocalDateTime().toLocalDate();
@@ -237,6 +267,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 				g.setIdOfferta(id_offerta);
 				g.setNome(nome);
 				g.setDescrizione(descrizione);
+				g.setImagePath(imagePath);
 				g.setPrezzo(prezzo);
 				g.setDataRilascio(dataRilascio);
 				
@@ -270,6 +301,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 			ps.executeUpdate();
 			
 			gioco.setNome(nome);
+			
 			return gioco;
 			
 		} catch (SQLException e) {

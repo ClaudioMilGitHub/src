@@ -31,8 +31,8 @@ public class BusinessLogic {
 	public static List<Utente> getAllUtenti() {
 		return DAOfactory.getDaoFactory().getUtenteDAO().getAllUtenti();
 	}	
-	public static Utente addUtente(int ruolo, String username, String email, String password, LocalDate dataNascita) {
-		return DAOfactory.getDaoFactory().getUtenteDAO().addUtente(ruolo, username, email, password, dataNascita);
+	public static Utente addUtente(int ruoloIntValue, String username, String email, String password, String nome, String cognome, String telefono, String indirizzo, String sitoWeb, String comuneResidenza, LocalDate dataNascita) {
+		return DAOfactory.getDaoFactory().getUtenteDAO().addUtente(ruoloIntValue, username, email, password,nome, cognome, telefono, indirizzo, sitoWeb, comuneResidenza, dataNascita);
 	}
 	public static Utente updateUtenteUsername(Utente utenteLoggato, String newUsername) {
 		return DAOfactory.getDaoFactory().getUtenteDAO().updateUtenteUsername(utenteLoggato, newUsername);
@@ -47,8 +47,9 @@ public class BusinessLogic {
 		return DAOfactory.getDaoFactory().getUtenteDAO().deleteUtenteByNome(nome);
 	}
 	
-	public static Gioco addGioco(String nome, LocalDate dataRilascio, String descrizione, double prezzo, Offerta offerta, Utente utente) {
-		return DAOfactory.getDaoFactory().getGiocoDAO().addGioco(nome, dataRilascio, descrizione, prezzo, offerta, utente);
+	public static Gioco addGioco(String nome, LocalDate dataRilascio, String descrizione, String imagePath, double prezzo, Offerta offerta,
+			Utente utente) {
+		return DAOfactory.getDaoFactory().getGiocoDAO().addGioco(nome, dataRilascio, descrizione, imagePath, prezzo, offerta, utente);
 	}
 	public static Gioco getGiocoByName(String nome) {
 		return DAOfactory.getDaoFactory().getGiocoDAO().getGiocoByName(nome);
