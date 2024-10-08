@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/PaginaAggiungiGioco.css">
-    <title>Benvenuto su STEAM</title>
+    <title>Pagina_Aggiungi_Gioco</title>
 </head>
 <body>
 <div class="container-fluid">
@@ -54,29 +54,47 @@
                           <div class="mb-3">
                             <label for="Select" class="form-label" style="color: white; margin-top: 2vh;">Genere</label>
                             <select id="Select" class="form-select" >
-                              <option></option>
+                              <option>Genere</option>
                               <option>Strategia</option>
                               <option></option>
                               <option></option>
                             </select>
                           </div>
-                        <div class="row">
+                          <div class="mb-3">
+                            <label for="offers" style="color: white;">Offerte</label>
+                            <select id="select" name="offers" class="form-select">
+                                <option value="Sconto">Sconto</option>
+                                <option value="Natale">Natalizio</option>
+                                <option value="Halloween">Sconti dell'orrore</option>
+                                <option value="Black Friday">Black Friday</option>
+                                <option value="Blue Mondey">Blue Monday</option>
+                            </select>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-6">
+                            <div style="display: flex;flex-direction: column;">
+                                <label for="cover" style="color: white;">Copertina (inserisci URL Immagine)</label>
+                                <input type="text" id="cover" name="cover" class="form-control" placeholder="Inserisci l'URL dell'immagine">
+                            </div>
+                            </div>
                     <div class="col-lg-6">
                         <div style="display: flex;flex-direction: column;">
-                            <p  style="color: white; display: flex; justify-content: center;">Prezzo</p>
+                            <p  style="color: white; display: flex; justify-content: center; margin-bottom: auto;">Prezzo</p>
                             <input type="range" name="range" class="Range" step="0.1" min="0" max="80" value="" onchange="rangePrimary.value=value">
-                            <input type="text" id="rangePrimary" placeholder="€" style="border-left: 2vh;border-radius: 4px;">€
+                            <input type="text" id="rangePrimary" placeholder="€" style="border-left: 2vh;border-radius: 5px;margin-top: -0.8vh;">
                             </input>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="row">
+                    <div class="col-lg-12">
                             <div style="display: flex;flex-direction: column;">
                             <label style="color: white; display: flex; justify-content: center; margin-bottom: 2vh;" >Data di rilascio
-                            <input type="date" id="releaseDate" name="releaseDate" style="border-radius: 4px;margin-top: 4vh;">
+                            <input type="date" id="releaseDate" name="releaseDate" style="border-radius: 5px;">
                             </label>
                        
                         </div>
                        </div>
+                      
               </div>
             
                           <div class="mb-3">
