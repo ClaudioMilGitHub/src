@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/PaginaAggiungiGioco.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/PaginaAggiungiGioco.css">
     <title>Pagina_Aggiungi_Gioco</title>
 </head>
 <body>
@@ -40,24 +40,24 @@
             </div>
               <div class="row">
                 <div class="col-lg-12">
-                    <form>
+                    <form action="<%=request.getContextPath()%>/AddGameLogicServlet" method="post">
                         <fieldset>
                           <legend>Aggiungi il tuo gioco</legend>
                           <div class="mb-3">
                             <label for="TextInput" class="form-label" style="color: white;">Nome</label>
-                            <input type="text" id="TextInput" class="form-control" placeholder="Nome del gioco">
+                            <input type="text" id="TextInput" class="form-control" placeholder="Nome del gioco" name="nomeFormGioco">
                           </div>
                           <div class="form-group">
                             <label for="FormControlTextarea1" style="color: white;">Descrizione</label>
-                            <textarea class="form-control" id="FormControlTextarea1" rows="3" placeholder="Aggiungi una descrizione..."></textarea>
+                            <textarea class="form-control" id="FormControlTextarea1" rows="3" placeholder="Aggiungi una descrizione..." name="descrizioneFormGioco"></textarea>
                           </div>
                           <div class="mb-3">
                             <label for="Select" class="form-label" style="color: white; margin-top: 2vh;">Genere</label>
-                            <select id="Select" class="form-select" >
+                            <select id="Select" class="form-select" name="genereFormGioco">
                               <option>Genere</option>
-                              <option>Strategia</option>
-                              <option></option>
-                              <option></option>
+                              <option value="Strategia">Strategia</option>
+                              <option value="Avventura">Avventura</option>
+                              <option value="Azione">Azione</option>
                             </select>
                           </div>
                           <div class="mb-3">
@@ -74,23 +74,24 @@
                             <div class="col-lg-6">
                            <form action="AddImage" method="post" enctype="multipart">
                             <p style="color: white; display: flex;justify-content: center;">Carica copertina</p>
-                            <input type="file">
-                            <input type="submit" value="Aggiungi Immagine" style="border-radius: 5px;">
+                            <input type="file" name="img2">
+                            <input type="submit" value="Aggiungi Immagine" style="border-radius: 5px;" name="imgFormGioco">
                            </form>
                             </div>
                     <div class="col-lg-6">
                         <div style="display: flex;flex-direction: column;">
                             <p  style="color: white; display: flex; justify-content: center; margin-bottom: 2%;">Prezzo</p>
                             <input type="range" name="range" class="Range" step="0.1" min="0" max="80" value="" onchange="rangePrimary.value=value">
-                            <input type="text" id="rangePrimary" placeholder="€" style="border-left: 2vh;border-radius: 5px; margin-top: 2%;">
-                            </input>
-                        </div>
+                            <input type="text" name="prezzoFormGioco" id="rangePrimary" placeholder="€" style="border-left: 2vh;border-radius: 5px; margin-top: 2%;">
                     </div>
+                    </div>
+                    </div>
+                    
                     <div class="row">
                     <div class="col-lg-12">
                             <div style="display: flex;flex-direction: column;">
                             <label style="color: white; display: flex; justify-content: center; margin-bottom: 2vh;" >Data di rilascio
-                            <input type="date" id="releaseDate" name="releaseDate" style="border-radius: 5px;">
+                            <input type="date" id="releaseDate" name="releaseDateFormGioco" style="border-radius: 5px;">
                             </label>
                        
                         </div>
