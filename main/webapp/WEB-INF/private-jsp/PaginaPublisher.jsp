@@ -119,7 +119,7 @@
                 <div class="col-lg-12">
                     <div class="d-grid gap-2" style="background-color: #171a21;" >
                         <div id="btn2">
-                                    <a href="PaginaAggiungiGioco.jsp"><button class="btn btn-primario" type="button" style="background-color: #536f86;">Aggiungi il tuo gioco</button></a>
+                                    <a href="<%=request.getContextPath()%>/AddGameLogicServlet"><button class="btn btn-primario" type="button" style="background-color: #536f86;">Aggiungi il tuo gioco</button></a>
                                     <a href="PaginaModificaGioco.jsp"><button class="btn btn-secondario" type="button" style="background-color:#2c3b47;">Aggiorna il tuo gioco</button></a>
                                     <a href="PaginaEliminaGioco.jsp"><button class="btn btn-terziario" type="button" style="background-color: #171a21;">Rimuovi il tuo gioco</button></a>
                         </div>

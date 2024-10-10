@@ -304,7 +304,7 @@ public class JdbcOffertaDAO implements OffertaDAO {
                 offerta.setId(rs.getLong("id"));
                 offerta.setNome(rs.getString("nome"));
                 offerta.setSconto(rs.getDouble("sconto"));
-                offerta.setDataInizio(rs.getTimestamp("dataInizio"));
+                offerta.setDataInizio(rs.getTimestamp("data_inizio"));
                 offerta.setDataFine(rs.getTimestamp("dataFine"));
                 offerta.setGiocoId(rs.getLong("giocoId")); // Imposta l'ID del gioco
                 offerta.setRicorrenza(Ricorrenza.valueOf(rs.getString("ricorrenza"))); // Imposta la ricorrenza

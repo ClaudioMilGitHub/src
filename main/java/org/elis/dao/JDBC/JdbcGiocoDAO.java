@@ -16,7 +16,9 @@ import org.elis.model.Gioco;
 import org.elis.model.Offerta;
 import org.elis.model.Utente;
 
+
 public class JdbcGiocoDAO implements GiocoDAO{
+	
 	
 	private JdbcGiocoDAO() {}
 	private static JdbcGiocoDAO instance;

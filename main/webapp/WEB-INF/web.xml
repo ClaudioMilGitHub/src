@@ -69,4 +69,24 @@
     <servlet-name>ProfileLogicServlet</servlet-name>
     <url-pattern>/ProfileLogicServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteGameLogicServlet</display-name>
+    <servlet-name>DeleteGameLogicServlet</servlet-name>
+    <servlet-class>org.elis.controller.DeleteGameLogicServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteGameLogicServlet</servlet-name>
+    <url-pattern>/DeleteGameLogicServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddGameLogicServlet</display-name>
+    <servlet-name>AddGameLogicServlet</servlet-name>
+    <servlet-class>org.elis.controller.AddGameLogicServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddGameLogicServlet</servlet-name>
+    <url-pattern>/AddGameLogicServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
