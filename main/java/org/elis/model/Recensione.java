@@ -1,28 +1,31 @@
 package org.elis.model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
-
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-
+@Entity(name = "Recensione")
 public class Recensione {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "is_recommended")
+	@Column(name = "is_recommended", nullable=false)
 	private boolean isRecommended;
-	@Column(name = "testo")
+	@Column(name = "testo", nullable=false)
 	private String testo;
 	
 	
-	@ManyToOne
+	 @ManyToOne(fetch = FetchType.LAZY)
+	    @JoinColumn(name = "utente_id", nullable = false)
 	private Utente utente;
-	@ManyToOne
+	 @ManyToOne(fetch = FetchType.LAZY)
+	    @JoinColumn(name = "gioco_id", nullable = false)
 	private Gioco gioco;
 	
 	

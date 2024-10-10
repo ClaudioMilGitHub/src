@@ -66,13 +66,37 @@ package org.elis.model;
 
 import java.sql.Timestamp;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity(name = "Offerta")
 public class Offerta {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+	
+	@Column(name = "nome")
     private String nome;
+	
+	@Column(nullable=false)
     private double sconto;
+	
+	@Column(nullable=false)
+	
     private Timestamp dataInizio;
+	@Column(nullable=false)
+	
     private Timestamp dataFine;
+	@Column(nullable=false)
     private long giocoId; 
+	
+	@Enumerated(EnumType.ORDINAL)
     private Ricorrenza ricorrenza; 
 
     public Offerta() {}
