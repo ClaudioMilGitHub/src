@@ -1,16 +1,28 @@
 package org.elis.dao;
 
 import org.elis.dao.JDBC.*;
+import org.elis.dao.JPA.JPADaoFactory;
 
-public abstract class DAOfactory {
+public abstract class DaoFactory {
+	
+	private static DaoFactory instance;
 	
 	public abstract UtenteDAO getUtenteDAO();
 	public abstract GiocoDAO getGiocoDAO();
 	public abstract LibreriaDAO getLibreriaDAO();
 	public abstract OffertaDAO getOffertaDAO();
 	public abstract GenereDAO getGenereDAO();
-
-	public static JdbcDAOfactory getDaoFactory() {
-		return new JdbcDAOfactory();
+	
+	public static DaoFactory getDaoFactory(String s) {
+		
+		if(instance==null) {
+			switch(s) {
+			case "JDBC":
+				instance= new JdbcDAOfactory();
+			case "JPA":
+				instance= new JPADaoFactory();
+			}
+		}	
+		return instance;
 	}
 }

@@ -3,14 +3,17 @@ package org.elis.dao.JDBC;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-import org.elis.dao.DAOfactory;
+import org.elis.dao.DaoFactory;
 import org.elis.dao.GenereDAO;
 import org.elis.dao.GiocoDAO;
 import org.elis.dao.LibreriaDAO;
 import org.elis.dao.OffertaDAO;
 import org.elis.dao.UtenteDAO;
 
-public class JdbcDAOfactory extends DAOfactory{
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Persistence;
+
+public class JdbcDAOfactory extends DaoFactory{
 
 	protected static Connection getConnection() throws Exception{
 		try {
@@ -22,6 +25,7 @@ public class JdbcDAOfactory extends DAOfactory{
 		}
 		return DriverManager.getConnection("jdbc:mysql://localhost:3306/steamdb","root","root");
 	}
+	
 
 	@Override
 	public UtenteDAO getUtenteDAO() {
