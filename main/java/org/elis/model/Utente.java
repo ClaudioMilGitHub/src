@@ -6,10 +6,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.*;
 
-@Entity(name="utente")
-@Table(name="utenti")
+@Entity(name="Utente")
+@Table(name="utente")
 public class Utente {
 
 	@Id
@@ -47,9 +50,12 @@ public class Utente {
 	@OneToMany(mappedBy="utente")
 	private Set<Libreria> libreria = new HashSet<>();
 	
-	@Column(name="data_creazione", columnDefinition="TIMESTAMP DEFAUL CURRENT_TIMESTAMP")
+	@CreationTimestamp
+	@Column(name="data_creazione", nullable = false)
 	private LocalDateTime dataCreazione;
-	@Column(name="data_ultima_modifica", columnDefinition="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+	
+	@UpdateTimestamp
+	@Column(name="data_ultima_modifica", nullable = false)
 	private LocalDateTime dataUltimaModifica;
 	
 	public Utente(long id, Ruolo ruolo, String username, String email, String password, LocalDate dataNascita) {

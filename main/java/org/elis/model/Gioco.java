@@ -3,7 +3,11 @@ package org.elis.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.*;
 
@@ -14,10 +18,14 @@ public class Gioco {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(name="data_creazione", columnDefinition="TIMESTAMP DEFAUL CURRENT_TIMESTAMP")
-	private LocalDateTime  dataCreazione;
-	@Column(name="data_ultima_modifica", columnDefinition="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
-	private LocalDateTime  dataUltimaModifica;
+	@CreationTimestamp
+	@Column(name="data_creazione", nullable = false)
+	private LocalDateTime dataCreazione;
+	
+	@UpdateTimestamp
+	@Column(name="data_ultima_modifica", nullable = false)
+	private LocalDateTime dataUltimaModifica;
+	
 	@Column(name="data_rilascio", nullable = false)
 	private LocalDate dataRilascio;
 	
@@ -30,6 +38,9 @@ public class Gioco {
 	
 	@Column(name="prezzo", nullable = false)
 	private double prezzo;
+	
+	@ManyToMany
+	private List<Genere> generi; 
 	
 	@OneToMany(mappedBy="gioco")
 	private Set<Libreria> librerie = new HashSet<>();

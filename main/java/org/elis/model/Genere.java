@@ -4,20 +4,25 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*; 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import jakarta.persistence.*; 
 
 @Entity 
 public class Genere {
 
-    @Id 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private long id;
     
-    @Column(name = "data_creazione", nullable = false) 
-    private LocalDateTime dataCreazione;
-    
-    @Column(name = "data_ultima_modifica") 
-    private LocalDateTime dataUltimaModifica;
+    @CreationTimestamp
+	@Column(name="data_creazione", nullable = false)
+	private LocalDateTime dataCreazione;
+	
+	@UpdateTimestamp
+	@Column(name="data_ultima_modifica", nullable = false)
+	private LocalDateTime dataUltimaModifica;
     
     @Column(name = "nome", nullable = false, length = 100) 
     private String nome;
@@ -26,7 +31,7 @@ public class Genere {
     @JoinColumn(name = "offerta_id") 
     private Offerta offerta;
     
-    @OneToMany(mappedBy = "genere", cascade = CascadeType.ALL) 
+    @ManyToMany(mappedBy = "generi", cascade = CascadeType.ALL) 
     private List<Gioco> giochi = new ArrayList<>();
     
     // Getter e Setter

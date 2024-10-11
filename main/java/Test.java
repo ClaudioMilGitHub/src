@@ -12,6 +12,11 @@ import org.elis.model.Utente;
 public class Test {
 	public static void main(String[] args) {
 			
-		//getEntityManager();
+		
+		Utente utenteNuovo = BusinessLogic.addUtente(0, "username", "email@gmail.com", "password", "Claudio", "Milano", "11111111", "via pippo", "www.pippo.com", "Roma", LocalDate.of(1996, 8, 31));
+		
+		System.out.println(utenteNuovo.getCognome());
+		
+
 	}
 }
