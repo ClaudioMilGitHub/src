@@ -1,38 +1,42 @@
 package org.elis.model;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
+import java.time.LocalDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-@Entity(name = "librearia")
+import jakarta.persistence.*;
+
+@Entity(name = "libreria")
+@Table(name="libreria")
 public class Libreria {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	@Column(name="nome")
-	private String nome;
-	@Column(name="data_creazione")
-	private LocalDateTime dataCreazione;
-	@Column(name="data_ultima_creazione")
-	private LocalDateTime dataUltimaModifica;
+	@EmbeddedId
+	private LibreriaId id;
+
 	
 	@ManyToOne
+	@MapsId("utenteId")
+	@JoinColumn(name="utente_id", nullable = false)
 	private Utente utente;
+	
 	@ManyToOne
-	private List<Gioco> giochi;
+	@MapsId("giocoId")
+	@JoinColumn(name="gioco_id", nullable = false)
+	private Gioco gioco;
+	
+	@Column(name="data_acquisto")
+	private LocalDate dataAcquisto;
+	
+	@Column(name="tempo_gioco")
+	private int tempoGioco;				//in minuti
+	
+	public Libreria() {}
 
-	public String getNome() {
-		return nome;
+	public LibreriaId getId() {
+		return id;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setId(LibreriaId id) {
+		this.id = id;
 	}
 
 	public Utente getUtente() {
@@ -42,36 +46,28 @@ public class Libreria {
 	public void setUtente(Utente utente) {
 		this.utente = utente;
 	}
-	
-	public long getId() {
-		return id;
+
+	public Gioco getGioco() {
+		return gioco;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setGioco(Gioco gioco) {
+		this.gioco = gioco;
 	}
 
-	public LocalDateTime getDataCreazione() {
-		return dataCreazione;
+	public LocalDate getDataAcquisto() {
+		return dataAcquisto;
 	}
 
-	public void setDataCreazione(LocalDateTime dataCreazione) {
-		this.dataCreazione = dataCreazione;
+	public void setDataAcquisto(LocalDate dataAcquisto) {
+		this.dataAcquisto = dataAcquisto;
 	}
 
-	public LocalDateTime getDataUltimaModifica() {
-		return dataUltimaModifica;
+	public int getTempoGioco() {
+		return tempoGioco;
 	}
 
-	public void setDataUltimaModifica(LocalDateTime dataUltimaModifica) {
-		this.dataUltimaModifica = dataUltimaModifica;
-	}
-
-	public List<Gioco> getGiochi() {
-		return giochi;
-	}
-
-	public void setGiochi(List<Gioco> giochi) {
-		this.giochi = giochi;
+	public void setTempoGioco(int tempoGioco) {
+		this.tempoGioco = tempoGioco;
 	}
 }

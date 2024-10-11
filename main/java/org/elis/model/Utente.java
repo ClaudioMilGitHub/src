@@ -2,30 +2,54 @@ package org.elis.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import jakarta.persistence.*;
+
+@Entity(name="utente")
+@Table(name="utenti")
 public class Utente {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 
+	@Column(name="ruolo")
 	private Ruolo ruolo;
 	
+	@Column(name="username", unique = true, nullable = false)
 	private String username;
+	@Column(name="email", unique = true, nullable = false)
 	private String email;
+	@Column(name="password", nullable = false)
 	private String password;
+	@Column(name="nome", nullable = false)
 	private String nome;
+	@Column(name="cognome", nullable = false)
 	private String cognome;
+	@Column(name="telefono")
 	private String telefono;
+	@Column(name="indirizzo")
 	private String indirizzo;
+	@Column(name="sito_web")
 	private String sitoWeb;
+	@Column(name="comune_residenza")
 	private String comuneResidenza;
 	
+	@Column(name="data_nascita", nullable = false)
 	private LocalDate dataNascita; 
 	
+	@OneToMany(mappedBy = "utente")
 	private List<Recensione> recensioni;
-	private List<Libreria> librerie;
 	
+	@OneToMany(mappedBy="utente")
+	private Set<Libreria> libreria = new HashSet<>();
+	
+	@Column(name="data_creazione", columnDefinition="TIMESTAMP DEFAUL CURRENT_TIMESTAMP")
 	private LocalDateTime dataCreazione;
+	@Column(name="data_ultima_modifica", columnDefinition="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
 	private LocalDateTime dataUltimaModifica;
 	
 	public Utente(long id, Ruolo ruolo, String username, String email, String password, LocalDate dataNascita) {
@@ -127,6 +151,14 @@ public class Utente {
 		this.comuneResidenza = comuneResidenza;
 	}
 
+	public LocalDate getDataNascita() {
+		return dataNascita;
+	}
+
+	public void setDataNascita(LocalDate dataNascita) {
+		this.dataNascita = dataNascita;
+	}
+
 	public List<Recensione> getRecensioni() {
 		return recensioni;
 	}
@@ -135,12 +167,12 @@ public class Utente {
 		this.recensioni = recensioni;
 	}
 
-	public List<Libreria> getLibrerie() {
-		return librerie;
+	public Set<Libreria> getLibreria() {
+		return libreria;
 	}
 
-	public void setLibrerie(List<Libreria> librerie) {
-		this.librerie = librerie;
+	public void setLibreria(Set<Libreria> libreria) {
+		this.libreria = libreria;
 	}
 
 	public LocalDateTime getDataCreazione() {
@@ -157,13 +189,5 @@ public class Utente {
 
 	public void setDataUltimaModifica(LocalDateTime dataUltimaModifica) {
 		this.dataUltimaModifica = dataUltimaModifica;
-	}
-
-	public LocalDate getDataNascita() {
-		return dataNascita;
-	}
-
-	public void setDataNascita(LocalDate dataNascita) {
-		this.dataNascita = dataNascita;
 	}
 }

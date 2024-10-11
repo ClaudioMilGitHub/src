@@ -47,10 +47,10 @@ public class JdbcGiocoDAO implements GiocoDAO{
 		g.setPrezzo(prezzo);
 		
 		if(offerta != null) {
-			g.setIdOfferta(offerta.getId());
+			g.setOfferta(offerta);
 		}
 		if(utente != null) {
-			g.setIdCasaEditrice(utente.getId());
+			g.getUtenti().add(utente);
 		}
 		
 		

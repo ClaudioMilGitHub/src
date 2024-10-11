@@ -20,8 +20,7 @@ if(instance == null) {
 		}
 		
 		return instance;
-	}
-	
+	}	
 	
 	@Override
 	public Gioco addGioco(String nome, LocalDate dataRilascio, String descrizione, String imagePath, double prezzo,

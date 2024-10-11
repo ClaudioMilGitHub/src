@@ -18,9 +18,11 @@ public abstract class DaoFactory {
 		if(instance==null) {
 			switch(s) {
 			case "JDBC":
-				instance= new JdbcDAOfactory();
+				instance = new JdbcDAOfactory();
+				break;
 			case "JPA":
-				instance= new JPADaoFactory();
+				instance = new JPADaoFactory();
+				break;
 			}
 		}	
 		return instance;

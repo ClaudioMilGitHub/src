@@ -12,7 +12,7 @@ import jakarta.persistence.Persistence;
 
 public class JPADaoFactory extends DaoFactory{
 	
-	protected static EntityManager getEntityManager() {
+	public static EntityManager getEntityManager() {
 		return Persistence.createEntityManagerFactory("SteamProject").createEntityManager();
 	}
 
