@@ -24,6 +24,7 @@ public class JPAUtenteDao implements UtenteDAO{
 		
 		return instance;
 	}
+	
 	@Override
 	public Utente addUtente(int ruoloIntValue, String username, String email, String password, String nome,
 			String cognome, String telefono, String indirizzo, String sitoWeb, String comuneResidenza,
@@ -52,16 +53,21 @@ public class JPAUtenteDao implements UtenteDAO{
 		
 		return u;
 	}
+	
 	@Override
 	public Utente getUtenteByName(String usernameSearch) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = JPADaoFactory.getEntityManager();
+		Query q = em.createQuery("SELECT u FROM Utente u WHERE u.username = :username");
+		q.setParameter("username", usernameSearch);
+		return (Utente) q.getSingleResult();
 	}
+	
 	@Override
 	public Utente getUtenteById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = JPADaoFactory.getEntityManager();
+		return em.find(Utente.class, id);
 	}
+	
 	@Override
 	public List<Utente> getAllUtenti() {
 		EntityManager em = JPADaoFactory.getEntityManager();
@@ -69,24 +75,50 @@ public class JPAUtenteDao implements UtenteDAO{
 		return q.getResultList();
 
 	}
+	
 	@Override
-	public Utente deleteUtenteByNome(String nome) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteUtenteByNome(String nome) {
+		EntityManager em = JPADaoFactory.getEntityManager();
+		Query q = em.createQuery("SELECT u FROM Utente u WHERE u.username = :username");
+		q.setParameter("username", nome);
+		Utente u = (Utente) q.getSingleResult();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		em.remove(u);
+		t.commit();
 	}
+	
 	@Override
 	public Utente updateUtenteUsername(Utente utenteLoggato, String newUsername) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		EntityManager em = JPADaoFactory.getEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		utenteLoggato.setUsername(newUsername);
+		utenteLoggato = em.merge(utenteLoggato);
+		t.commit();
+		return utenteLoggato;
 	}
+	
 	@Override
 	public Utente updateUtentePassword(Utente utenteLoggato, String newPassword) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = JPADaoFactory.getEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		utenteLoggato.setPassword(newPassword);
+		utenteLoggato = em.merge(utenteLoggato);
+		t.commit();
+		return utenteLoggato;
 	}
+	
 	@Override
 	public Utente updateUtenteDataNascita(Utente utenteLoggato, LocalDate newDataNascita) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = JPADaoFactory.getEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		utenteLoggato.setDataNascita(newDataNascita);
+		utenteLoggato = em.merge(utenteLoggato);
+		t.commit();
+		return utenteLoggato;
 	}
 }

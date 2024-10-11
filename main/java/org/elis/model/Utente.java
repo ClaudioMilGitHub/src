@@ -47,6 +47,7 @@ public class Utente {
 	@OneToMany(mappedBy = "utente")
 	private List<Recensione> recensioni;
 	
+	
 	@OneToMany(mappedBy="utente")
 	private Set<Libreria> libreria = new HashSet<>();
 	

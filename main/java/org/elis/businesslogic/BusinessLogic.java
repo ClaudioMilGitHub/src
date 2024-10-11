@@ -46,8 +46,8 @@ public class BusinessLogic {
 	public static Utente updateUtenteDataNascita(Utente utenteLoggato, LocalDate newDataNascita) {
 		return DaoFactory.getDaoFactory(implementation).getUtenteDAO().updateUtenteDataNascita(utenteLoggato, newDataNascita);
 	}
-	public static Utente deleteUtenteByNome(String nome) {
-		return DaoFactory.getDaoFactory(implementation).getUtenteDAO().deleteUtenteByNome(nome);
+	public static void deleteUtenteByNome(String nome) {
+		DaoFactory.getDaoFactory(implementation).getUtenteDAO().deleteUtenteByNome(nome);
 	}
 	
 	public static Gioco addGioco(String nome, LocalDate dataRilascio, String descrizione, String imagePath, double prezzo, Offerta offerta,
