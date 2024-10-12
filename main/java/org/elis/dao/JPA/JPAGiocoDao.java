@@ -8,6 +8,10 @@ import org.elis.model.Gioco;
 import org.elis.model.Offerta;
 import org.elis.model.Utente;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Query;
+
 public class JPAGiocoDao implements GiocoDAO{
 
 	
@@ -25,8 +29,21 @@ if(instance == null) {
 	@Override
 	public Gioco addGioco(String nome, LocalDate dataRilascio, String descrizione, String imagePath, double prezzo,
 			Offerta idOfferta, Utente utente) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Gioco g = new Gioco();
+		g.setNome(nome);
+		g.setDataRilascio(dataRilascio);
+		g.setDescrizione(descrizione);
+		g.setImagePath(imagePath);
+		g.setPrezzo(prezzo);
+		
+		EntityManager em = JPADaoFactory.getEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		em.persist(g);
+		t.commit();
+		
+		return g;
 	}
 
 	@Override
@@ -43,8 +60,9 @@ if(instance == null) {
 
 	@Override
 	public List<Gioco> getAllGiochi() {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = JPADaoFactory.getEntityManager();
+		Query q = em.createQuery("Select g FROM Gioco g");
+		return q.getResultList();
 	}
 
 	@Override

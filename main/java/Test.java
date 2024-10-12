@@ -5,9 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import org.elis.businesslogic.BusinessLogic;
-import org.elis.model.Genere;
-import org.elis.model.Gioco;
-import org.elis.model.Utente;
+import org.elis.model.*;
 
 public class Test {
 	public static void main(String[] args) {
@@ -23,11 +21,18 @@ public class Test {
 		
 //		BusinessLogic.deleteUtenteByNome("username3");
 		
+		Offerta offerta = BusinessLogic.getOffertaById(1);
+		Utente utente = BusinessLogic.getUtenteById(3);
+		Gioco gioco = BusinessLogic.addGioco("Gioco", LocalDate.of(2022, 1, 10), "Gioco appena aggiunto", "path", 29.99, offerta, utente);
 		
-		Utente utenteDaAggiornare = BusinessLogic.getUtenteByName("usernameNuovo");
-		Utente utenteAggiornato = BusinessLogic.updateUtenteDataNascita(utenteDaAggiornare, LocalDate.of(1993, 1, 1));
+		System.out.println(offerta.getNome());
+		System.out.println(utente.getNome());
 
-		System.out.println(utenteAggiornato.getUsername());
+		
+//		Utente utenteDaAggiornare = BusinessLogic.getUtenteByName("usernameNuovo");
+//		Utente utenteAggiornato = BusinessLogic.updateUtenteDataNascita(utenteDaAggiornare, LocalDate.of(1993, 1, 1));
+//
+//		System.out.println(utenteAggiornato.getUsername());
 
 		
 	}

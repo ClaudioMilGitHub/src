@@ -7,6 +7,8 @@ import org.elis.dao.OffertaDAO;
 import org.elis.model.Offerta;
 import org.elis.model.Ricorrenza;
 
+import jakarta.persistence.EntityManager;
+
 public class JPAOffertaDao implements OffertaDAO{
 
 	
@@ -31,8 +33,8 @@ private JPAOffertaDao() {}
 
 	@Override
 	public Offerta getOffertaById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = JPADaoFactory.getEntityManager();
+		return em.find(Offerta.class, id);
 	}
 
 	@Override

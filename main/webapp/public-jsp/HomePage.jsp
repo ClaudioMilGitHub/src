@@ -17,42 +17,12 @@
 
 	<%Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");%>
 	<%List<Gioco> listaGiochi = (List<Gioco>) request.getAttribute("listaGiochi");%>
-	<%System.out.println(request.getContextPath()); %>
 
     <div class="container-fluid">
-        <!-- Navigation bar row-->
-        <div class="row navbar mb-3">
-            <nav class="navbar navbar-expand-lg">
-                <div class="container">
-                    <a class="navbar-brand" href="<%=request.getContextPath()%>/public-jsp/HomePage.jsp">
-                        <img src="https://store.akamai.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016" alt="Steam logo" width="176" height="44">
-                    </a>
-
-                    <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                      <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                      <div class="navbar-nav">
-                      <%if(utenteLoggato != null){%>
-	                       	<a class="nav-link" href="<%=request.getContextPath()%>/ProfileLogicServlet"><%=utenteLoggato.getUsername()%></a>
-	                        <a class="nav-link" href="#">Libreria</a>
-	                        <a class="nav-link" href="<%=request.getContextPath()%>/LogoutServlet">Logout</a>
-                      <%} else if(utenteLoggato == null){%>
-                          <a class="nav-link" href="<%=request.getContextPath()%>/LoginLogicServlet">Accedi</a>
-                          <a class="nav-link" href="<%=request.getContextPath()%>/RegistrationLogicServlet">Registrati</a>
-                        <%}%>
-                      </div>
-                    </div>
-                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
-                </div>
-            </nav>
-             
-        </div>
+     
+    <% request.setAttribute("utenteLoggato", utenteLoggato); %>
+	<jsp:include page="/includes/navbar.jsp"/>
+	
 
         <!-- Content row-->
         <div class="row content h-100">
@@ -124,22 +94,8 @@
             </div>
         </div>
 
-        <!-- Footer row-->
-        <div class="row footer">
-            <footer class="footer">
-                <div class="content-logo d-flex flex-row justify-content-between">
-                    <div class="footer-logo-steam">
-                        <img src="https://store.akamai.steamstatic.com/public/images/v6/logo_steam_footer.png" alt="logo steam">
-                    </div>
-                    <div class="footer-valve">
-                        <img src="https://store.akamai.steamstatic.com/public/images/footerLogo_valve_new.png" alt="logo">
-                    </div>
-                </div>
-                <div class="content-footer color-white" id="footer_text">
-                    Progetto ispirato a Steam per puri scopi didattici per il Master di Sviluppo Software e Applicazioni edizione Maggio. Gruppo di lavoro composto da Claudio Milano, Leandro Biccellari, Antonio Guglielmo e Simone Medori.
-                </div>
-            </footer>
-        </div>
+        <%@include file="/includes/footer.jsp" %>>
+        
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
