@@ -1,25 +1,22 @@
 package org.elis.model;
 
 import java.time.LocalDate;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+
 import jakarta.persistence.*;
 
 @Entity(name = "libreria")
 @Table(name="libreria")
 public class Libreria {
 	
-	@EmbeddedId
-	private LibreriaId id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long id;
 
-	
 	@ManyToOne
-	@MapsId("utenteId")
 	@JoinColumn(name="utente_id", nullable = false)
 	private Utente utente;
 	
 	@ManyToOne
-	@MapsId("giocoId")
 	@JoinColumn(name="gioco_id", nullable = false)
 	private Gioco gioco;
 	
@@ -31,13 +28,6 @@ public class Libreria {
 	
 	public Libreria() {}
 
-	public LibreriaId getId() {
-		return id;
-	}
-
-	public void setId(LibreriaId id) {
-		this.id = id;
-	}
 
 	public Utente getUtente() {
 		return utente;

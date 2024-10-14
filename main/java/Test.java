@@ -23,10 +23,14 @@ public class Test {
 		
 		Offerta offerta = BusinessLogic.getOffertaById(1);
 		Utente utente = BusinessLogic.getUtenteById(3);
-		Gioco gioco = BusinessLogic.addGioco("Gioco", LocalDate.of(2022, 1, 10), "Gioco appena aggiunto", "path", 29.99, offerta, utente);
+		Gioco gioco = BusinessLogic.getAllGiochi().getFirst();
+		Libreria libreria = BusinessLogic.addLibreria(utente, gioco);
+//		Gioco gioco = BusinessLogic.addGioco("Gioco", LocalDate.of(2022, 1, 10), "Gioco appena aggiunto", "path", 29.99, offerta, utente);
 		
+//		System.out.println(gioco.getId());
 		System.out.println(offerta.getNome());
 		System.out.println(utente.getNome());
+		System.out.println("Libreria{ utenteId: " + libreria.getUtente().getId() + " giocoId: " + libreria.getGioco().getId() + " }"); 
 
 		
 //		Utente utenteDaAggiornare = BusinessLogic.getUtenteByName("usernameNuovo");

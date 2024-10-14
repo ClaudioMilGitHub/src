@@ -7,6 +7,9 @@ import org.elis.model.Gioco;
 import org.elis.model.Libreria;
 import org.elis.model.Utente;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+
 public class JPALibreriaDao implements LibreriaDAO{
 
 	
@@ -24,9 +27,20 @@ private JPALibreriaDao() {}
 	
 	
 	@Override
-	public Libreria addLibreria(String nome, Utente utente, Gioco gioco) {
-		// TODO Auto-generated method stub
-		return null;
+	public Libreria addLibreria(Utente utente, Gioco gioco) {
+		
+		Libreria l = new Libreria();
+		l.setUtente(utente);
+		l.setGioco(gioco);
+		
+		EntityManager em = JPADaoFactory.getEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		em.persist(l);
+		t.commit();
+		
+		return l;
+				
 	}
 
 	@Override

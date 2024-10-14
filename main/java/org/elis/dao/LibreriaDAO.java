@@ -8,7 +8,7 @@ import org.elis.model.Utente;
 
 public interface LibreriaDAO {
 
-    Libreria addLibreria(String nome, Utente utente, Gioco gioco);
+    Libreria addLibreria(Utente utente, Gioco gioco);
     Libreria getLibreriaByName(String nome);
     List<Libreria> getAllLibrerie();
     Libreria updateLibreriaById(long id, String nuovoNome);

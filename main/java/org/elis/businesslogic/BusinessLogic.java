@@ -85,8 +85,8 @@ public class BusinessLogic {
 		return DaoFactory.getDaoFactory(implementation).getGiocoDAO().deleteGiocoByNome(nome);
 	}
 	
-	public static Libreria addLibreria(String nome, Utente utente, Gioco gioco) {
-		return DaoFactory.getDaoFactory(implementation).getLibreriaDAO().addLibreria(nome, utente, gioco);
+	public static Libreria addLibreria(Utente utente, Gioco gioco) {
+		return DaoFactory.getDaoFactory(implementation).getLibreriaDAO().addLibreria(utente, gioco);
 	}
 	public static Libreria getLibreriaByName(String nome) {
 		return DaoFactory.getDaoFactory(implementation).getLibreriaDAO().getLibreriaByName(nome);
