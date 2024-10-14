@@ -54,8 +54,8 @@ if(instance == null) {
 
 	@Override
 	public Gioco getGiocoById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = JPADaoFactory.getEntityManager();
+		return em.find(Gioco.class, id);
 	}
 
 	@Override

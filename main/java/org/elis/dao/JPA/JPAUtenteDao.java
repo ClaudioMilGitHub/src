@@ -68,6 +68,7 @@ public class JPAUtenteDao implements UtenteDAO{
 		return em.find(Utente.class, id);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Utente> getAllUtenti() {
 		EntityManager em = JPADaoFactory.getEntityManager();

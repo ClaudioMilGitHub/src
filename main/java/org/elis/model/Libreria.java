@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import jakarta.persistence.*;
 
-@Entity(name = "libreria")
+@Entity(name = "Libreria")
 @Table(name="libreria")
 public class Libreria {
 	
@@ -28,7 +28,14 @@ public class Libreria {
 	
 	public Libreria() {}
 
+	public long getId() {
+		return id;
+	}
 
+	public void setId(long id) {
+		this.id = id;
+	}
+	
 	public Utente getUtente() {
 		return utente;
 	}

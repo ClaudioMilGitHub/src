@@ -48,8 +48,13 @@ public class Utente {
 	private List<Recensione> recensioni;
 	
 	
-	@OneToMany(mappedBy="utente")
-	private Set<Libreria> libreria = new HashSet<>();
+	@ManyToMany
+    @JoinTable(
+        name = "Libreria",
+        joinColumns = @JoinColumn(name = "utente_id"),
+        inverseJoinColumns = @JoinColumn(name = "gioco_id")
+    )
+    private Set<Gioco> giochi = new HashSet<>();
 	
 	@CreationTimestamp
 	@Column(name="data_creazione", nullable = false)
@@ -174,12 +179,12 @@ public class Utente {
 		this.recensioni = recensioni;
 	}
 
-	public Set<Libreria> getLibreria() {
-		return libreria;
+	public Set<Gioco> getGiochi() {
+		return giochi;
 	}
 
-	public void setLibreria(Set<Libreria> libreria) {
-		this.libreria = libreria;
+	public void setGiochi(Set<Gioco> giochi) {
+		this.giochi = giochi;
 	}
 
 	public LocalDateTime getDataCreazione() {

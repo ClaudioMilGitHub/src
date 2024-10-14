@@ -42,8 +42,8 @@ public class Gioco {
 	@ManyToMany
 	private List<Genere> generi; 
 	
-	@OneToMany(mappedBy="gioco")
-	private Set<Libreria> librerie = new HashSet<>();
+	@ManyToMany(mappedBy = "giochi")
+	private Set<Utente> utenti = new HashSet<>();
 	
 	public Gioco() {}
 
@@ -111,11 +111,20 @@ public class Gioco {
 		this.prezzo = prezzo;
 	}
 
-	public Set<Libreria> getLibrerie() {
-		return librerie;
+	public List<Genere> getGeneri() {
+		return generi;
 	}
 
-	public void setLibrerie(Set<Libreria> librerie) {
-		this.librerie = librerie;
+	public void setGeneri(List<Genere> generi) {
+		this.generi = generi;
 	}
+
+	public Set<Utente> getUtenti() {
+		return utenti;
+	}
+
+	public void setUtenti(Set<Utente> utenti) {
+		this.utenti = utenti;
+	}
+
 }
