@@ -43,14 +43,14 @@ public class ProfileLogicServlet extends HttpServlet {
         
         switch(ruolo) {
         case "UTENTE_BASE":
-        	request.getRequestDispatcher("public-jsp/ProfiloUtente.jsp").forward(request, response);
-        	break;
+        	request.getRequestDispatcher("WEB-INF/private-jsp/Pagina_Utente.jsp").forward(request, response);
+        	return;
         case "PUBLISHER":
         	request.getRequestDispatcher("WEB-INF/private-jsp/PaginaPublisher.jsp").forward(request, response);
-        	break;
+        	return;
         case "ADMIN":
-        	request.getRequestDispatcher("public-jsp/ProfiloAdmin.jsp").forward(request, response);
-        	break;
+        	request.getRequestDispatcher("WEB-INF/private-jsp/ProfiloAdmin.jsp").forward(request, response);
+        	return;
         }
 	}
 

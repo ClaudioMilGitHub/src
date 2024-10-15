@@ -12,8 +12,7 @@ public interface LibreriaDAO {
     Libreria getLibreriaByName(String nome);
     List<Libreria> getAllLibrerie();
     Libreria updateLibreriaById(long id, String nuovoNome);
-    Libreria deleteLibreriaByNome(String nome);
+    void deleteLibreriaByNome(String nome);
     Libreria getLibreriaById(long id);
 	
-    
 }

@@ -57,8 +57,9 @@ private JPALibreriaDao() {}
 
 	@Override
 	public List<Libreria> getAllLibrerie() {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = JPADaoFactory.getEntityManager();
+		Query q = em.createQuery("Select l from Libreria l");
+		return q.getResultList();
 	}
 
 	@Override
@@ -68,14 +69,21 @@ private JPALibreriaDao() {}
 	}
 
 	@Override
-	public Libreria deleteLibreriaByNome(String nome) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteLibreriaByNome(String nome) {
+		EntityManager em = JPADaoFactory.getEntityManager();
+		Query q = em.createQuery("SELECT l FROM Libreria l JOIN l.utente u WHERE u.username = :username");
+		q.setParameter("username", nome);
+		Libreria l = (Libreria) q.getSingleResult();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		em.remove(l);
+		t.commit();
 	}
 
 	@Override
 	public Libreria getLibreriaById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = JPADaoFactory.getEntityManager();
+		return em.find(Libreria.class, id);
 	}
+
 }
