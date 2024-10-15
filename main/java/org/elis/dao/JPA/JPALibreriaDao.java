@@ -30,7 +30,7 @@ private JPALibreriaDao() {}
 	
 	
 	@Override
-	public Libreria addLibreria(Utente utente, Gioco gioco) {
+	public Libreria aggiungiGiocoALibreria(Utente utente, Gioco gioco) {
 		
 		Libreria l = new Libreria();
 		l.setGioco(gioco);
@@ -78,7 +78,4 @@ private JPALibreriaDao() {}
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-
 }

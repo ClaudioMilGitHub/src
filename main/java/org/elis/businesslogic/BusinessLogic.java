@@ -3,11 +3,14 @@ package org.elis.businesslogic;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
+
 import org.elis.dao.DaoFactory;
 import org.elis.model.Genere;
 import org.elis.model.Gioco;
 import org.elis.model.Libreria;
 import org.elis.model.Offerta;
+import org.elis.model.Ricorrenza;
 import org.elis.model.Utente;
 
 public class BusinessLogic {
@@ -59,7 +62,13 @@ public class BusinessLogic {
 	}
 	public static Gioco getGiocoById(long id) {
 		return DaoFactory.getDaoFactory(implementation).getGiocoDAO().getGiocoById(id);
+		
 	}
+	
+	public static List<Gioco> getGiochiByUtente(Utente utente){
+		return DaoFactory.getDaoFactory(implementation).getGiocoDAO().getGiochiByUtente(utente);
+	}
+	
 	public static List<Gioco> getAllGiochi(){
 		return DaoFactory.getDaoFactory(implementation).getGiocoDAO().getAllGiochi();
 	}
@@ -81,12 +90,18 @@ public class BusinessLogic {
 	public static Gioco updateGiocoPrezzo(Gioco gioco, double prezzo) {
 		return DaoFactory.getDaoFactory(implementation).getGiocoDAO().updateGiocoPrezzo(gioco, prezzo);
 	}
-	public static Gioco deleteGiocoByNome(String nome) {
-		return DaoFactory.getDaoFactory(implementation).getGiocoDAO().deleteGiocoByNome(nome);
+	public static void deleteGiocoById(long id) {
+		DaoFactory.getDaoFactory(implementation).getGiocoDAO().deleteGiocoById(id);
 	}
 	
-	public static Libreria addLibreria(Utente utente, Gioco gioco) {
-		return DaoFactory.getDaoFactory(implementation).getLibreriaDAO().addLibreria(utente, gioco);
+	public static void deleteGiocoByNome(String nome) {
+		DaoFactory.getDaoFactory(implementation).getGiocoDAO().deleteGiocoByNome(nome);
+	}
+	
+
+	
+	public static Libreria aggiungiGiocoALibreria(Utente utente, Gioco gioco) {
+		return DaoFactory.getDaoFactory(implementation).getLibreriaDAO().aggiungiGiocoALibreria(utente, gioco);
 	}
 	public static Libreria getLibreriaByName(String nome) {
 		return DaoFactory.getDaoFactory(implementation).getLibreriaDAO().getLibreriaByName(nome);
@@ -103,6 +118,10 @@ public class BusinessLogic {
 	
 	public static Genere addGenere(String nome) {
 		return DaoFactory.getDaoFactory(implementation).getGenereDAO().addGenere(nome);
+	}
+	
+	public static Genere aggiungiGiocoaGenere (long genereId, long giocoId) {
+		return DaoFactory.getDaoFactory(implementation).getGenereDAO().aggiungiGiocoaGenere(genereId, giocoId);
 	}
 	public static Genere getGenereByName(String nome) {
 		return DaoFactory.getDaoFactory(implementation).getGenereDAO().getGenereByName(nome);
@@ -121,8 +140,8 @@ public class BusinessLogic {
 		return DaoFactory.getDaoFactory(implementation).getGenereDAO().deleteByName(nome);
 	}
 	
-	public static Offerta addOfferta(Offerta offerta) {
-		return DaoFactory.getDaoFactory(implementation).getOffertaDAO().addOfferta(offerta);
+	public static Offerta addOfferta(Ricorrenza ricorrenza, double sconto, LocalDate dataInizio, LocalDate dataFine, String nome) {
+		return DaoFactory.getDaoFactory(implementation).getOffertaDAO().addOfferta(ricorrenza, sconto, dataInizio, dataFine, nome);
 	}
 	public static Offerta getOffertaById(long id) {
 		return DaoFactory.getDaoFactory(implementation).getOffertaDAO().getOffertaById(id);

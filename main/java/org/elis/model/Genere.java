@@ -2,7 +2,9 @@ package org.elis.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -31,8 +33,9 @@ public class Genere {
     @JoinColumn(name = "offerta_id") 
     private Offerta offerta;
     
-    @ManyToMany(mappedBy = "generi", cascade = CascadeType.ALL) 
-    private List<Gioco> giochi = new ArrayList<>();
+    
+    @ManyToMany
+    private Set<Gioco> giochi = new HashSet<>();
     
     // Getter e Setter
 
@@ -76,11 +79,13 @@ public class Genere {
         this.offerta = offerta;
     }
 
-    public List<Gioco> getGiochi() {
-        return giochi;
-    }
+	public Set<Gioco> getGiochi() {
+		return giochi;
+	}
 
-    public void setGiochi(List<Gioco> giochi) {
-        this.giochi = giochi;
-    }
+	public void setGiochi(Set<Gioco> giochi) {
+		this.giochi = giochi;
+	}
+
+    
 }

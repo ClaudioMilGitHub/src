@@ -65,6 +65,11 @@ public class Offerta {
 package org.elis.model;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -73,6 +78,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity(name = "Offerta")
 public class Offerta {
@@ -84,17 +90,17 @@ public class Offerta {
 	@Column(name = "nome")
     private String nome;
 	
-	@Column(nullable=false)
+	@Column(name = "sconto", nullable=false)
     private double sconto;
 	
-	@Column(nullable=false)
+	@Column(name = "data_inizio", nullable=false)
+    private LocalDate dataInizio;
 	
-    private Timestamp dataInizio;
-	@Column(nullable=false)
+	@Column(name = "data_Fine", nullable=false)
+    private LocalDate dataFine;
 	
-    private Timestamp dataFine;
-	@Column(nullable=false)
-    private long giocoId; 
+	@OneToMany(mappedBy = "offerta")
+	private List<Gioco> giochi = new ArrayList<>();
 	
 	@Enumerated(EnumType.ORDINAL)
     private Ricorrenza ricorrenza; 
@@ -126,31 +132,31 @@ public class Offerta {
         this.sconto = sconto;
     }
 
-    public Timestamp getDataInizio() {
-        return dataInizio;
-    }
+    public LocalDate getDataInizio() {
+		return dataInizio;
+	}
 
-    public void setDataInizio(Timestamp dataInizio) {
-        this.dataInizio = dataInizio;
-    }
+	public void setDataInizio(LocalDate dataInizio) {
+		this.dataInizio = dataInizio;
+	}
 
-    public Timestamp getDataFine() {
-        return dataFine;
-    }
+	public LocalDate getDataFine() {
+		return dataFine;
+	}
 
-    public void setDataFine(Timestamp dataFine) {
-        this.dataFine = dataFine;
-    }
+	public void setDataFine(LocalDate dataFine) {
+		this.dataFine = dataFine;
+	}
 
-    public long getGiocoId() {
-        return giocoId;
-    }
+	public List<Gioco> getGiochi() {
+		return giochi;
+	}
 
-    public void setGiocoId(long giocoId) {
-        this.giocoId = giocoId;
-    }
+	public void setGiochi(List<Gioco> giochi) {
+		this.giochi = giochi;
+	}
 
-    public Ricorrenza getRicorrenza() {
+	public Ricorrenza getRicorrenza() {
         return ricorrenza;
     }
 
@@ -158,4 +164,3 @@ public class Offerta {
         this.ricorrenza = ricorrenza;
     }
 }
-

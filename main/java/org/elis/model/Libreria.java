@@ -5,7 +5,11 @@ import java.time.LocalDate;
 import jakarta.persistence.*;
 
 @Entity(name = "Libreria")
-@Table(name="libreria")
+@Table(
+	    name="libreria", 
+	    uniqueConstraints=
+	        @UniqueConstraint(columnNames={"utente_id", "gioco_id"})
+	)
 public class Libreria {
 	
 	@Id

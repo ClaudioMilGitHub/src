@@ -1,6 +1,7 @@
 package org.elis.dao.JPA;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.elis.dao.OffertaDAO;
@@ -8,6 +9,8 @@ import org.elis.model.Offerta;
 import org.elis.model.Ricorrenza;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Query;
 
 public class JPAOffertaDao implements OffertaDAO{
 
@@ -26,9 +29,23 @@ private JPAOffertaDao() {}
 	
 	
 	@Override
-	public Offerta addOfferta(Offerta offerta) {
-		// TODO Auto-generated method stub
-		return null;
+	public Offerta addOfferta(Ricorrenza ricorrenza, double sconto, LocalDate dataInizio, LocalDate dataFine, String nome) {
+		
+		Offerta o = new Offerta();
+		o.setRicorrenza(ricorrenza);
+		o.setSconto(sconto);
+		o.setDataInizio(dataInizio);
+		o.setDataFine(dataFine);
+		o.setNome(nome);
+		
+		EntityManager em = JPADaoFactory.getEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		em.persist(o);
+		t.commit();
+		
+		return o;
+		
 	}
 
 	@Override
@@ -39,8 +56,9 @@ private JPAOffertaDao() {}
 
 	@Override
 	public List<Offerta> getAllOfferta() {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = JPADaoFactory.getEntityManager();
+		Query q = em.createQuery("Select o FROM Offerta o");
+		return q.getResultList();
 	}
 
 	@Override
@@ -84,7 +102,4 @@ private JPAOffertaDao() {}
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-
 }

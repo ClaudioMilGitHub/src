@@ -2,6 +2,7 @@ package org.elis.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,7 +30,7 @@ public class Gioco {
 	@Column(name="data_rilascio", nullable = false)
 	private LocalDate dataRilascio;
 	
-	@Column(name="nome", nullable = false)
+	@Column(name="nome", nullable = false, unique = true)
 	private String nome;
 	@Column(name="descrizione", nullable = false)
 	private String descrizione;
@@ -39,11 +40,15 @@ public class Gioco {
 	@Column(name="prezzo", nullable = false)
 	private double prezzo;
 	
-	@ManyToMany
-	private List<Genere> generi; 
+	@ManyToMany(mappedBy = "giochi")
+	private Set<Genere> generi = new HashSet<>(); 
 	
 	@ManyToMany(mappedBy = "giochi")
-	private Set<Utente> utenti = new HashSet<>();
+	private List<Utente> utenti = new ArrayList<>();
+	
+	@ManyToOne
+	@JoinColumn(name = "offerta_id")
+	private Offerta offerta;
 	
 	public Gioco() {}
 
@@ -111,20 +116,40 @@ public class Gioco {
 		this.prezzo = prezzo;
 	}
 
-	public List<Genere> getGeneri() {
+	
+
+	public Set<Genere> getGeneri() {
 		return generi;
 	}
 
-	public void setGeneri(List<Genere> generi) {
+	public void setGeneri(Set<Genere> generi) {
 		this.generi = generi;
 	}
 
-	public Set<Utente> getUtenti() {
+	public List<Utente> getUtenti() {
 		return utenti;
 	}
 
-	public void setUtenti(Set<Utente> utenti) {
+	public void setUtenti(List<Utente> utenti) {
 		this.utenti = utenti;
 	}
+	
+	public Offerta getOfferta() {
+		return offerta;
+	}
 
+	public void setOfferta(Offerta offerta) {
+		this.offerta = offerta;
+	}
+
+	public void rimuoviUtente(Utente utente) {
+        utenti.remove(utente);
+        utente.getGiochi().remove(this);
+    }
+	
+	public void rimuoviTuttiGliUtenti() {
+        for (Utente utente : new HashSet<>(utenti)) {
+            rimuoviUtente(utente);
+        }
+    }
 }

@@ -2,6 +2,7 @@ package org.elis.dao;
 
 import java.util.List;
 import org.elis.model.Genere;
+import org.elis.model.Gioco;
 import org.elis.model.Offerta;
 
 public interface GenereDAO {
@@ -11,4 +12,5 @@ public interface GenereDAO {
     Genere updateGenereNome(Genere genere, String nuovoNome);
     Genere updateGenereOfferta(Genere genere, Offerta nuovaOfferta);
     Genere deleteByName(String nome);
+    Genere aggiungiGiocoaGenere (long genereId, long giocoId);
 }

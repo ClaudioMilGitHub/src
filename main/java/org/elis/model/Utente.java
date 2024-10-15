@@ -2,6 +2,7 @@ package org.elis.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -48,13 +49,13 @@ public class Utente {
 	private List<Recensione> recensioni;
 	
 	
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
         name = "Libreria",
         joinColumns = @JoinColumn(name = "utente_id"),
         inverseJoinColumns = @JoinColumn(name = "gioco_id")
     )
-    private Set<Gioco> giochi = new HashSet<>();
+    private List<Gioco> giochi = new ArrayList<>();
 	
 	@CreationTimestamp
 	@Column(name="data_creazione", nullable = false)
@@ -179,13 +180,18 @@ public class Utente {
 		this.recensioni = recensioni;
 	}
 
-	public Set<Gioco> getGiochi() {
+	public List<Gioco> getGiochi() {
 		return giochi;
 	}
 
-	public void setGiochi(Set<Gioco> giochi) {
+	public void setGiochi(List<Gioco> giochi) {
 		this.giochi = giochi;
 	}
+	
+	public void aggiungiGioco(Gioco gioco) {
+        giochi.add(gioco);
+        gioco.getUtenti().add(this);
+    }
 
 	public LocalDateTime getDataCreazione() {
 		return dataCreazione;

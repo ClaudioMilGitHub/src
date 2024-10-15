@@ -1,46 +1,61 @@
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import org.elis.businesslogic.BusinessLogic;
+import org.elis.dao.JPA.JPADaoFactory;
 import org.elis.model.*;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 
 public class Test {
 	public static void main(String[] args) {
-			
 		
-//		Utente utente = BusinessLogic.addUtente(0, "username1", "email@gmail.com1", "password", "Claudio", "Milano", "11111111", "via pippo", "www.pippo.com", "Roma", LocalDate.of(1996, 8, 31));
-//		Utente utenteNuovo1 = BusinessLogic.addUtente(0, "username2", "asdemail@gmail.com2", "password", "Claudio", "Milano", "11111111", "via pippo", "www.pippo.com", "Roma", LocalDate.of(1996, 8, 31));
-//		Utente utenteNuovo2 = BusinessLogic.addUtente(0, "username3", "email@gmail.com3", "password", "Claudio", "Milano", "11111111", "via pippo", "www.pippo.com", "Roma", LocalDate.of(1996, 8, 31));
+//		BusinessLogic.addUtente(0, "username", "email@gmail.com", "passord", "Claudio", "Milano", "1111111", "Via San Bernardino", null, null, LocalDate.of(1996, 8, 31));
+//		BusinessLogic.addGioco("Gioco", LocalDate.of(2024, 1, 1), "Bello", "path", 29.99, null, null);
 		
-		Utente u = BusinessLogic.getUtenteById(1);
-		System.out.println(u.getUsername());
-		Gioco g = BusinessLogic.getGiocoById(1);
-		Libreria l = BusinessLogic.getLibreriaByName("username1");
+//		Genere genere = BusinessLogic.getGenereByName("Avventura");
+//		Gioco gioco = BusinessLogic.getGiocoById(1);
+//		
+//		BusinessLogic.aggiungiGiocoaGenere(genere, gioco);
 		
-//		Gioco gioco = BusinessLogic.addGioco("Gioco", LocalDate.of(2022, 1, 10), "Gioco appena aggiunto", "path", 29.99, o, u);
-			
-//		Utente utenteTrovato = BusinessLogic.getUtenteByName("username3");
-//		System.out.println(utenteTrovato.getNome());
+//		Genere genere = BusinessLogic.addGenere("Avventura");
+//		Offerta offerta = BusinessLogic.addOfferta(Ricorrenza.BLACK_FRIDAY, 0.5, LocalDate.of(2024, 11, 27), LocalDate.of(2024, 12, 1), "black friday");
+//		Utente u = BusinessLogic.getUtenteById(1);
+//		Gioco g = BusinessLogic.getGiocoById(5);
+//		
+//		BusinessLogic.aggiungiGiocoALibreria(u, g);
 		
-//		BusinessLogic.deleteUtenteByNome("username3");
+//		
+//		
+		EntityManager em = JPADaoFactory.getEntityManager();
+//		EntityTransaction t = em.getTransaction();
+//		
+//		
+//		t.begin();
+//		Genere genere = em.find(Genere.class, 1);
+		Gioco g = em.find(Gioco.class, 1);
+		Set<Genere> setGenere = new HashSet<>();
+		setGenere = g.getGeneri();
 		
-//		Offerta offerta = BusinessLogic.getOffertaById(1);
-//		Libreria libreria = BusinessLogic.addLibreria(u, g);
-
+		Genere[] generiArray = setGenere.toArray(new Genere[setGenere.size()]);
 		
-		System.out.println("Libreria di " + u.getUsername() + ": " + l.getId());
-//		System.out.println(g.getId());
-//		System.out.println(u.getNome());
-//		System.out.println("Libreria { utenteId: " + libreria.getUtente().getId() + " giocoId: " + libreria.getGioco().getId() + " }"); 
-
+		System.out.println(generiArray[0].getNome());
 		
-//		Utente utenteDaAggiornare = BusinessLogic.getUtenteByName("usernameNuovo");
-//		Utente utenteAggiornato = BusinessLogic.updateUtenteDataNascita(utenteDaAggiornare, LocalDate.of(1993, 1, 1));
-//
-//		System.out.println(utenteAggiornato.getUsername());
+//		
+//		genere.getGiochi().add(g);
+//		
+//		em.persist(g);
+//		t.commit();
+//		em.close();
+		
+		
+		
 
 		
 	}

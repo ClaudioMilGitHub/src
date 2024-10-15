@@ -20,5 +20,7 @@ public interface GiocoDAO {
 	Gioco updateGiocoDataRilascio(Gioco gioco, LocalDate dataRilascio);
 	Gioco updateGiocoDescrizione(Gioco gioco, String descrizione);
 	Gioco updateGiocoPrezzo(Gioco gioco, double prezzo);
-	Gioco deleteGiocoByNome(String nome);
+	void deleteGiocoByNome(String nome);
+	List<Gioco> getGiochiByUtente(Utente utente);
+	void deleteGiocoById(long id);
 }
