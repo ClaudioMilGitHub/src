@@ -75,20 +75,38 @@ private JPAGenereDao() {}
 
 	@Override
 	public Genere updateGenereNome(Genere genere, String nuovoNome) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = JPADaoFactory.getEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		genere.setNome(nuovoNome);
+		genere = em.merge(genere);
+		t.commit();
+		return genere;
 	}
 
 	@Override
 	public Genere updateGenereOfferta(Genere genere, Offerta nuovaOfferta) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = JPADaoFactory.getEntityManager();
+	    EntityTransaction t = em.getTransaction();
+	    t.begin();
+        genere.setOfferta(nuovaOfferta);
+        genere = em.merge(genere);
+        t.commit();
+		return genere;
 	}
 
 	@Override
 	public Genere deleteByName(String nome) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = JPADaoFactory.getEntityManager();
+		Query q = em.createQuery("SELECT g FROM Genere g WHERE g.nome = :nome");
+		q.setParameter("nome", nome);
+		Genere g = (Genere) q.getSingleResult();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		em.remove(g);
+		t.commit();
+		return g;
+		
 	}
 	
 	

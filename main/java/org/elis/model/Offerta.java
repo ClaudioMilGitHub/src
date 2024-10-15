@@ -64,12 +64,12 @@ public class Offerta {
 
 package org.elis.model;
 
-import java.sql.Timestamp;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.annotations.CreationTimestamp;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

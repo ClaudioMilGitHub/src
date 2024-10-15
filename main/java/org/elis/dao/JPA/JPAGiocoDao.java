@@ -61,6 +61,7 @@ if(instance == null) {
 		return em.find(Gioco.class, id);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Gioco> getGiochiByUtente(Utente utente) {
 		EntityManager em = JPADaoFactory.getEntityManager();
@@ -69,6 +70,7 @@ if(instance == null) {
 		return q.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Gioco> getAllGiochi() {
 		EntityManager em = JPADaoFactory.getEntityManager();
@@ -76,6 +78,7 @@ if(instance == null) {
 		return q.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Gioco> getAllGiochiByGenere(long genere) {
 		EntityManager em = JPADaoFactory.getEntityManager();

@@ -1,8 +1,8 @@
 package org.elis.dao.JPA;
 
-import java.util.HashSet;
+
 import java.util.List;
-import java.util.Set;
+
 
 import org.elis.dao.LibreriaDAO;
 import org.elis.model.Gioco;
@@ -55,6 +55,7 @@ private JPALibreriaDao() {}
 		return (Libreria) q.getSingleResult();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Libreria> getAllLibrerie() {
 		EntityManager em = JPADaoFactory.getEntityManager();
@@ -64,7 +65,17 @@ private JPALibreriaDao() {}
 
 	@Override
 	public Libreria updateLibreriaById(long id, String nuovoNome) {
-		// TODO Auto-generated method stub
+		  EntityManager em = JPADaoFactory.getEntityManager();
+		  EntityTransaction t = em.getTransaction();
+		  t.begin();
+	      Libreria l = em.find(Libreria.class, id);
+	      if (l != null) {
+	            l.getUtente().setUsername(nuovoNome);
+	            em.merge(l);
+	            t.commit();
+	      } else {
+	            System.out.println("Impossibile trovare la libreria con l'ID specificato.");
+	        }
 		return null;
 	}
 
