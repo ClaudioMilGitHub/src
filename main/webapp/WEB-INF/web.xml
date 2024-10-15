@@ -89,4 +89,14 @@
     <servlet-name>AddGameLogicServlet</servlet-name>
     <url-pattern>/AddGameLogicServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateProfileServlet</display-name>
+    <servlet-name>UpdateProfileServlet</servlet-name>
+    <servlet-class>org.elis.controller.UpdateProfileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateProfileServlet</servlet-name>
+    <url-pattern>/UpdateProfileServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

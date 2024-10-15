@@ -24,39 +24,10 @@ Utente utenteLoggato = (Utente) request.getSession().getAttribute("utenteLoggato
 <body>
 	<div class="container-fluid">
 		<section>
-			<div class="row navbar mb-3" style="background-color: #171a21;">
-				<nav class="navbar navbar-expand-lg">
-					<div class="container">
-						<a class="navbar-brand" href="#"> <img
-							src="https://store.akamai.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016"
-							alt="Steam logo" width="176" height="44">
-						</a>
-
-						<button class="navbar-toggler navbar-dark" type="button"
-							data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-							aria-controls="navbarNavAltMarkup" aria-expanded="false"
-							aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-							<div class="navbar-nav">
-								<a class="nav-link" aria-current="page"
-									href="public-jsp/HomePage.jsp">Home</a> <a class="nav-link"
-									href="#">Negozio</a>
-							</div>
-						</div>
-						<div class="collapse navbar-collapse" id="navbarNavDropdown">
-							<form class="d-flex" role="search">
-								<input class="form-control me-2" type="search"
-									placeholder="Cerca" aria-label="Search" style="margin: auto;">
-								<button class="btn btn-outline-success" type="submit"
-									style="margin: auto;">Cerca</button>
-							</form>
-						</div>
-
-					</div>
-				</nav>
-			</div>
+		
+			<% request.setAttribute("utenteLoggato", utenteLoggato); %>
+			<jsp:include page="/includes/navbar.jsp"/>
+			
 			<div class="profile-container mt-5 p-4">
 				<div class="text-center">
 					<img
@@ -94,6 +65,7 @@ Utente utenteLoggato = (Utente) request.getSession().getAttribute("utenteLoggato
 					</form>
 				</div>
 			</div>
+			
 			<%@include file="/includes/footer.jsp"%>
 	</div>
 	
