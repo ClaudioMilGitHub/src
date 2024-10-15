@@ -20,6 +20,7 @@
 
     <div class="container-fluid">
      
+    <!--  Navbar -->
     <% request.setAttribute("utenteLoggato", utenteLoggato); %>
 	<jsp:include page="/includes/navbar.jsp"/>
 	
@@ -76,7 +77,7 @@
 						<div class="content-cards mb-3">
 							<div class="card m-auto" style="width: 80%;">
 								<img
-									src="<%=request.getContextPath()%>/res/<%=listaGiochi.get(i).getImagePath() %>"
+									src="<%=listaGiochi.get(i).getImagePath() %>"
 									class="card-img-top" alt="game_img">
 								<div class="card-body">
 									<h3 class="card-title"><%=listaGiochi.get(i).getNome() %></h3>
@@ -94,7 +95,7 @@
             </div>
         </div>
 
-        <%@include file="/includes/footer.jsp" %>>
+        <%@include file="/includes/footer.jsp" %>
         
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>

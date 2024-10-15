@@ -20,7 +20,8 @@
 
 </head>
 <body>
-
+	
+	<%Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");%>
 	<%List<Gioco> listaGiochi =  (List<Gioco>) request.getAttribute("listaGiochi");%>
 	<%Genere genere =  (Genere) request.getAttribute("genere");%>
 
@@ -28,38 +29,8 @@
 
 		<!-- Navigation bar row-->
 
-		<div class="row navbar mb-3">
-			<nav class="navbar navbar-expand-lg">
-				<div class="container">
-					<a class="navbar-brand" href="#"> <img
-						src="https://store.akamai.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016"
-						alt="Steam logo" width="176" height="44">
-					</a>
-
-					<button class="navbar-toggler navbar-dark" type="button"
-						data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-						aria-controls="navbarNavAltMarkup" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-						<div class="navbar-nav">
-							<a class="nav-link" aria-current="page"
-								href="<%=request.getContextPath()%>/index">Home</a> <a
-								class="nav-link" href="#">Profilo</a>
-						</div>
-					</div>
-					<div class="collapse navbar-collapse" id="navbarNavDropdown">
-						<div class="global-action">
-							<a class="action-link"
-								href="<%=request.getContextPath()%>/PaginaLogic.jsp">Accedi</a>
-							<a class="action-link"
-								href="<%=request.getContextPath()%>/PaginaRegistrazione.jsp">Registrati</a>
-						</div>
-					</div>
-				</div>
-			</nav>
-		</div>
+		<% request.setAttribute("utenteLoggato", utenteLoggato); %>
+		<jsp:include page="/includes/navbar.jsp"/>
 
 		<!-- Content row-->
 

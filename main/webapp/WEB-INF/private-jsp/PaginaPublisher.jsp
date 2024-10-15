@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="org.elis.model.*"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,34 +11,16 @@
     <title>Benvenuto su STEAM</title>
 </head>
 <body>
+
+	<%Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");%>
+	
 <div class="container-fluid">
 <section>
-            <div class="row navbar mb-3" style="background-color: #171a21;">
-                <nav class="navbar navbar-expand-lg">
-                    <div class="container">
-                        <a class="navbar-brand" href="#">
-                            <img src="https://store.akamai.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016" alt="Steam logo" width="176" height="44">
-                        </a>
-    
-                        <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                          <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                          <div class="navbar-nav">
-                            <a class="nav-link" aria-current="page" href="#">Home</a>
-                            <a class="nav-link" href="#">Negozio</a>
-                          </div>
-                        </div>
-                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                            <form class="d-flex" role="search">
-                                <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Search">
-                                <button class="btn btn-outline-success" type="submit">Cerca</button>
-                            </form>
-                        </div>
-                       
-                    </div>
-                </nav>
-            </div>
+            
+	<!--  Navbar -->
+    <% request.setAttribute("utenteLoggato", utenteLoggato); %>
+	<jsp:include page="/includes/navbar.jsp"/>
+            
               <div class="row">
                 <div class="col-lg-3">
                   <div class="card mb-3">

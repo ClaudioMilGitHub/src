@@ -1,7 +1,9 @@
 body{
     background-image: url("https://store.akamai.steamstatic.com/public/images/v6/colored_body_top.png?v=2");
     background-size: cover;
+
 }
+
 legend{
     color: white;
 }
@@ -19,9 +21,7 @@ footer{
 
 .btn{
     color: white;
-    border: 2px white solid;
-    
-   
+    border: 2px white solid;   
     
 }
 
@@ -60,6 +60,7 @@ label{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    color: #fff;
 }
 
 button {
@@ -92,6 +93,4 @@ button:hover {
 .col-lg-6{
     display: flex;
     flex-direction: column;
-
 }
-

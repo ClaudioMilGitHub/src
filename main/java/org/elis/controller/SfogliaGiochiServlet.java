@@ -32,8 +32,9 @@ public class SfogliaGiochiServlet extends HttpServlet {
 		String genereInput = request.getParameter("genereInputForm");
 		
 		Genere genere = BusinessLogic.getGenereByName(genereInput);
+		System.out.println("Nome genere: " + genere.getNome());
 		long idGenere = genere.getId();
-		
+		System.out.println("ID genere: " + idGenere);
 		List<Gioco> listaGiochi = BusinessLogic.getAllGiochiByGenere(idGenere);
 		
 		

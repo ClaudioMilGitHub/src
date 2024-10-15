@@ -82,8 +82,8 @@ if(instance == null) {
 	@Override
 	public List<Gioco> getAllGiochiByGenere(long genere) {
 		EntityManager em = JPADaoFactory.getEntityManager();
-		Query q = em.createQuery("Select g FROM Gioco g JOIN g.generi gen WHERE gen.id = idGenere");
-		q.setParameter("genere", genere);
+		Query q = em.createQuery("Select g FROM Gioco g JOIN g.generi gen WHERE gen.id = :idGenere");
+		q.setParameter("idGenere", genere);
 		return q.getResultList();
 	}
 

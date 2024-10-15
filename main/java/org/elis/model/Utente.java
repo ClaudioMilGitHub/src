@@ -29,9 +29,9 @@ public class Utente {
 	private String email;
 	@Column(name="password", nullable = false)
 	private String password;
-	@Column(name="nome", nullable = false)
+	@Column(name="nome", nullable = true)
 	private String nome;
-	@Column(name="cognome", nullable = false)
+	@Column(name="cognome", nullable = true)
 	private String cognome;
 	@Column(name="telefono")
 	private String telefono;
