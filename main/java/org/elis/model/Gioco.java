@@ -152,4 +152,16 @@ public class Gioco {
             rimuoviUtente(utente);
         }
     }
+
+	public void rimuoviTuttiGeneri() {
+		for (Genere genere : new HashSet<>(generi)) {
+            rimuoviGenere(genere);
+        }
+	}
+
+	private void rimuoviGenere(Genere genere) {
+		generi.remove(genere);
+        genere.getGiochi().remove(this);
+        }
+			
 }

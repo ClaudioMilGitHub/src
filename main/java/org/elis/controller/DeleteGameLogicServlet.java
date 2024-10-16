@@ -52,16 +52,20 @@ public class DeleteGameLogicServlet extends HttpServlet {
             response.sendRedirect("public-jsp/Errore.jsp");
             return;
         }
-        System.out.println("prima input");
+
         String nome = request.getParameter("game");
-        System.out.println("dopo input");
-        for(Gioco g : BusinessLogic.getAllGiochi()) {
-        	if(g.getNome().equals(nome)) {
-        		BusinessLogic.deleteGiocoByNome(nome);
-        	}
-        }
-        System.out.println("dopo ciclo");
-        request.getRequestDispatcher("public-jsp/SuccessoRegistrazione.jsp").forward(request, response);
+
+        Gioco giocoDaEliminare = BusinessLogic.getGiocoByName(nome);
+        BusinessLogic.deleteGiocoById(giocoDaEliminare.getId());
+        
+        
+//        for(Gioco g : BusinessLogic.getAllGiochi()) {
+//        	if(g.getNome().equals(nome)) {
+//        		BusinessLogic.deleteGiocoByNome(nome);
+//        	}
+//        }
+
+        request.getRequestDispatcher("WEB-INF/private-jsp/PaginaEliminaGioco.jsp").forward(request, response);
         
 	}
 

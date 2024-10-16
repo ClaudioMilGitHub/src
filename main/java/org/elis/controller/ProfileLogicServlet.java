@@ -49,7 +49,7 @@ public class ProfileLogicServlet extends HttpServlet {
         	request.getRequestDispatcher("WEB-INF/private-jsp/PaginaPublisher.jsp").forward(request, response);
         	return;
         case "ADMIN":
-        	request.getRequestDispatcher("WEB-INF/private-jsp/ProfiloAdmin.jsp").forward(request, response);
+        	request.getRequestDispatcher("WEB-INF/private-jsp/PaginaAdmin.jsp").forward(request, response);
         	return;
         }
 	}

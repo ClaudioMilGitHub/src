@@ -152,6 +152,7 @@ if(instance == null) {
 		EntityTransaction t = em.getTransaction();
 		if (gioco != null) {
             gioco.rimuoviTuttiGliUtenti();
+            gioco.rimuoviTuttiGeneri();
             t.begin();
             em.remove(gioco);
             t.commit();

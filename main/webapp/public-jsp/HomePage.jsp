@@ -94,7 +94,8 @@
                 
             </div>
         </div>
-
+		
+		<!-- Footer -->
         <%@include file="/includes/footer.jsp" %>
         
     </div>
