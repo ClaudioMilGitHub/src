@@ -9,7 +9,7 @@
     <title>Logout STEAM</title>
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid min-vh-100 d-flex flex-column">
         <!-- Header row-->
         <div class="row header">      
             <header>
@@ -20,7 +20,7 @@
         </div>
 
         <!-- Content row-->
-        <div class="row">
+        <div class="row flex-grow-1">
             <div class="col-lg-3">
                  
             </div>
@@ -28,7 +28,11 @@
                 <div id="box-1">
                     <div id="box-small">
                         <h2 class="mt-5">Logout completato</h2>
-                        <p>Hai effettuato il logout correttamente. <br><a href="<%=request.getContextPath()%>/public-jsp/PaginaLogin.jsp">Effettua il login di nuovo</a>.</p>
+                        <p>
+                        Hai effettuato il logout correttamente.
+                        <a href="<%=request.getContextPath()%>/public-jsp/PaginaLogin.jsp">
+                        </a>
+                        </p>
                     </div>
                 </div> 
                            
@@ -39,23 +43,23 @@
             
         </div>
 
-        <!-- Footer row-->
-        <div class="row footer">
-            <footer class="footer">
-                <div class="content-logo d-flex flex-row justify-content-between">
-                    <div class="footer-logo-steam">
-                        <img src="https://store.akamai.steamstatic.com/public/images/v6/logo_steam_footer.png" alt="logo steam">
-                    </div>
-                    <div class="footer-valve">
-                        <img src="https://store.akamai.steamstatic.com/public/images/footerLogo_valve_new.png" alt="logo">
-                    </div>
-                </div>
-                <div class="content-footer color-white" id="footer_text">
-                    Progetto ispirato a Steam per puri scopi didattici per il Master di Sviluppo Software e Applicazioni edizione Maggio. Gruppo di lavoro composto da Claudio Milano, Leandro Biccellari, Antonio Guglielmo e Simone Medori.
-                </div>
-            </footer>
-        </div>
+        <!-- Footer -->
+        <%@include file="/includes/footer.jsp" %>
+        
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+  
+  	<script>
+  	
+  	 setTimeout(function() {
+     	console.log('infunction');
+         window.location.href = "<%=request.getContextPath()%>/index";
+     }, 3000); // 3000 millisecondi = 3 secondi
+     
+  	</script>
+   
+
+    
+    
 </body>
 </html>

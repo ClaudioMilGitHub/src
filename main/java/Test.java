@@ -21,13 +21,13 @@ public class Test {
 //		public Utente addUtente(int ruoloIntValue, String username, String email, String password, String nome, String cognome, String telefono, String indirizzo, String sitoWeb, String comuneResidenza, LocalDate dataNascita)
 		
 		
-//		BusinessLogic.addUtente(0, "theredcondor", "email01@gmail.com", "Password1234!", "Claudio", null, "3755954849", null, null, "Via San Bernardino 27", LocalDate.of(1996, 8, 31));
-//		BusinessLogic.addUtente(1, "therinoranos", "email02@gmail.com", "Password1234!?", "Rino", "Rano", "3755954848", "Roma", null, "Via San Bernardino 26", LocalDate.of(1997, 7, 30));
-//		BusinessLogic.addUtente(1, "thegiannigiannos", "email03@gmail.com", "Password1235!?", "Gianno", "Gianni", "3755954847", "Roma", null, "Via San Bernardino 25", LocalDate.of(1998, 6, 29));
-//		BusinessLogic.addUtente(1, "thepincopancos", "email04@gmail.com", "Password1236!?", "Pinco", "Panco", "3755954846", "Milano", null, "Via San Bernardino 24", LocalDate.of(1999, 5, 28));
-//		BusinessLogic.addUtente(1, "thegiallogiallis", "email05@gmail.com", "Password1237!?", "Giallo", "Gialli", "3755954845", null, null, "Via San Bernardino 23", LocalDate.of(1995, 4, 27));
-//		BusinessLogic.addUtente(2, "ubisoft", "ubisoft@ubisoft.com", "Password1238!?", "Ubisoft", null, "3755954844", "Saint-Mandé" , "www.ubisoft.com/", null, LocalDate.of(1985, 3, 26));
-//		BusinessLogic.addUtente(2, "505Games", "505@505games.com", "Password1239!?", "505Games", null, "3755954843", "Milano", "https://505games.com/", "Via San Bernardino 21", LocalDate.of(2006, 2, 25));
+//		BusinessLogic.addUtente(0, "theredcondor", "email01@gmail.com", "Password1234!", "Claudio", "Milano", "3755954849", "Via San Bernardino 27", null, "Trapani", LocalDate.of(1996, 8, 31));
+//		BusinessLogic.addUtente(1, "therinoranos", "email02@gmail.com", "Password1234!?", "Rino", "Rano", "3755954848", "Via San Bernardino 26", null, "Roma", LocalDate.of(1997, 7, 30));
+//		BusinessLogic.addUtente(1, "thegiannigiannos", "email03@gmail.com", "Password1235!?", "Gianno", "Gianni", "3755954847", "Via San Bernardino 25", null, "Roma", LocalDate.of(1998, 6, 29));
+//		BusinessLogic.addUtente(1, "thepincopancos", "email04@gmail.com", "Password1236!?", "Pinco", "Panco", "3755954846", "Via San Bernardino 24", null, "Milano", LocalDate.of(1999, 5, 28));
+//		BusinessLogic.addUtente(1, "thegiallogiallis", "email05@gmail.com", "Password1237!?", "Giallo", "Gialli", "3755954845", "Via San Bernardino 23", null, null, LocalDate.of(1995, 4, 27));
+//		BusinessLogic.addUtente(2, "ubisoft", "ubisoft@ubisoft.com", "Password1238!?", "Ubisoft", null, "3755954844", null, "www.ubisoft.com/", "Saint-Mandé", LocalDate.of(1985, 3, 26));
+//		BusinessLogic.addUtente(2, "505Games", "505@505games.com", "Password1239!?", "505Games", null, "3755954843", null, "https://505games.com/", "Milano", LocalDate.of(2006, 2, 25));
 		
 		//Aggiungi giochi al database
 //		BusinessLogic.addGioco("Death Stranding", LocalDate.of(2019, 11, 8), "Dal leggendario Hideo Kojima arriva un’esperienza di gioco che definisce il genere", "path", 39.99, null, null);
@@ -42,11 +42,11 @@ public class Test {
 //		BusinessLogic.addGioco("Control Ultimate Edition", LocalDate.of(2020, 8, 27), "Vincitore di oltre 80 riconoscimenti, Control è uno spettacolare gioco d’azione e avventura", "path", 39.99, null, null);
 
 		//Aggiungi genere al database
-//		BusinessLogic.addGenere("Avventura");
-//		BusinessLogic.addGenere("Azione");
-//		BusinessLogic.addGenere("Ruolo");
-//		BusinessLogic.addGenere("Strategia");
-//		BusinessLogic.addGenere("Metroidvania");
+		BusinessLogic.addGenere("Avventura");
+		BusinessLogic.addGenere("Azione");
+		BusinessLogic.addGenere("Ruolo");
+		BusinessLogic.addGenere("Strategia");
+		BusinessLogic.addGenere("Metroidvania");
 		
 		//Aggiungi giochi al genere  id[Genere, Gioco]
 		//Avventura
