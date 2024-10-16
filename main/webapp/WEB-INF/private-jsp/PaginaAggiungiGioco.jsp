@@ -49,6 +49,7 @@
                                 <option value="Strategia">Strategia</option>
                                 <option value="Avventura">Avventura</option>
                                 <option value="Azione">Azione</option>
+                                <option value="Metroidvania">Metroidvania</option>
                             </select>
                         </div>
 

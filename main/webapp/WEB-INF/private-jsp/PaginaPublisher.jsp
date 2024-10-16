@@ -196,6 +196,7 @@
                         </div>
                     </div>  
                 </div>
+                
             <!-- Footer -->
             <%@include file="/includes/footer.jsp" %>
 </section>

@@ -18,7 +18,7 @@
 	<%Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");%>
 	<%List<Gioco> listaGiochi = (List<Gioco>) request.getAttribute("listaGiochi");%>
 
-    <div class="container-fluid">
+    <div class="container-fluid min-vh-100 d-flex flex-column">
      
     <!--  Navbar -->
     <% request.setAttribute("utenteLoggato", utenteLoggato); %>
@@ -26,7 +26,7 @@
 	
 
         <!-- Content row-->
-        <div class="row content h-100">
+        <div class="row content flex-grow-1">
             <div class="col-lg-3 col-sm mb-3 d-none d-lg-block">
                 <div class="options-buttons">
                     <div class="col home_page_gutter-block ps-4">

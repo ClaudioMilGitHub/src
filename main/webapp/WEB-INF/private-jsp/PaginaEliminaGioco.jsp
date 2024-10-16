@@ -22,16 +22,16 @@
 
 	<%Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");%>
 
-	<div class="container-fluid">
+	<div class="container-fluid min-vh-100 d-flex flex-column">
 
 
 		<!--  Navbar -->
 		<% request.setAttribute("utenteLoggato", utenteLoggato); %>
 		<jsp:include page="/includes/navbar.jsp" />
 
-	</div>
+	
 
-	<div class="row">
+	<div class="row flex-grow-1">
 		<div class="col-lg-12">
 			<form action="<%=request.getContextPath()%>/DeleteGameLogicServlet"
 				method="post">
@@ -63,6 +63,8 @@
 
 	<!-- Footer -->
 	<%@include file="/includes/footer.jsp"%>
+	
+	</div>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"

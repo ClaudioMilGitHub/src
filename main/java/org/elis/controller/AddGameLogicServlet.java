@@ -25,6 +25,7 @@ import java.util.Scanner;
 import javax.swing.plaf.nimbus.NimbusStyle;
 
 import org.elis.businesslogic.BusinessLogic;
+import org.elis.model.Genere;
 import org.elis.model.Gioco;
 import org.elis.model.Offerta;
 import org.elis.model.Utente;
@@ -143,8 +144,12 @@ public class AddGameLogicServlet extends HttpServlet {
 		Utente utenteLoggato = (Utente)request.getSession().getAttribute("utenteLoggato");
 		double prezzo = Double.parseDouble(prezzo2);
 		LocalDate dataRilascio = LocalDate.parse(data);
-		BusinessLogic.addGioco(nome, dataRilascio, descrizione, imageUrl, prezzo, offerta, utenteLoggato);
-		System.out.println("fine! Gioco caricato");
+		
+		//Aggiungiamo il gioco al database e alle associazioni
+		Gioco giocoAggiunto = BusinessLogic.addGioco(nome, dataRilascio, descrizione, imageUrl, prezzo, offerta, utenteLoggato);
+		Genere genereGioco = BusinessLogic.getGenereByName(genere);
+		BusinessLogic.aggiungiGiocoaGenere(genereGioco.getId(), giocoAggiunto.getId());
+
 		request.getRequestDispatcher("WEB-INF/private-jsp/PaginaPublisher.jsp").forward(request, response);
 	}
 
