@@ -48,22 +48,6 @@ private JPALibreriaDao() {}
 	}
 
 	@Override
-	public Libreria getLibreriaByName(String nome) {
-		EntityManager em = JPADaoFactory.getEntityManager();
-		Query q = em.createQuery("SELECT l FROM Libreria l JOIN l.utente u WHERE u.username = :username");
-		q.setParameter("username", nome);
-		return (Libreria) q.getSingleResult();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Libreria> getAllLibrerie() {
-		EntityManager em = JPADaoFactory.getEntityManager();
-		Query q = em.createQuery("Select l from Libreria l");
-		return q.getResultList();
-	}
-
-	@Override
 	public Libreria updateLibreriaById(long id, String nuovoNome) {
 		  EntityManager em = JPADaoFactory.getEntityManager();
 		  EntityTransaction t = em.getTransaction();
@@ -79,15 +63,34 @@ private JPALibreriaDao() {}
 		return null;
 	}
 
+	
+
+	@Override
+	public List<Libreria> getLibreriaByName(String nome) {
+		EntityManager em = JPADaoFactory.getEntityManager();
+		Query q = em.createQuery("SELECT l FROM Libreria l JOIN l.utente u WHERE u.username = :username");
+		q.setParameter("username", nome);
+		return q.getResultList();
+	}
+
+	@Override
+	public List<Libreria> getAllLibrerie() {
+		EntityManager em = JPADaoFactory.getEntityManager();
+		Query q = em.createQuery("Select l from Libreria l");
+		return q.getResultList();
+	}
+
 	@Override
 	public void deleteLibreriaByNome(String nome) {
 		EntityManager em = JPADaoFactory.getEntityManager();
 		Query q = em.createQuery("SELECT l FROM Libreria l JOIN l.utente u WHERE u.username = :username");
 		q.setParameter("username", nome);
-		Libreria l = (Libreria) q.getSingleResult();
+		List<Libreria> libreria = q.getResultList();
 		EntityTransaction t = em.getTransaction();
 		t.begin();
+		for(Libreria l : libreria) {
 		em.remove(l);
+		}
 		t.commit();
 	}
 
@@ -95,6 +98,20 @@ private JPALibreriaDao() {}
 	public Libreria getLibreriaById(long id) {
 		EntityManager em = JPADaoFactory.getEntityManager();
 		return em.find(Libreria.class, id);
+	}
+
+
+	@Override
+	public Libreria deleteLibreriaById(long id) {
+		EntityManager em = JPADaoFactory.getEntityManager();
+		Query q = em.createQuery("SELECT l FROM Libreria l WHERE l.id = :id");
+		q.setParameter("id", id);
+		Libreria l = (Libreria) q.getSingleResult();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		em.remove(l);
+		t.commit();
+		return l;
 	}
 
 }
