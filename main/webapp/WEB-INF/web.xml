@@ -99,4 +99,14 @@
     <servlet-name>UpdateProfileServlet</servlet-name>
     <url-pattern>/UpdateProfileServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LibreriaServlet</display-name>
+    <servlet-name>LibreriaServlet</servlet-name>
+    <servlet-class>org.elis.controller.LibreriaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LibreriaServlet</servlet-name>
+    <url-pattern>/LibreriaServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

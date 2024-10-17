@@ -26,7 +26,7 @@
                       <div class="navbar-nav">
                       <%if(utenteLoggato != null){%>
 	                       	<a class="nav-link" href="<%=request.getContextPath()%>/ProfileLogicServlet"><%=utenteLoggato.getUsername()%></a>
-	                        <a class="nav-link" href="<%=request.getContextPath()%>/LibreriaLogicServlet">Libreria</a>
+	                        <a class="nav-link" href="<%=request.getContextPath()%>/LibreriaServlet">Libreria</a>
 	                        <a class="nav-link" href="<%=request.getContextPath()%>/LogoutServlet">Logout</a>
                       <%} else if(utenteLoggato == null){%>
                           <a class="nav-link" href="<%=request.getContextPath()%>/LoginLogicServlet">Accedi</a>

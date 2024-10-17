@@ -109,6 +109,30 @@ public class Test {
 //		em.close();
 		
 		
+//		EntityManager em = JPADaoFactory.getEntityManager();
+//		EntityTransaction t = em.getTransaction();
+		
+//		t.begin();
+//		Gioco gioco = em.find(Gioco.class, 15);
+//		Utente utente = em.find(Utente.class, 2);
+//		
+//		utente.getGiochi().add(gioco);
+//		
+//		em.persist(gioco);
+//		t.commit();
+//		em.close();
+//		
+		
+//		
+//		Utente utente = em.find(Utente.class, 1);
+//		Gioco gioco = em.find(Gioco.class, 2);
+		
+//		BusinessLogic.aggiungiGiocoALibreria(utente, gioco);
+		
+//		for (Gioco gioco1 : utente.getGiochi()) {
+//			System.out.println(gioco1.getNome());
+//		}
+		
 		
 
 		
