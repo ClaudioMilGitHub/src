@@ -1,6 +1,6 @@
 package org.elis.dao.JPA;
 
-import org.elis.dao.DaoFactory;
+import org.elis.dao.DAOFactory;
 import org.elis.dao.GenereDAO;
 import org.elis.dao.GiocoDAO;
 import org.elis.dao.LibreriaDAO;
@@ -10,7 +10,7 @@ import org.elis.dao.UtenteDAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
 
-public class JPADaoFactory extends DaoFactory{
+public class JPADaoFactory extends DAOFactory{
 	
 	public static EntityManager getEntityManager() {
 		return Persistence.createEntityManagerFactory("SteamProject").createEntityManager();

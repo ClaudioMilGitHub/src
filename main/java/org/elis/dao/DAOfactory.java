@@ -3,9 +3,9 @@ package org.elis.dao;
 import org.elis.dao.JDBC.*;
 import org.elis.dao.JPA.JPADaoFactory;
 
-public abstract class DaoFactory {
+public abstract class DAOFactory {
 	
-	private static DaoFactory instance;
+	private static DAOFactory instance;
 	
 	public abstract UtenteDAO getUtenteDAO();
 	public abstract GiocoDAO getGiocoDAO();
@@ -13,7 +13,7 @@ public abstract class DaoFactory {
 	public abstract OffertaDAO getOffertaDAO();
 	public abstract GenereDAO getGenereDAO();
 	
-	public static DaoFactory getDaoFactory(String s) {
+	public static DAOFactory getDaoFactory(String s) {
 		
 		if(instance==null) {
 			switch(s) {
