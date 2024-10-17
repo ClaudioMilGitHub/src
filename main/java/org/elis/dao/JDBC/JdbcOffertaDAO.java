@@ -231,7 +231,7 @@ import java.util.List;
 import org.elis.dao.OffertaDAO;
 import org.elis.model.Offerta;
 import org.elis.model.Ricorrenza;
-
+/*
 public class JdbcOffertaDAO implements OffertaDAO {
     private JdbcOffertaDAO() {}
     private static JdbcOffertaDAO instance;
@@ -246,7 +246,7 @@ public class JdbcOffertaDAO implements OffertaDAO {
     @Override
     public Offerta addOfferta(Offerta offerta) {
         String query = "INSERT INTO offerta (nome, sconto, dataInizio, dataFine, giocoId, ricorrenza) VALUES (?, ?, ?, ?, ?, ?)";
-        try (Connection c = JdbcDAOfactory.getConnection();
+        try (Connection c = JdbcDAOFactory.getConnection();
              PreparedStatement ps = c.prepareStatement(query)) {
             ps.setString(1, offerta.getNome());
             ps.setDouble(2, offerta.getSconto());
@@ -268,7 +268,7 @@ public class JdbcOffertaDAO implements OffertaDAO {
     @Override
     public Offerta getOffertaById(long id) {
         String query = "SELECT * FROM OFFERTA WHERE ID = ?";
-        try (Connection c = JdbcDAOfactory.getConnection();
+        try (Connection c = JdbcDAOFactory.getConnection();
              PreparedStatement ps = c.prepareStatement(query)) {
             ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
@@ -296,7 +296,7 @@ public class JdbcOffertaDAO implements OffertaDAO {
     public List<Offerta> getAllOfferta() {
         List<Offerta> offerte = new ArrayList<>();
         String query = "SELECT * FROM OFFERTA";
-        try (Connection c = JdbcDAOfactory.getConnection();
+        try (Connection c = JdbcDAOFactory.getConnection();
              PreparedStatement ps = c.prepareStatement(query);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
@@ -323,7 +323,7 @@ public class JdbcOffertaDAO implements OffertaDAO {
     public List<Offerta> getOfferteByRicorrenza(Ricorrenza ricorrenza) {
         List<Offerta> offerte = new ArrayList<>();
         String query = "SELECT * FROM OFFERTA WHERE ricorrenza = ?";
-        try (Connection c = JdbcDAOfactory.getConnection();
+        try (Connection c = JdbcDAOFactory.getConnection();
              PreparedStatement ps = c.prepareStatement(query)) {
             ps.setString(1, ricorrenza.name());
             ResultSet rs = ps.executeQuery();
@@ -351,7 +351,7 @@ public class JdbcOffertaDAO implements OffertaDAO {
     public List<Offerta> getOfferteByGiocoId(long giocoId) {
         List<Offerta> offerte = new ArrayList<>();
         String query = "SELECT * FROM OFFERTA WHERE giocoId = ?";
-        try (Connection c = JdbcDAOfactory.getConnection();
+        try (Connection c = JdbcDAOFactory.getConnection();
              PreparedStatement ps = c.prepareStatement(query)) {
             ps.setLong(1, giocoId);
             ResultSet rs = ps.executeQuery();
@@ -379,7 +379,7 @@ public class JdbcOffertaDAO implements OffertaDAO {
     public Offerta deleteOffertaById(long id) {
         Offerta offerta = getOffertaById(id);
         String query = "DELETE FROM OFFERTA WHERE ID = ?";
-        try (Connection c = JdbcDAOfactory.getConnection();
+        try (Connection c = JdbcDAOFactory.getConnection();
              PreparedStatement ps = c.prepareStatement(query)) {
             ps.setLong(1, id);
             ps.executeUpdate();
@@ -396,7 +396,7 @@ public class JdbcOffertaDAO implements OffertaDAO {
     @Override
     public Offerta updateOffertaNome(Offerta offerta, String nome) {
         String query = "UPDATE OFFERTA SET nome = ? WHERE id = ?";
-        try (Connection c = JdbcDAOfactory.getConnection();
+        try (Connection c = JdbcDAOFactory.getConnection();
              PreparedStatement ps = c.prepareStatement(query)) {
             ps.setString(1, nome);
             ps.setLong(2, offerta.getId());
@@ -414,7 +414,7 @@ public class JdbcOffertaDAO implements OffertaDAO {
     @Override
     public Offerta updateOffertaDataInizio(Offerta offerta, Timestamp dataInizio) {
         String query = "UPDATE OFFERTA SET dataInizio = ? WHERE id = ?";
-        try (Connection c = JdbcDAOfactory.getConnection();
+        try (Connection c = JdbcDAOFactory.getConnection();
              PreparedStatement ps = c.prepareStatement(query)) {
             ps.setTimestamp(1, dataInizio);
             ps.setLong(2, offerta.getId());
@@ -432,7 +432,7 @@ public class JdbcOffertaDAO implements OffertaDAO {
     @Override
     public Offerta updateOffertaDataFine(Offerta offerta, Timestamp dataFine) {
         String query = "UPDATE OFFERTA SET dataFine = ? WHERE id = ?";
-        try (Connection c = JdbcDAOfactory.getConnection();
+        try (Connection c = JdbcDAOFactory.getConnection();
              PreparedStatement ps = c.prepareStatement(query)) {
             ps.setTimestamp(1, dataFine);
             ps.setLong(2, offerta.getId());
@@ -450,7 +450,7 @@ public class JdbcOffertaDAO implements OffertaDAO {
     @Override
     public Offerta updateOffertaSconto(Offerta offerta, double sconto) {
         String query = "UPDATE OFFERTA SET sconto = ? WHERE id = ?";
-        try (Connection c = JdbcDAOfactory.getConnection();
+        try (Connection c = JdbcDAOFactory.getConnection();
              PreparedStatement ps = c.prepareStatement(query)) {
             ps.setDouble(1, sconto);
             ps.setLong(2, offerta.getId());
@@ -464,4 +464,4 @@ public class JdbcOffertaDAO implements OffertaDAO {
 		}
         return offerta;
     }
-}
+}*/

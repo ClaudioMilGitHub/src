@@ -56,7 +56,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 		
 		
 		try(
-				Connection c = JdbcDAOfactory.getConnection();
+				Connection c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
 			
@@ -98,7 +98,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 		//ora la select è più specifica
 		
 		try(
-				Connection c = JdbcDAOfactory.getConnection();
+				Connection c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				) {
 			ps.setLong(1, id);
@@ -122,8 +122,8 @@ public class JdbcGiocoDAO implements GiocoDAO{
 				g.setId(id);
 				g.setDataRilascio(dataRilascio);
 				g.setDescrizione(descrizione);
-				g.setIdCasaEditrice(idCasaEditrice);
-				g.setIdOfferta(idOfferta);
+				//g.setIdCasaEditrice(idCasaEditrice);
+				//g.setIdOfferta(idOfferta);
 				g.setNome(nome);			
 				g.setDataCreazione(dataCreazione);
 				g.setDataUltimaModifica(dataUltimaModifica);
@@ -146,7 +146,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 
 		
 		try(
-				Connection c = JdbcDAOfactory.getConnection();
+				Connection c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				) {
 			ps.setString(1, nome);
@@ -171,8 +171,8 @@ public class JdbcGiocoDAO implements GiocoDAO{
 				g.setDataRilascio(dataRilascio);
 				g.setDescrizione(descrizione);
 				g.setImagePath(imagePath);
-				g.setIdCasaEditrice(idCasaEditrice);
-				g.setIdOfferta(idOfferta);
+			//	g.setIdCasaEditrice(idCasaEditrice);
+			//	g.setIdOfferta(idOfferta);
 				g.setNome(nome);			
 				g.setDataCreazione(dataCreazione);
 				g.setDataUltimaModifica(dataUltimaModifica);
@@ -192,7 +192,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 		List<Gioco> giochi = new ArrayList<>();
 		String query = "SELECT * FROM gioco";	
 		try(
-				Connection  c = JdbcDAOfactory.getConnection();
+				Connection  c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
 			
@@ -220,8 +220,8 @@ public class JdbcGiocoDAO implements GiocoDAO{
 				g.setDataRilascio(dataRilascio);
 				g.setDescrizione(descrizione);
 				g.setImagePath(imagePath);
-				g.setIdCasaEditrice(idCasaEditrice);
-				g.setIdOfferta(idOfferta);
+			//	g.setIdCasaEditrice(idCasaEditrice);
+				//g.setIdOfferta(idOfferta);
 				g.setNome(nome);			
 				g.setDataCreazione(dataCreazione);
 				g.setDataUltimaModifica(dataUltimaModifica);
@@ -245,7 +245,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 		List<Gioco> giochi = new ArrayList<>();
 		String query = "SELECT * from gioco JOIN genere_gioco ON gioco.id = id_gioco WHERE id_genere = ?";
 		try(
-				Connection  c = JdbcDAOfactory.getConnection();
+				Connection  c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
 			ps.setLong(1, genere);
@@ -265,8 +265,8 @@ public class JdbcGiocoDAO implements GiocoDAO{
 				LocalDate dataRilascio = data_rilascio.toLocalDateTime().toLocalDate();
 				
 				g.setId(id_gioco);
-				g.setIdCasaEditrice(id_casa_editrice);
-				g.setIdOfferta(id_offerta);
+				//g.setIdCasaEditrice(id_casa_editrice);
+				//g.setIdOfferta(id_offerta);
 				g.setNome(nome);
 				g.setDescrizione(descrizione);
 				g.setImagePath(imagePath);
@@ -293,7 +293,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 		String query = "UPDATE gioco SET nome = ? WHERE ID = ?";
 		
 		try(
-				Connection  c = JdbcDAOfactory.getConnection();
+				Connection  c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
 			
@@ -320,7 +320,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 		String query = "UPDATE gioco SET immagine = ? WHERE ID = ?";
 		
 		try(
-				Connection  c = JdbcDAOfactory.getConnection();
+				Connection  c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
 			
@@ -346,7 +346,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 		String query = "UPDATE gioco SET data_rilascio = ? WHERE ID = ?";
 		
 		try(
-				Connection  c = JdbcDAOfactory.getConnection();
+				Connection  c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
 			
@@ -372,7 +372,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 		String query = "UPDATE gioco SET descrizione = ? WHERE ID = ?";
 		
 		try(
-				Connection  c = JdbcDAOfactory.getConnection();
+				Connection  c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
 			
@@ -398,7 +398,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 		String query = "UPDATE gioco SET prezzo = ? WHERE ID = ?";
 		
 		try(
-				Connection  c = JdbcDAOfactory.getConnection();
+				Connection  c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
 			
@@ -424,7 +424,7 @@ public class JdbcGiocoDAO implements GiocoDAO{
 
 		
 		try(
-				Connection  c = JdbcDAOfactory.getConnection();
+				Connection  c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
 			ps.setString(1, nome);
@@ -435,5 +435,17 @@ public class JdbcGiocoDAO implements GiocoDAO{
 			e.printStackTrace();
 		}	
 		return null;
+	}
+
+	@Override
+	public List<Gioco> getGiochiByUtente(Utente utente) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteGiocoById(long id) {
+		// TODO Auto-generated method stub
+		
 	}
 }

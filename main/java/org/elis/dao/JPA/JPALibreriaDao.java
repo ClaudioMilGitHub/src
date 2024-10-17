@@ -64,7 +64,7 @@ private JPALibreriaDao() {}
 	}
 
 	
-
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Libreria> getLibreriaByName(String nome) {
 		EntityManager em = JPADaoFactory.getEntityManager();
@@ -72,7 +72,7 @@ private JPALibreriaDao() {}
 		q.setParameter("username", nome);
 		return q.getResultList();
 	}
-
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Libreria> getAllLibrerie() {
 		EntityManager em = JPADaoFactory.getEntityManager();
@@ -80,6 +80,7 @@ private JPALibreriaDao() {}
 		return q.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void deleteLibreriaByNome(String nome) {
 		EntityManager em = JPADaoFactory.getEntityManager();

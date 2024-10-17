@@ -11,7 +11,7 @@ import java.util.List;
 import org.elis.dao.UtenteDAO;
 import org.elis.model.Ruolo;
 import org.elis.model.Utente;
-
+/*
 public class JdbcUtenteDAO implements UtenteDAO{
 	
 	private JdbcUtenteDAO() {}
@@ -47,7 +47,7 @@ public class JdbcUtenteDAO implements UtenteDAO{
 		u.setDataNascita(dataNascita);
 		
 		try(
-				Connection  c = JdbcDAOfactory.getConnection();
+				Connection  c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				
 				){
@@ -80,7 +80,7 @@ public class JdbcUtenteDAO implements UtenteDAO{
 		String query = "SELECT * FROM UTENTE WHERE USERNAME = ?";
 		
 		try(
-				Connection c = JdbcDAOfactory.getConnection();
+				Connection c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				) {
 			ps.setString(1, usernameSearch);
@@ -134,7 +134,7 @@ public class JdbcUtenteDAO implements UtenteDAO{
 		String query = "SELECT * FROM UTENTE WHERE id = ?";
 		
 		try(
-				Connection c = JdbcDAOfactory.getConnection();
+				Connection c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				) {
 			ps.setLong(1, id);
@@ -192,7 +192,7 @@ public class JdbcUtenteDAO implements UtenteDAO{
 		String query = "SELECT * FROM UTENTE";
 		
 		try(
-				Connection  c = JdbcDAOfactory.getConnection();
+				Connection  c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
 			
@@ -251,7 +251,7 @@ public class JdbcUtenteDAO implements UtenteDAO{
 		String query = "UPDATE utente SET username = ? WHERE ID = ?";
 		
 		try(
-				Connection  c = JdbcDAOfactory.getConnection();
+				Connection  c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
 			
@@ -278,7 +278,7 @@ public class JdbcUtenteDAO implements UtenteDAO{
 		String query = "UPDATE utente SET password = ? WHERE ID = ?";
 		
 		try(
-				Connection  c = JdbcDAOfactory.getConnection();
+				Connection  c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
 			
@@ -305,7 +305,7 @@ public class JdbcUtenteDAO implements UtenteDAO{
 		String query = "UPDATE utente SET data_nascita = ? WHERE ID = ?";
 		
 		try(
-				Connection  c = JdbcDAOfactory.getConnection();
+				Connection  c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
 			
@@ -332,7 +332,7 @@ public class JdbcUtenteDAO implements UtenteDAO{
 		String query = "DELETE FROM UTENTE WHERE USERNAME = ?";
 		
 		try(
-				Connection  c = JdbcDAOfactory.getConnection();
+				Connection  c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
 			ps.setString(1, nome);
@@ -344,4 +344,4 @@ public class JdbcUtenteDAO implements UtenteDAO{
 		}	
 		return null;
 	}
-}
+}*/

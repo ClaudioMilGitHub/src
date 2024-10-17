@@ -3,7 +3,7 @@ package org.elis.dao.JDBC;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-import org.elis.dao.DaoFactory;
+import org.elis.dao.DAOFactory;
 import org.elis.dao.GenereDAO;
 import org.elis.dao.GiocoDAO;
 import org.elis.dao.LibreriaDAO;
@@ -13,7 +13,7 @@ import org.elis.dao.UtenteDAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
 
-public class JdbcDAOfactory extends DaoFactory{
+public class JdbcDAOFactory extends DAOFactory{
 
 	protected static Connection getConnection() throws Exception{
 		try {
@@ -29,7 +29,7 @@ public class JdbcDAOfactory extends DaoFactory{
 
 	@Override
 	public UtenteDAO getUtenteDAO() {
-		return JdbcUtenteDAO.getInstance();
+		return null;//JdbcUtenteDAO.getInstance();
 	}
 	
 	@Override
@@ -39,12 +39,12 @@ public class JdbcDAOfactory extends DaoFactory{
 	
 	@Override
 	public LibreriaDAO getLibreriaDAO() {
-		return JdbcLibreriaDAO.getInstance();
+		return null;// JdbcLibreriaDAO.getInstance();
 	}
 
 	@Override
 	public OffertaDAO getOffertaDAO() {
-		return JdbcOffertaDAO.getInstance();
+		return null;//JdbcOffertaDAO.getInstance();
 	}
 	
 	@Override

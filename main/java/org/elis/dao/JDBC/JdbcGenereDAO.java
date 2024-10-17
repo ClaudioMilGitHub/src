@@ -28,7 +28,7 @@ public class JdbcGenereDAO implements GenereDAO {
     @Override
     public Genere addGenere(String nome) {
         String query = "INSERT INTO genere (nome) VALUES (?)";
-        try (Connection c = JdbcDAOfactory.getConnection();
+        try (Connection c = JdbcDAOFactory.getConnection();
              PreparedStatement ps = c.prepareStatement(query)) {
             ps.setString(1, nome);
             ps.executeUpdate();
@@ -48,7 +48,7 @@ public class JdbcGenereDAO implements GenereDAO {
     public Genere getGenereByName(String nome) {
     	String query = "SELECT * FROM genere WHERE nome = ?";
 
-        try (Connection c = JdbcDAOfactory.getConnection();
+        try (Connection c = JdbcDAOFactory.getConnection();
              PreparedStatement ps = c.prepareStatement(query)) {
             ps.setString(1, nome);
             try (ResultSet rs = ps.executeQuery()) {
@@ -78,7 +78,7 @@ public class JdbcGenereDAO implements GenereDAO {
 
         
         try(
-				Connection  c = JdbcDAOfactory.getConnection();
+				Connection  c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
 			
@@ -115,7 +115,7 @@ public class JdbcGenereDAO implements GenereDAO {
     	
 		
 		try(
-				Connection  c = JdbcDAOfactory.getConnection();
+				Connection  c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
 			
@@ -144,7 +144,7 @@ public class JdbcGenereDAO implements GenereDAO {
     	
 		
 		try(
-				Connection  c = JdbcDAOfactory.getConnection();
+				Connection  c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
 			
@@ -173,7 +173,7 @@ public class JdbcGenereDAO implements GenereDAO {
 
 		
 		try(
-				Connection  c = JdbcDAOfactory.getConnection();
+				Connection  c = JdbcDAOFactory.getConnection();
 				PreparedStatement ps = c.prepareStatement(query);
 				){
 			ps.setString(1, nome);
@@ -185,4 +185,10 @@ public class JdbcGenereDAO implements GenereDAO {
 		}	
 		return null;
     }
+
+	@Override
+	public Genere aggiungiGiocoaGenere(long genereId, long giocoId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
