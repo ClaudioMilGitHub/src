@@ -1,4 +1,6 @@
 <%@page import="org.elis.businesslogic.BusinessLogic"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="org.elis.model.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -21,7 +23,15 @@
 <body>
 
 	<%Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");%>
-
+	<%List<Gioco> listaGiochi = new ArrayList<>();%>
+	<%if(utenteLoggato.getRuolo().name() == "PUBLISHER"){
+		listaGiochi = BusinessLogic.getGiochiByUtente(utenteLoggato); 
+	}%>
+	
+	<%if(utenteLoggato.getRuolo().name() == "ADMIN"){
+		listaGiochi = BusinessLogic.getAllGiochi();
+	}%>
+	
 	<div class="container-fluid min-vh-100 d-flex flex-column">
 
 
@@ -44,7 +54,7 @@
 								class="form-select">
 								<option value="" aria-placeholder="Seleziona il gioco">...</option>
 								<%
-                                for(Gioco g : BusinessLogic.getAllGiochi()){ %>
+                                for(Gioco g : listaGiochi){ %>
 
 								<option value="<%=g.getNome() %>" aria-placeholder=""><%=g.getNome() %></option>
 

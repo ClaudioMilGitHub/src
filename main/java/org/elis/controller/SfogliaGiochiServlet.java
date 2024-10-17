@@ -36,8 +36,6 @@ public class SfogliaGiochiServlet extends HttpServlet {
 		long idGenere = genere.getId();
 		System.out.println("ID genere: " + idGenere);
 		List<Gioco> listaGiochi = BusinessLogic.getAllGiochiByGenere(idGenere);
-		
-		
 		request.setAttribute("genere", genere);
 		request.setAttribute("listaGiochi", listaGiochi);
 		request.getRequestDispatcher("public-jsp/SfogliaGiochi.jsp").forward(request, response);

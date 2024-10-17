@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Avventura</title>
+<title>Sfoglia per genere</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -25,7 +25,7 @@
 	<%List<Gioco> listaGiochi =  (List<Gioco>) request.getAttribute("listaGiochi");%>
 	<%Genere genere =  (Genere) request.getAttribute("genere");%>
 
-	<div class="container-fluid">
+<div class="container-fluid min-vh-100 d-flex flex-column">
 
 		<!-- Navigation bar row-->
 
@@ -33,90 +33,42 @@
 		<jsp:include page="/includes/navbar.jsp"/>
 
 		<!-- Content row-->
-
-		<div class="row content-carousel">
-			<div class="col-lg-3 col-sm mb-3 d-none d-lg-block">
-				<!-- Left Column-->
-			</div>
-			<div class="col-lg-6 content-container mb-5">
-
-				<h1 class="titolo-genere ms-1"><%=genere.getNome()%></h1>
-
-				<!-- Insert game List here -->
-				<div id="carouselExampleCaptions" class="carousel slide">
-					<div class="carousel-indicators">
-						<button type="button" data-bs-target="#carouselExampleCaptions"
-							data-bs-slide-to="0" class="active" aria-current="true"
-							aria-label="Slide 1"></button>
-						<button type="button" data-bs-target="#carouselExampleCaptions"
-							data-bs-slide-to="1" aria-label="Slide 2"></button>
-						<button type="button" data-bs-target="#carouselExampleCaptions"
-							data-bs-slide-to="2" aria-label="Slide 3"></button>
-						<button type="button" data-bs-target="#carouselExampleCaptions"
-							data-bs-slide-to="3" aria-label="Slide 4"></button>
-					</div>
-					<div class="carousel-inner">
-						<div class="carousel-item active">
-							<img
-								src="<%=request.getContextPath()%>/res/<%=listaGiochi.get(0).getImagePath() %>"
-								class="d-block w-100" alt="...">
-							<div class="carousel-caption d-none d-md-block">
-								<h5>
-									<%=listaGiochi.get(0).getNome() %>
-									<!--Put Game title here -->
-								</h5>
-								<p>
-									<%=listaGiochi.get(0).getDescrizione() %>
-									<!--Put Game description here -->
-								</p>
-							</div>
-						</div>
-						
-						<%for(int i = 1; i <= 3; i++){%>
-							<div class="carousel-item">
-								<!--Put Game image here -->
-								<img
-									src="<%=request.getContextPath()%>/res/<%=listaGiochi.get(i).getImagePath() %>"
-									class="d-block w-100" alt="...">
-								<div class="carousel-caption d-none d-md-block">
-									<h5><%=listaGiochi.get(i).getNome() %></h5>
-									<p><%=listaGiochi.get(i).getDescrizione() %></p>
-								</div>
-							</div>
-						<%}%>
-						
-
-					</div>
-					<button class="carousel-control-prev" type="button"
-						data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Previous</span>
-					</button>
-					<button class="carousel-control-next" type="button"
-						data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Next</span>
-					</button>
-				</div>
-			</div>
-			<div class="col-lg-3 col-sm mb-3 d-none d-lg-block">
-				<!-- Right column-->
-			</div>
-		</div>
 		
-		<div class="row content-cards" id="row-cards">
+		<div class="row content-cards flex-grow-1" id="row-cards">
+			<%if(listaGiochi.size() == 0){ %>
+				<p class="text-center fs-1" style = "color:#ffff;">Ancora nessun gioco qui!</p>
+			<%} else {%>
+				<p class="text-center fs-1" style = "color:#ffff;"><%=genere.getNome() %></p>
+			<%}%>
 			<%for(int i = 0; i < listaGiochi.size(); i++){%>
 				<div class="col-lg-4">
+					
 					<div class="content-cards mb-3">
 						<div class="card m-auto" style="width: 80%;">
 							<img
-								src="<%=request.getContextPath()%>/res/<%=listaGiochi.get(i).getImagePath() %>"
+								src="<%=listaGiochi.get(i).getImagePath() %>"
 								class="card-img-top" alt="...">
 							<div class="card-body">
 								<h3 class="card-title"><%=listaGiochi.get(i).getNome() %></h3>
 								<p class="card-text"><%=listaGiochi.get(i).getDescrizione() %></p>
-								<a href="#" class="btn btn-outline-primary">Acquista</a>
-							</div>
+								<%if(utenteLoggato != null){
+									
+										if( i < utenteLoggato.getGiochi().size() && utenteLoggato.getGiochi().get(i) != null){
+
+											if(listaGiochi.get(i).getNome().equalsIgnoreCase(utenteLoggato.getGiochi().get(i).getNome())) 
+											{
+
+												%>
+												<a href="#" class="btn btn-outline-primary">In libreria</a>
+												<%} else {%>
+														<a href="#" class="btn btn-outline-primary">Acquista</a>
+													<%}									
+											} else {%>
+												<a href="#" class="btn btn-outline-primary">Acquista</a>
+											<%}
+										} else {%>
+											<a href="#" class="btn btn-outline-primary">Acquista</a>
+										<%}%>							</div>
 						</div>
 					</div>
 				</div>	
@@ -124,38 +76,16 @@
 		</div>
 		
 		
-		<div class="row more-cards-button">
-			<div class="col-lg-12 mb-3 d-flex justify-content-center">
-				<button class="btn btn-dark carica-altro m-3 carica-altro">Carica
-					altro</button>
+			<div class="col-lg-12 mb-3 h-75 d-flex justify-content-center">
 				<button class="btn btn-dark carica-altro m-3" id="btn-home">
 					<a href="#" id="link-home">Torna su</a>
 				</button>
 			</div>
-		</div>
-		
-		<div class="row">
-			<footer class="footer">
-				<div class="content-logo d-flex flex-row justify-content-between">
-					<div class="footer-logo-steam">
-						<img
-							src="https://store.akamai.steamstatic.com/public/images/v6/logo_steam_footer.png"
-							alt="logo steam">
-					</div>
-					<div class="footer-valve">
-						<img
-							src="https://store.akamai.steamstatic.com/public/images/footerLogo_valve_new.png"
-							alt="logo">
-					</div>
-				</div>
-				<div class="content-footer color-white" id="footer_text">
-					Progetto ispirato a Steam per puri scopi didattici per il Master di
-					Sviluppo Software e Applicazioni edizione Maggio. Gruppo di lavoro
-					composto da Claudio Milano, Leandro Biccellari, Antonio Guglielmo e
-					Simone Medori.</div>
-			</footer>
-		</div>
-	</div>
+
+
+		<!-- Footer -->
+        <%@include file="/includes/footer.jsp" %>
+</div>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"

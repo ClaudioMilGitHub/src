@@ -144,7 +144,7 @@ public class AddGameLogicServlet extends HttpServlet {
 		Gioco giocoAggiunto = BusinessLogic.addGioco(nome, dataRilascio, descrizione, imageUrl, prezzo, offerta, utenteLoggato);
 		Genere genereGioco = BusinessLogic.getGenereByName(genere);
 		BusinessLogic.aggiungiGiocoaGenere(genereGioco.getId(), giocoAggiunto.getId());
-
+		BusinessLogic.aggiungiGiocoALibreria(utenteLoggato, giocoAggiunto);
 		request.getRequestDispatcher("WEB-INF/private-jsp/PaginaPublisher.jsp").forward(request, response);
 	}
 

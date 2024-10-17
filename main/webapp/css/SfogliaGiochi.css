@@ -1,5 +1,6 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
+    min-height : 100vh;
 }
 
 .navbar{
@@ -17,6 +18,8 @@ body{
 
 footer{
     background-color: #171a21;
+    margin: 0;
+    padding: 0;
 }
 
 .action-link{
@@ -64,3 +67,11 @@ a[class^="nav-link"]{
 	color: #F5F5F6;
 }
 
+.more-cards-button{
+	background-image: url("https://store.akamai.steamstatic.com/public/images/v6/colored_body_top.png?v=2");
+    background-size: cover;
+}
+
+.title{
+	color : #ffff;
+}

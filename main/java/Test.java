@@ -42,17 +42,19 @@ public class Test {
 //		BusinessLogic.addGioco("Control Ultimate Edition", LocalDate.of(2020, 8, 27), "Vincitore di oltre 80 riconoscimenti, Control è uno spettacolare gioco d’azione e avventura", "path", 39.99, null, null);
 
 		//Aggiungi genere al database
-		BusinessLogic.addGenere("Avventura");
-		BusinessLogic.addGenere("Azione");
-		BusinessLogic.addGenere("Ruolo");
-		BusinessLogic.addGenere("Strategia");
-		BusinessLogic.addGenere("Metroidvania");
+//		BusinessLogic.addGenere("Avventura");
+//		BusinessLogic.addGenere("Azione");
+//		BusinessLogic.addGenere("Ruolo");
+//		BusinessLogic.addGenere("Strategia");
+//		BusinessLogic.addGenere("Metroidvania");
 		
 		//Aggiungi giochi al genere  id[Genere, Gioco]
 		//Avventura
-//		BusinessLogic.aggiungiGiocoaGenere(1, 4);
-//		BusinessLogic.aggiungiGiocoaGenere(1, 8);
+//		BusinessLogic.aggiungiGiocoaGenere(1, 1);
 //		BusinessLogic.aggiungiGiocoaGenere(1, 2);
+//		BusinessLogic.aggiungiGiocoaGenere(1, 4);
+//		BusinessLogic.aggiungiGiocoaGenere(1, 5);
+//		BusinessLogic.aggiungiGiocoaGenere(1, 8);
 //		BusinessLogic.aggiungiGiocoaGenere(1, 9);
 //
 //		//Azione
