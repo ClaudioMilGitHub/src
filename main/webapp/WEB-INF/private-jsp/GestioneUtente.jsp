@@ -32,8 +32,8 @@
 				<ul class="list-group cProductsList">
 					<%for(int i =0 ; i < listaUtenti.size(); i++){
 						if(listaUtenti.get(i).getRuolo().ordinal() != 0 && !listaUtenti.get(i).isSuspended()) {%>
-						<li class="list-group-item d-flex"><p
-							class="p-0 m-0 flex-grow-1"><%=listaUtenti.get(i).getUsername() %></p>
+						<li class="list-group-item d-flex align-content-center"><p
+							class="p-0 m-0 flex-grow-1 fs-4 fw-bold"><%=listaUtenti.get(i).getUsername() %></p>
 						<button class="btn btn-warning suspend">SUSPEND</button>
 						<button class="btn btn-danger delete">DELETE</button></li>
 					<%}
@@ -50,8 +50,8 @@
 				<ul class="list-group cProductsList">
 					<%for(int i =0 ; i < listaUtenti.size(); i++){
 						if(listaUtenti.get(i).getRuolo().ordinal() != 0 && listaUtenti.get(i).isSuspended()) {%>
-						<li class="list-group-item d-flex"><p
-							class="p-0 m-0 flex-grow-1"><%=listaUtenti.get(i).getUsername() %></p>
+						<li class="list-group-item d-flex align-content-center"><p
+							class="p-0 m-0 flex-grow-1 fs-4 fw-bold"><%=listaUtenti.get(i).getUsername()%></p>
 						<button class="btn btn-success resume">RESUME</button>
 						<button class="btn btn-danger delete">DELETE</button></li>
 					<%}
