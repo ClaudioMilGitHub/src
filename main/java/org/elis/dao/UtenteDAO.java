@@ -15,4 +15,5 @@ public interface UtenteDAO {
 	Utente updateUtenteUsername(Utente utenteLoggato, String newUsername);
 	Utente updateUtentePassword(Utente utenteLoggato, String newPassword);
 	Utente updateUtenteDataNascita(Utente utenteLoggato, LocalDate newDataNascita);
+	Utente updateUtenteSuspension(Utente utente, boolean suspension);
 }

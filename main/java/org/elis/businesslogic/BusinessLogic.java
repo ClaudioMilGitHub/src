@@ -59,6 +59,11 @@ public class BusinessLogic {
 	public static Utente updateUtenteDataNascita(Utente utenteLoggato, LocalDate newDataNascita) {
 		return DAOFactory.getDaoFactory(implementation).getUtenteDAO().updateUtenteDataNascita(utenteLoggato, newDataNascita);
 	}
+
+	public static Utente updateUtenteSuspension(Utente utente, boolean suspension) {
+		return DAOFactory.getDaoFactory(implementation).getUtenteDAO().updateUtenteSuspension(utente, suspension);
+	}
+	
 	public static void deleteUtenteByNome(String nome) {
 		DAOFactory.getDaoFactory(implementation).getUtenteDAO().deleteUtenteByNome(nome);
 	}
@@ -84,6 +89,10 @@ public class BusinessLogic {
 	}
 	public static List<Gioco> getAllGiochiByGenere(long genereId){
 		return DAOFactory.getDaoFactory(implementation).getGiocoDAO().getAllGiochiByGenere(genereId);
+	}
+	
+	public static List<Gioco> getAllGiochiByIdUtente(long idUtente){
+		return DAOFactory.getDaoFactory(implementation).getGiocoDAO().getAllGiochiByIdUtente(idUtente);
 	}
 
 	public static Gioco updateGiocoNome(Gioco gioco, String nome) {

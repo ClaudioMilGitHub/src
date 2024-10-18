@@ -194,7 +194,7 @@
                 <div class="card-body">
                 <div class="d-grid gap-2">
                 <div id="btn2">
-                                            <a href="<%=request.getContextPath()%>/AddGameLogicServlet""><button class="btn btn-add" type="button">Aggiungi gioco</button></a>
+                                            <a href="<%=request.getContextPath()%>/AddGameLogicServlet"><button class="btn btn-add" type="button">Aggiungi gioco</button></a>
                                             <a href="<%=request.getContextPath()%>/UpdateGameLogicServlet"><button class="btn btn-update" type="button">Aggiorna gioco</button></a>
                                             <a href="<%=request.getContextPath()%>/DeleteGameLogicServlet"><button class="btn btn-delete" type="button">Rimuovi gioco</button></a>
                 </div>
@@ -207,11 +207,10 @@
                 <div class="card text-white bg-secondary mb-3">
                 <div class="card-header">Gestione utenti</div>
                 <div class="card-body">
-                <div class="d-grid gap-2" >
+                <div class="d-grid" >
                 <div id="btn2">
-                                        <a href="PaginaAggiungiUtente.jsp"><button class="btn btn-add" type="button">Aggiungi un utente</button></a>
-                                        <a href="PaginaSospendiUtente.jsp"><button class="btn btn-update" type="button">Sospendi un utente </button></a>
-                                        <a href="PaginaEliminaUtente.jsp"><button class="btn btn-delete" type="button">Rimuovi un utente</button></a>
+                                        <a href="<%=request.getContextPath()%>/GestioneUtenteServlet"><button class="btn btn-add" type="button">Gestisci utenti</button></a>
+                                        
                 </div>  
                 </div>
                 </div>        

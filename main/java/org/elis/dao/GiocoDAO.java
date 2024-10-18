@@ -23,4 +23,5 @@ public interface GiocoDAO {
 	void deleteGiocoByNome(String nome);
 	List<Gioco> getGiochiByUtente(Utente utente);
 	void deleteGiocoById(long id);
+	List<Gioco> getAllGiochiByIdUtente(long idUtente);
 }

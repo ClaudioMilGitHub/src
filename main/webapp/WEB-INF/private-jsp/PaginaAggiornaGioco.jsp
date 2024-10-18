@@ -1,38 +1,24 @@
-<%@ page import="jakarta.servlet.http.HttpSession" %>
-<%@ page import="org.elis.model.Utente" %>
+<%@page import="org.hibernate.internal.build.AllowSysOut"%>
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@page import="org.elis.model.*"%>
+    <%@page import="org.elis.businesslogic.BusinessLogic"%>
+    <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-	crossorigin="anonymous">
-	<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/ProfileUpdate.css">
-    <title>Aggiornamento Profilo - SteamFarlocco</title>
-    
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
-<% 
-            // Recupera la sessione esistente
-            HttpSession currentSession = request.getSession(false);
-            Utente utenteLoggato = (currentSession != null) ? (Utente) currentSession.getAttribute("utenteLoggato") : null;
 
-            if (utenteLoggato == null) {
-                // Se la sessione non esiste o l'utente non è loggato, reindirizza al login
-                response.sendRedirect("public-jsp/PaginaLogin.jsp");
-                return;
-            }
-
-            // Recupera i dati dell'utente per mostrarli nel form
-            String currentEmail = utenteLoggato.getEmail();
-            String currentUsername = utenteLoggato.getUsername();
-            String currentDataNascita = (utenteLoggato.getDataNascita() != null) ? utenteLoggato.getDataNascita().toString() : "";
-        %>
-
-    <div class="container-fluid min-vh-100 d-flex flex-column">
+	<%Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");%>
+	<%List<Gioco> listaGiochi = BusinessLogic.getAllGiochiByIdUtente(utenteLoggato.getId()); %>
+	<%for(Gioco gioco : listaGiochi){
+		System.out.println(gioco.getNome());
+	}%>
+<div class="container-fluid min-vh-100 d-flex flex-column">
 	    
 	 <!--  Navbar -->
     <% request.setAttribute("utenteLoggato", utenteLoggato); %>
@@ -90,9 +76,6 @@
     <!-- Footer -->    
     <%@include file="/includes/footer.jsp"%>
     </div>
-    
-    <script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-..."></script>
+
 </body>
 </html>

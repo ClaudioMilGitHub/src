@@ -122,4 +122,14 @@ public class JPAUtenteDao implements UtenteDAO{
 		t.commit();
 		return utenteLoggato;
 	}
+	
+	public Utente updateUtenteSuspension(Utente utente, boolean suspension) {
+		EntityManager em = JPADaoFactory.getEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		utente.setSuspended(suspension);
+		utente = em.merge(utente);
+		t.commit();
+		return utente;
+	}
 }

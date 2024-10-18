@@ -1,0 +1,147 @@
+body{
+    background-image: url("https://store.akamai.steamstatic.com/public/images/v6/colored_body_top.png?v=2");
+    background-size: cover;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f5f5;
+   
+}
+fieldset{
+    margin-left: 2%;
+    margin-right: 6%;
+}
+
+legend{
+    color: red;
+    
+}
+
+.navbar{
+    background-color: #171a21;
+}
+
+.navbar-toggler {
+    color: var(--bs-navbar-color);
+}
+
+.home_page_gutter-block {
+    margin-left: 40px;
+}
+
+footer{
+    background-color: #171a21;
+    background-size: auto;
+    display: flex;
+    margin-top: 48.5vh;
+    
+}
+.profile-container {
+    background-color: #292e39; 
+    color: #F5F5F6; 
+    padding: 20px;
+    border-radius: 5px; 
+}
+
+.btn{
+    color: white;
+    border: 2px white solid; 
+}
+
+
+a[class^="nav-link"]{
+    color: #F5F5F6;
+}
+
+#footer_text{
+    color: #8F98A0;
+    font-size: 12px;
+   
+}
+
+.action-link{
+    text-decoration: none;
+    color: #b8b6b4;
+}
+
+.form-group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
+#footer_text{
+    color: #8F98A0;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+}
+select, input[type="text"], input[type="number"], input[type="date"], textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #171a21;
+    border-radius: 4px;
+}
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+.checkbox-group label {
+    margin-right: 15px;
+    color: #555;
+}
+#modifyFields {
+  
+    margin-top: 20px;
+  
+}
+
+button {
+    padding: 10px 20px;
+    background: #171a21;
+    border: 2px white solid;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+button:hover {
+    background: #f46a6a;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.game-item {
+    padding: 10px 15px;
+}
+
+.game-id {
+    min-width: 80px;
+}
+
+.game-title {
+    min-width: 200px;
+}
+
+.game-date {
+    color: #6c757d;
+    font-size: 0.9em;
+}

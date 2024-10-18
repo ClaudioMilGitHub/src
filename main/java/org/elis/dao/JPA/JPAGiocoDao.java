@@ -86,6 +86,15 @@ if(instance == null) {
 		q.setParameter("idGenere", genere);
 		return q.getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Gioco> getAllGiochiByIdUtente(long idUtente) {
+		EntityManager em = JPADaoFactory.getEntityManager();
+		Query q = em.createQuery("Select g FROM Gioco g JOIN g.utenti u WHERE u.id = :idUtente");
+		q.setParameter("idUtente", idUtente);
+		return q.getResultList();
+	}
 
 	@Override
 	public Gioco updateGiocoNome(Gioco gioco, String nome) {

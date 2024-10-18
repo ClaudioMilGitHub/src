@@ -41,6 +41,8 @@ public class Utente {
 	private String sitoWeb;
 	@Column(name="comune_residenza")
 	private String comuneResidenza;
+	@Column(name="isSuspended")
+	private boolean isSuspended;
 	
 	@Column(name="data_nascita", nullable = false)
 	private LocalDate dataNascita; 
@@ -75,6 +77,14 @@ public class Utente {
 	}
 
 	public Utente() {}
+	
+	public boolean isSuspended() {
+		return isSuspended;
+	}
+
+	public void setSuspended(boolean isSuspended) {
+		this.isSuspended = isSuspended;
+	}
 
 	public long getId() {
 		return id;

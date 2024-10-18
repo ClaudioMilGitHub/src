@@ -109,4 +109,34 @@
     <servlet-name>LibreriaServlet</servlet-name>
     <url-pattern>/LibreriaServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GestioneUtenteServlet</display-name>
+    <servlet-name>GestioneUtenteServlet</servlet-name>
+    <servlet-class>org.elis.controller.GestioneUtenteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GestioneUtenteServlet</servlet-name>
+    <url-pattern>/GestioneUtenteServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AggiungiUtenteServlet</display-name>
+    <servlet-name>AggiungiUtenteServlet</servlet-name>
+    <servlet-class>org.elis.controller.AggiungiUtenteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AggiungiUtenteServlet</servlet-name>
+    <url-pattern>/AggiungiUtenteServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateGameLogicServlet</display-name>
+    <servlet-name>UpdateGameLogicServlet</servlet-name>
+    <servlet-class>org.elis.controller.UpdateGameLogicServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateGameLogicServlet</servlet-name>
+    <url-pattern>/UpdateGameLogicServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

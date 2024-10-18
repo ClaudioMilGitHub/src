@@ -59,7 +59,7 @@
 
 						<%}
 						} else {%>
-							<h1 style = "color:white;">Nessun gioco da eliminare</h1>
+							<h2 class = "text-center fw-bold" style = "color:white;">Nessun gioco da eliminare</h2>
 						<%} %>
 						 
 					</div>

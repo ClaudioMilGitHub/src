@@ -61,6 +61,12 @@ public class LoginLogicServlet extends HttpServlet {
 		
 		//In caso l'utente abbia inserito le credenziali corrette, indirizza alla home page
 		if(u != null) {
+			
+			if(u.isSuspended()) {
+				request.setAttribute("messaggioDiErrore", "Utente sospeso.");
+				request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
+				return;
+			}
 			//Verifica se la checkbox sia checked, per i cookies
 			if(checkboxValue != null) {
 				Cookie emailCookie = new Cookie("emailKey", email);
