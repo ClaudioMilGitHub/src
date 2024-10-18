@@ -27,6 +27,16 @@ public class BusinessLogic {
 		return null;
 	}
 	
+	public static boolean GameInLibreria(Utente user, Gioco game) {
+		for(Gioco g : user.getGiochi()) {
+			if(g.getNome().equalsIgnoreCase(game.getNome())) {
+				return true;
+			}
+		}
+		return false;
+		
+	}
+	
 	//Aggiungere stringa in getDaoFactory per metodo di gestione dati
 	public static Utente getUtenteById(long id) {
 		return DAOFactory.getDaoFactory(implementation).getUtenteDAO().getUtenteById(id);

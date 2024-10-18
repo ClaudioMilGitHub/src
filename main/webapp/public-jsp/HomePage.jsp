@@ -1,3 +1,4 @@
+<%@page import="org.elis.businesslogic.BusinessLogic"%>
 <%@page import="org.hibernate.internal.build.AllowSysOut"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -73,8 +74,7 @@
                 </div>  
             </div>
             <div class="col-lg-6 card-container ">
-                <%for(int i = 0; i < listaGiochi.size(); i++){
-                %>				
+                <%for(int i = 0; i < listaGiochi.size(); i++){%>				
 					<div class="col">
 						<div class="content-cards mb-3">
 							<div class="card m-auto" style="width: 80%;">
@@ -84,24 +84,27 @@
 								<div class="card-body">
 									<h3 class="card-title"><%=listaGiochi.get(i).getNome() %></h3>
 									<p class="card-text"><%=listaGiochi.get(i).getDescrizione() %></p>
-									<%if(utenteLoggato != null){
-									
-										if( i < utenteLoggato.getGiochi().size() && utenteLoggato.getGiochi().get(i) != null){
+									<form action="<%=request.getContextPath()%>/LibreriaServlet" method="post">
+									<%if(utenteLoggato != null){%>
+										
+										<%boolean test = BusinessLogic.GameInLibreria(utenteLoggato, listaGiochi.get(i));%>
 
-											if(listaGiochi.get(i).getNome().equalsIgnoreCase(utenteLoggato.getGiochi().get(i).getNome())) 
-											{
+											<%if(test){%>
 
-												%>
+												
 												<a href="#" class="btn btn-outline-primary">In libreria</a>
 												<%} else {%>
-														<a href="#" class="btn btn-outline-primary">Acquista</a>
-													<%}									
-											} else {%>
-												<a href="#" class="btn btn-outline-primary">Acquista</a>
-											<%}
+														<input type="hidden" name="AddGameToLibreria" value="<%=listaGiochi.get(i).getNome() %>">
+														<button type="submit" class="btn btn-outline-primary">Acquista</button>																				
+												<%}
+												
 										} else {%>
-											<a href="#" class="btn btn-outline-primary">Acquista</a>
+											<input type="hidden" name="AddGameToLibreria" value="<%=listaGiochi.get(i).getNome() %>">
+											<button type="submit" class="btn btn-outline-primary">Acquista</button>
+											
+											
 										<%}%>
+									</form>
 								</div>
 							</div>
 						</div>
