@@ -42,31 +42,27 @@
 	
 
 	<div class="row flex-grow-1">
-		<div class="col-lg-12">
-			<form action="<%=request.getContextPath()%>/DeleteGameLogicServlet"
-				method="post">
-				<fieldset>
-					<legend>Elimina gioco</legend>
-					<div class="mb-3">
-						<div class="form-group">
-							<label for="gameSelect" style="color: white;">Seleziona
-								il gioco da eliminare:</label> <select id="gameSelect" name="game"
-								class="form-select">
-								<option value="" aria-placeholder="Seleziona il gioco">...</option>
-								<%
-                                for(Gioco g : listaGiochi){ %>
+		<div class="col-lg-12">				
+					<div class="list-group">
+					<%if(!listaGiochi.isEmpty()){ %>
+						<%for(int i=0; i< listaGiochi.size(); i++) {%>
+						  
+						  <button type="button" class="list-group-item list-group-item-action d-flex mb-3" value = "<%=listaGiochi.get(i).getNome() %>">
+								<div class="d-flex justify-content-between align-items-center">
+								        <div>
+								            <span class="fw-bold me-3">ID: <%=listaGiochi.get(i).getId()%></span>
+								            <span class="me-3">Titolo: <span class="text-primary"><%=listaGiochi.get(i).getNome()%></span></span>
+								        </div>
+								        <span class="text-muted">Data Creazione: <%=listaGiochi.get(i).getDataCreazione()%></span>
+								 </div>
+							</button>
 
-								<option value="<%=g.getNome() %>" aria-placeholder=""><%=g.getNome() %></option>
-
-								<%} %>
-							</select>
-						</div>
+						<%}
+						} else {%>
+							<h1 style = "color:white;">Nessun gioco da eliminare</h1>
+						<%} %>
+						 
 					</div>
-
-					<button type="submit" class="Elimina" style="margin-top: 5vh;">ELIMINA</button>
-
-				</fieldset>
-			</form>
 		</div>
 	</div>
 
@@ -80,5 +76,35 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
 		integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
 		crossorigin="anonymous"></script>
+		
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script>
+	
+	$(document).ready(function() {
+
+		const contextPath = '${pageContext.request.contextPath}';
+			
+	    $('.list-group-item').click(function() {
+	        var gameName = $('.list-group-item').val();
+	        $.ajax({
+	            type: 'POST',
+	            url: contextPath + '/DeleteGameLogicServlet',
+	            data: { 
+	                gameName: gameName 
+	            },
+	            success: function(response) {
+	                // Gestione della risposta
+	                alert('Gioco eliminato con successo');
+	                location.reload();
+	            },
+	            error: function(xhr, status, error) {
+	                // Gestione degli errori
+	                alert('Errore durante l\'eliminazione:', error);
+	            }
+	        });
+	    });
+	});
+	
+	</script>
 </body>
 </html>

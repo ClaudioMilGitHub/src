@@ -53,8 +53,9 @@ public class DeleteGameLogicServlet extends HttpServlet {
             return;
         }
 
-        String nome = request.getParameter("game");
-
+        String nome = request.getParameter("gameName");
+        System.out.println(nome);
+        
         Gioco giocoDaEliminare = BusinessLogic.getGiocoByName(nome);
         BusinessLogic.deleteGiocoById(giocoDaEliminare.getId());
         

@@ -131,3 +131,20 @@ button:hover {
 .form-group {
     margin-bottom: 20px;
 }
+
+.game-item {
+    padding: 10px 15px;
+}
+
+.game-id {
+    min-width: 80px;
+}
+
+.game-title {
+    min-width: 200px;
+}
+
+.game-date {
+    color: #6c757d;
+    font-size: 0.9em;
+}

@@ -1,3 +1,4 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="org.elis.model.Utente"%>
 <%@page import="org.elis.model.Libreria"%>
 <%@page import="org.elis.businesslogic.BusinessLogic"%>

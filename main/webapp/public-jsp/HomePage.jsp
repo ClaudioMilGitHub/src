@@ -74,6 +74,9 @@
                 </div>  
             </div>
             <div class="col-lg-6 card-container ">
+            <%if(listaGiochi.isEmpty()){%>
+            	<img src ="<%=request.getContextPath()%>/res/error404.jpg" class = "mt-5">
+           <%}%>
                 <%for(int i = 0; i < listaGiochi.size(); i++){%>				
 					<div class="col">
 						<div class="content-cards mb-3">
