@@ -61,7 +61,7 @@
 								class="form-control">
 						</div>
 						<div class="col-mb-12 " style="color: #b5b5b5;">
-							<label from="checkboxFormLogin">Rimanere Connesso</label> <input
+							<label for="checkboxFormLogin">Rimanere Connesso</label> <input
 								<%if(!email.isBlank() && !password.isBlank()){%> checked <%} %>
 								type="checkbox" name="checkboxFormLogin">
 						</div>

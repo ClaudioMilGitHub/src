@@ -3,7 +3,6 @@ package org.elis.businesslogic;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 import org.elis.dao.DAOFactory;
 import org.elis.model.Genere;

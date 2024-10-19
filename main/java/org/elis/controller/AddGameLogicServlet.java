@@ -70,7 +70,7 @@ public class AddGameLogicServlet extends HttpServlet {
 		String nome = request.getParameter("nomeFormGioco");
 		String descrizione = request.getParameter("descrizioneFormGioco");
 		String genere = request.getParameter("genereFormGioco");
-		String offerte = request.getParameter("offers");
+//		String offerte = request.getParameter("offers");
 		String prezzo2 = request.getParameter("prezzoFormGioco");
 		String data = request.getParameter("releaseDateFormGioco");
 		Offerta offerta = null;
@@ -127,14 +127,14 @@ public class AddGameLogicServlet extends HttpServlet {
 			}
 		}
 		
-		if(offerte != null || !offerte.isEmpty() ) {
-			System.out.println("offerte inserite");
-			for(Offerta o: BusinessLogic.getAllOfferta()) {
-				if(o.getNome().equals(offerte)) {
-					offerta = o;
-				}
-			}
-		}
+//		if(offerte != null || !offerte.isEmpty() ) {
+//			System.out.println("offerte inserite");
+//			for(Offerta o: BusinessLogic.getAllOfferta()) {
+//				if(o.getNome().equals(offerte)) {
+//					offerta = o;
+//				}
+//			}
+//		}
 		System.out.println("inizio parte finale");
 		Utente utenteLoggato = (Utente)request.getSession().getAttribute("utenteLoggato");
 		double prezzo = Double.parseDouble(prezzo2);

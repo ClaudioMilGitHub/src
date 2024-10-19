@@ -13,6 +13,7 @@ import org.elis.model.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
+@SuppressWarnings("unused")
 public class Test {
 	public static void main(String[] args) {
 		

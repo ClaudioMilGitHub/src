@@ -1,7 +1,6 @@
 package org.elis.controller;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,9 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.elis.businesslogic.BusinessLogic;
-import org.elis.model.Gioco;
-import org.elis.model.Ruolo;
-import org.elis.model.Utente;
+import org.elis.model.*;
 
 /**
  * Servlet implementation class LoginLogicServlet
