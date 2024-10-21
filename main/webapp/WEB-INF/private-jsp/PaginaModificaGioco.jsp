@@ -1,155 +1,113 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="org.elis.model.*" %>
+<%@page import="org.elis.businesslogic.BusinessLogic"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Pagina_Modifica_Gioco</title>
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/PaginaModificaGioco.css">
+    <title>Modifica Gioco</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+
+     	 <% Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato"); %>
+   		 <% List<Offerta> offerte = BusinessLogic.getAllOfferta(); %>
+   		 <% List<Gioco> giochi = BusinessLogic.getAllGiochi(); %>
+   		 <% List<Genere> generi = BusinessLogic.getAllGenere(); %>
     <div class="container-fluid">
-        <section>
-            <div class="row navbar mb-3" style="background-color: #171a21;">
-                <nav class="navbar navbar-expand-lg">
-                    <div class="container">
-                        <a class="navbar-brand" href="#">
-                            <img src="https://store.akamai.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016" alt="Steam logo" width="176" height="44">
-                        </a>
-    
-                        <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                          <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                          <div class="navbar-nav">
-                            <a class="nav-link" aria-current="page" href="#">Home</a>
-                            <a class="nav-link" href="#">Negozio</a>
-                          </div>
-                        </div>
-                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                            <form class="d-flex" role="search">
-                                <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Search">
-                                <button class="btn btn-outline-success" type="submit">Cerca</button>
-                            </form>
-                        </div>
+         <!--  NavBar  -->
+         <% request.setAttribute("utenteLoggato", utenteLoggato); %>
+         <jsp:include page="/includes/navbar.jsp"/>
+ 
+         <!-- Page -->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <fieldset>
+                    <legend>Modifica gioco</legend>
+                    <form action="<%= request.getContextPath() %>/UpdateGameLogicServlet" method="post">
                        
-                    </div>
-                </nav>
-            </div>
-        </section>
-              <div class="row">
-                <div class="col-lg-12">
-                    <fieldset>
-            <legend>Modifica gioco</legend>
-            <div class="form-group">
-            <label for="gameSelect" style="color: white;">Seleziona un gioco:</label>
-            <select id="gameSelect">
-                <option value="" aria-placeholder="Seleziona il gioco">...</option>
-           
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label style="color: white;">Seleziona i campi da modificare:</label>
-            <div class="checkbox-group">
-                <label style="color: white;"><input type="checkbox" class="fieldCheckbox" value="name" style="color: white;"> Nome</label>
-                <label style="color: white;"><input type="checkbox" class="fieldCheckbox" value="description" style="color: white;"> Descrizione</label>
-                <label style="color: white;"><input type="checkbox" class="fieldCheckbox" value="price" style="color: white;"> Prezzo</label>
-                <label style="color: white;"><input type="checkbox" class="fieldCheckbox" value="genere" style="color: white;"> Genere</label>
-                <label style="color: white;"><input type="checkbox" class="fieldCheckbox" value="cover" style="color: white;">Copertina</label>
-                <label style="color: white;"><input type="checkbox" class="fieldCheckbox" value="releaseDate" style="color: white;"> Data di Rilascio</label>
-                <label style="color: white;"><input type="checkbox" class="fieldCheckbox" value="offers" style="color: white;">Offerte</label>
-            </div>
-        </div>
-
-      
-        <div id="modifyFields">
-            <form id="modifyForm">
-             
-                <div class="form-group hidden" id="field-name">
-                    <label for="name" style="color: white;">Nome</label>
-                    <input type="text" id="name" name="name">
-                </div>
-
-                <div class="form-group hidden" id="field-description">
-                    <label for="description" style="color: white;">Descrizione</label>
-                    <textarea id="description" name="description" rows="4"></textarea>
-                </div>
-
-            
-                <div class="form-group hidden" id="field-price">
-                    <label for="price" style="color: white;">Prezzo</label>
-                    <input type="number" id="price" name="price" min="0" step="0.01">
-                </div>
-
-                <div class="form-group hidden" id="field-genere">
-                    <label for="genere" class="form-label" style="color: white;">Genere</label>
-                    <select id="genere" name="genere" class="form-select">
-                        <option value="">Seleziona Genere...</option>
-                        <option value="Strategia">Strategia</option>
-                        <option value="Azione">Azione</option>
-                        <option value="RPG">RPG</option>
-                        <option value="Avventura">Avventura</option>
-                        <option value="Simulazione">Simulazione</option>
-                        <option value="Sport">Sport</option>
-                    </select>
-                </div>
-
-                        <div class="form-group hidden" id="field-cover">
-                            <label for="cover" style="color: white;">Copertina (inserisci URL Immagine)</label>
-                            <input type="text" id="cover" name="cover" class="form-control" placeholder="Inserisci l'URL dell'immagine">
+                        <div class="form-group">
+                            <label for="gameSelect" style="color: white;">Seleziona un gioco:</label>
+                            <select id="gameSelect" name="gameSelect" class="form-select">
+                                <option value="">Seleziona il gioco</option>
+                                <%for(int i=0; i < giochi.size(); i++) {%>
+                                	<option value="<%=giochi.get(i).getId() %>"><%=giochi.get(i).getNome() %></option>
+                                <%} %>
+                                
+                            </select>
                         </div>
 
+                        <!-- Nome -->
+                        <div class="form-group">
+                            <label for="name" style="color: white;">Nome</label>
+                            <input type="text" id="name" name="name" class="form-control">
+                        </div>
 
-               
-                <div class="form-group hidden" id="field-releaseDate">
-                    <label for="releaseDate" style="color: white;">Data di rilascio</label>
-                    <input type="date" id="releaseDate" name="releaseDate">
-                </div>
+                        <!-- Descrizione -->
+                        <div class="form-group">
+                            <label for="description" style="color: white;">Descrizione</label>
+                            <textarea id="descrizioneFormGioco" name="descrizioneFormGioco" class="form-control" rows="4"></textarea>
+                        </div>
 
-                <div class="form-group hidden" id="field-offers">
-                    <label for="offers" style="color: white;">Offerte</label>
-                    <select id="offers" name="offers" class="form-select" multiple>
-                        <option value="Sconto">Sconto</option>
-                        <option value="Natale">Natalizio</option>
-                        <option value="Halloween">Sconti dell'orrore</option>
-                        <option value="Black Friday">Black Friday</option>
-                        <option value="Blue Mondey">Blue Monday</option>
-                       
-                       
-                    </select>
-                </div>
+                        <!-- Prezzo -->
+                        <div class="form-group">
+                            <label for="price" style="color: white;">Prezzo</label>
+                            <input type="number" id="price" name="price" class="form-control" min="0" step="0.01">
+                        </div>
 
-                <button type="submit" class="Invio">Salva Modifiche</button>
-            </form>
-        </div>
-    </div>
-    </div>
+                        <!-- Genere -->
+                        <div class="form-group">
+                            <label for="genere" style="color: white;">Genere</label>
+                            <select id="genere" name="genere" class="form-select">
+                                <option value="">Seleziona Genere...</option>
+                               <%for(int i=0; i < generi.size(); i++) {%>
+                                	<option value="<%=generi.get(i).getId() %>"><%=generi.get(i).getNome() %></option>
+                                <%} %>
+                            </select>
+                        </div>
 
-    
-        <div id="message" class="hidden"></div>
-    </div>
-    <footer class="footer" style="margin-top: 48.5vh;">
-        <div class="content-logo d-flex justify-content-between">
-            <div class="footer-logo-steam">
-                <img src="https://store.akamai.steamstatic.com/public/images/v6/logo_steam_footer.png" alt="logo steam">
+                        <!-- Copertina -->
+                        <div class="row">
+                            <div class="col-lg-6" style="margin-top: 3vh;">
+                                <label for="coverImage" style="color: white;">Immagine di Copertina:</label>
+                                <input type="file" id="coverImage" name="coverImage" accept="image/*" required>
+                            </div>
+                        </div>
+
+                        <!-- Data di rilascio -->
+                        <div class="form-group">
+                            <label for="releaseDate" style="color: white;">Data di Rilascio</label>
+                            <input type="date" id="releaseDate" name="releaseDate" class="form-control">
+                        </div>
+
+                        <!-- Offerte -->
+                        <div class="form-group">
+                            <label for="offers" style="color: white;">Offerte</label>
+                            <select id="offers" name="offers" class="form-select" multiple>
+                                <option value="Sconto">Offerta</option>
+                                <%for(int i=0; i < offerte.size(); i++) {%>
+                                	<option value="<%=offerte.get(i).getId() %>"><%=offerte.get(i).getNome() %></option>
+                                <%} %>
+                            </select>
+                        </div>
+
+                     
+                        <button type="submit" class="btn btn-primary mt-3">Salva Modifiche</button>
+                    </form>
+                </fieldset>
             </div>
-            <div class="footer-valve">
-                <img src="https://store.akamai.steamstatic.com/public/images/footerLogo_valve_new.png" alt="logo">
-            </div>
         </div>
-        
-        <div class="content-footer color-white d-flex justify-content: center" id="footer_text"  >
-            Progetto ispirato a Steam per puri scopi didattici per il Master di Sviluppo Software e Applicazioni edizione Maggio. Gruppo di lavoro composto da Claudio Milano, Leandro Biccellari, Antonio Guglielmo e Simone Medori.
-        </div>
-    </footer>
-</section>
-</div>     
+    </div>
+<div>
+    <!-- Footer -->
+    <jsp:include page="/includes/footer.jsp"/>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    <script src="../JS/PaginaModificaGioco.js"></script>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-wEmeIV1mKuiNp0TcNyvP2Nc36wWct5OSs1RbZxPDlvzf7z4xi1ywZyO8RXUnp4an" crossorigin="anonymous"></script>
+
 </body>
 </html>
