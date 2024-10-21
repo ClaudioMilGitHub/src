@@ -42,8 +42,8 @@ footer{
 }
 
 .btn{
-    color: white;
-    border: 2px white solid; 
+   
+    border: 2px solid; 
 }
 
 
@@ -77,13 +77,17 @@ label{
     flex-direction: column;
 }
 
-
-
 #footer_text{
     color: #8F98A0;
     font-size: 12px;
     line-height: 16px;
 }
+
+li[class^="list-group-item"]{
+	background-color: #35343f;
+	
+}
+
 
 
 label {

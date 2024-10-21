@@ -32,10 +32,13 @@
 				<ul class="list-group cProductsList">
 					<%for(int i =0 ; i < listaUtenti.size(); i++){
 						if(listaUtenti.get(i).getRuolo().ordinal() != 0 && !listaUtenti.get(i).isSuspended()) {%>
-						<li class="list-group-item d-flex align-content-center"><p
-							class="p-0 m-0 flex-grow-1 fs-4 fw-bold"><%=listaUtenti.get(i).getUsername() %></p>
-						<button class="btn btn-warning suspend">SUSPEND</button>
-						<button class="btn btn-danger delete">DELETE</button></li>
+						<li class="list-group-item p-2 mb-1 bg-dark d-flex align-content-center"><p
+							class="p-0 m-0 flex-grow-1 fs-4 fw-bold text-success"><%=listaUtenti.get(i).getUsername() %></p>
+							<div class="btn-group" role="group">
+								<button class="btn btn-outline-warning suspend">SUSPEND</button>
+								<button class="btn btn-outline-danger delete">DELETE</button>
+							</div>
+						</li>
 					<%}
 					}%>
 				</ul>
@@ -50,10 +53,13 @@
 				<ul class="list-group cProductsList">
 					<%for(int i =0 ; i < listaUtenti.size(); i++){
 						if(listaUtenti.get(i).getRuolo().ordinal() != 0 && listaUtenti.get(i).isSuspended()) {%>
-						<li class="list-group-item d-flex align-content-center"><p
-							class="p-0 m-0 flex-grow-1 fs-4 fw-bold"><%=listaUtenti.get(i).getUsername()%></p>
-						<button class="btn btn-success resume">RESUME</button>
-						<button class="btn btn-danger delete">DELETE</button></li>
+						<li class="list-group-item d-flex align-content-center p-2 mb-1 bg-dark"><p
+							class="p-0 m-0 flex-grow-1 fs-4 fw-bold text-danger"><%=listaUtenti.get(i).getUsername()%></p>
+						<div class="btn-group" role="group">
+							<button class="btn btn-outline-success resume">RESUME</button>
+							<button class="btn btn-outline-danger delete">DELETE</button>
+						</div>
+						</li>
 					<%}
 					}%>
 				</ul>
