@@ -41,7 +41,7 @@
                           </div>
                           <div class="col-mb-12 ">
                             <label for="telefono" class="form-label">NUMERO DI TELEFONO</label>
-                            <input id="telefono" class="form-control" type="number" placeholder="012345678" name="telefono">
+                            <input id="telefono" class="form-control" type="tel" placeholder="012345678" name="telefono">
                           </div>
                            <div class="col-mb-12 ">
                             <label for="indirizzoFormInput" class="form-label">INDIRIZZO</label>
@@ -77,7 +77,7 @@
                         </div>
                         <div class="col-mb-12 ">
                             <label for="sitoWebFormInput" class="form-label">SITO WEB</label>
-                            <input id="sitoWebFormInput" class="form-control" type="text" placeholder="HTTP/..." name="sitoWebFormInput">
+                            <input id="sitoWebFormInput" class="form-control" type="url" placeholder="HTTP/..." name="sitoWebFormInput">
                           </div>
                         <div id="div-2" class="col-md-12 col-auto">
                             <input type="submit" value="REGISTRATI"  class="btn btn-outline-primary" id="btn">
