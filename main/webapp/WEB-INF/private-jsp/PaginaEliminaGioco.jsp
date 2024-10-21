@@ -47,13 +47,13 @@
 					<%if(!listaGiochi.isEmpty()){ %>
 						<%for(int i=0; i< listaGiochi.size(); i++) {%>
 						  
-						  <button type="button" class="list-group-item list-group-item-action d-flex mb-3" value = "<%=listaGiochi.get(i).getNome() %>">
+						  <button style="border: 2px solid;" type="button" class="list-group-item list-group-item-action d-flex mb-3 bg-dark text-dander-emphasis" value = "<%=listaGiochi.get(i).getNome() %>">
 								<div class="d-flex justify-content-between align-items-center">
 								        <div>
-								            <span class="fw-bold me-3">ID: <%=listaGiochi.get(i).getId()%></span>
-								            <span class="me-3">Titolo: <span class="text-primary"><%=listaGiochi.get(i).getNome()%></span></span>
+								            <span class="fw-bold me-3 text-warning-emphasis">ID: <%=listaGiochi.get(i).getId()%></span>
+								            <span class="me-3 text-info-emphasis">Titolo: <span class="text-warning-emphasis"><%=listaGiochi.get(i).getNome()%></span></span>
 								        </div>
-								        <span class="text-muted">Data Creazione: <%=listaGiochi.get(i).getDataCreazione()%></span>
+								        <span class="text-muted text-info-emphasis">Data Creazione: <%=listaGiochi.get(i).getDataCreazione()%></span>
 								 </div>
 							</button>
 

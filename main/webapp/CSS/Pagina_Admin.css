@@ -1,10 +1,12 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background-image: url("https://store.akamai.steamstatic.com/public/images/v6/colored_body_top.png?v=2");
-    background-size: cover;
+    
 }
 
-
+.container-fluid{
+	background-image: url("https://store.akamai.steamstatic.com/public/images/v6/colored_body_top.png?v=2");
+    background-size: cover;
+}
 
 .navbar{
     background-color: #171a21;
@@ -37,10 +39,7 @@ p{
 	color:white;
 }
 
-.card-body{
-    background-color: #292e39;
-    color: #F5F5F6;
-}
+
 
 a[class^="nav-link"]{
     color: #F5F5F6;
@@ -73,5 +72,5 @@ a[class^="nav-link"]{
 .col-lg-6{
 
     display: flex;
-    justify-content: center;
+
 }
