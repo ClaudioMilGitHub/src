@@ -75,7 +75,10 @@ public class AddGameLogicServlet extends HttpServlet {
 		String data = request.getParameter("releaseDateFormGioco");
 		Offerta offerta = null;
 		
+		
+		System.out.println("Genere = " + genere);
 		System.out.println(offerte);
+		
 		// Recupero il file immagine dal form
 		Part filePart = request.getPart("coverImage");
 		InputStream fileInputStream = filePart.getInputStream();
@@ -127,17 +130,35 @@ public class AddGameLogicServlet extends HttpServlet {
 			}
 		}
 		
-		long idOfferta = Long.parseLong(offerte);
-		offerta = BusinessLogic.getOffertaById(idOfferta);
+		
+		if(offerte!=null) {
+			
+			try {
+				
+				long idOfferta = Long.parseLong(offerte);
+				offerta = BusinessLogic.getOffertaById(idOfferta);
+				
+			} catch(NumberFormatException e) {
+				offerta = null;
+			}
+			
+		}
+			
+		
 		Utente utenteLoggato = (Utente)request.getSession().getAttribute("utenteLoggato");
 		double prezzo = Double.parseDouble(prezzo2);
 		LocalDate dataRilascio = LocalDate.parse(data);
 		
 		//Aggiungiamo il gioco al database e alle associazioni
 		Gioco giocoAggiunto = BusinessLogic.addGioco(nome, dataRilascio, descrizione, imageUrl, prezzo, offerta, utenteLoggato);
-		Genere genereGioco = BusinessLogic.getGenereByName(genere);
 		
-		BusinessLogic.aggiungiGiocoaGenere(genereGioco.getId(), giocoAggiunto.getId());
+		
+		if(!genere.equalsIgnoreCase("null")) {
+			long idGenere = Long.parseLong(genere);
+			Genere genereGioco = BusinessLogic.getGenereById(idGenere);	
+			BusinessLogic.aggiungiGiocoaGenere(genereGioco.getId(), giocoAggiunto.getId());
+		}
+		
 		
 		BusinessLogic.aggiungiGiocoALibreria(utenteLoggato, giocoAggiunto);
 		

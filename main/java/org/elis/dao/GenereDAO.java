@@ -13,4 +13,5 @@ public interface GenereDAO {
     Genere updateGenereOfferta(Genere genere, Offerta nuovaOfferta);
     Genere deleteByName(String nome);
     Genere aggiungiGiocoaGenere (long genereId, long giocoId);
+	Genere getGenereById(long id);
 }

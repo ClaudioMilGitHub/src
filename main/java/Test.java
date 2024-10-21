@@ -21,7 +21,6 @@ public class Test {
 		
 //		public Utente addUtente(int ruoloIntValue, String username, String email, String password, String nome, String cognome, String telefono, String indirizzo, String sitoWeb, String comuneResidenza, LocalDate dataNascita)
 		
-		
 //		BusinessLogic.addUtente(0, "theredcondor", "email01@gmail.com", "Password1234!", "Claudio", "Milano", "3755954849", "Via San Bernardino 27", null, "Trapani", LocalDate.of(1996, 8, 31));
 //		BusinessLogic.addUtente(1, "therinoranos", "email02@gmail.com", "Password1234!?", "Rino", "Rano", "3755954848", "Via San Bernardino 26", null, "Roma", LocalDate.of(1997, 7, 30));
 //		BusinessLogic.addUtente(1, "thegiannigiannos", "email03@gmail.com", "Password1235!?", "Gianno", "Gianni", "3755954847", "Via San Bernardino 25", null, "Roma", LocalDate.of(1998, 6, 29));
@@ -48,6 +47,11 @@ public class Test {
 //		BusinessLogic.addGenere("Ruolo");
 //		BusinessLogic.addGenere("Strategia");
 //		BusinessLogic.addGenere("Metroidvania");
+//		BusinessLogic.addGenere("FPS");
+		
+//		Aggiungi offerte al database
+//		BusinessLogic.addOfferta(Ricorrenza.ESTATE, 0.25, LocalDate.of(2024, 5, 1), LocalDate.of(2024, 9, 1), "Saldi Estivi");
+//		BusinessLogic.addOfferta(Ricorrenza.NATALE, 0.7, LocalDate.of(2024, 12, 1), LocalDate.of(2024, 12, 31), "Saldi di natale");
 		
 		//Aggiungi giochi al genere  id[Genere, Gioco]
 		//Avventura
@@ -75,6 +79,7 @@ public class Test {
 //		//MetroidVania
 //		BusinessLogic.aggiungiGiocoaGenere(5, 3);
 		
+			
 		
 //		Genere genere = BusinessLogic.getGenereByName("Avventura");
 //		Gioco gioco = BusinessLogic.getGiocoById(1);

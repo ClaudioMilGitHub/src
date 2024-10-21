@@ -30,6 +30,7 @@
 		<jsp:include page="/includes/navbar.jsp" />
 
 		<div class="card-container flex-grow-1	">
+			
 			<%for(Libreria l : BusinessLogic.getLibreriaByName(utenteLoggato.getUsername())){ %>
 			<div class="card mb-3 "
 				style="max-width: 1500px; color: gray; background-color: #171a21;">

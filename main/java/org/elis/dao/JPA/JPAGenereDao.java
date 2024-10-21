@@ -64,12 +64,20 @@ private JPAGenereDao() {}
 		q.setParameter("nome", nome);
 		return (Genere) q.getSingleResult();
 	}
+	
+	@Override
+	public Genere getGenereById(long id) {
+		EntityManager em = JPADaoFactory.getEntityManager();
+		Query q = em.createQuery("SELECT g FROM Genere g WHERE g.id = :idGenere");
+		q.setParameter("idGenere", id);
+		return (Genere) q.getSingleResult();
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Genere> getAllGenere() {
 		EntityManager em = JPADaoFactory.getEntityManager();
-		Query q = em.createQuery("SELECT g FROM genere g");
+		Query q = em.createQuery("SELECT g FROM Genere g");
 		return q.getResultList();
 	}
 

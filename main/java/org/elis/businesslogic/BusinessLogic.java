@@ -165,6 +165,10 @@ public class BusinessLogic {
 		return DAOFactory.getDaoFactory(implementation).getGenereDAO().deleteByName(nome);
 	}
 	
+	public static Genere getGenereById(long id) {
+		return DAOFactory.getDaoFactory(implementation).getGenereDAO().getGenereById(id);
+	}
+	
 	public static Offerta addOfferta(Ricorrenza ricorrenza, double sconto, LocalDate dataInizio, LocalDate dataFine, String nome) {
 		return DAOFactory.getDaoFactory(implementation).getOffertaDAO().addOfferta(ricorrenza, sconto, dataInizio, dataFine, nome);
 	}

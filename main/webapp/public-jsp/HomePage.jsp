@@ -1,5 +1,4 @@
 <%@page import="org.elis.businesslogic.BusinessLogic"%>
-<%@page import="org.hibernate.internal.build.AllowSysOut"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
@@ -19,6 +18,8 @@
 
 	<%Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");%>
 	<%List<Gioco> listaGiochi = (List<Gioco>) request.getAttribute("listaGiochi");%>
+	<%List<Genere> generi = BusinessLogic.getAllGenere(); %>
+	<%List<Utente> utenti = BusinessLogic.getAllUtenti(); %>
 
     <div class="container-fluid min-vh-100 d-flex flex-column">
      
@@ -32,43 +33,21 @@
             <div class="col-lg-3 col-sm mb-3 d-none d-lg-block">
                 <div class="options-buttons">
                     <div class="col home_page_gutter-block ps-4">
-                        <div class="col gutter_header">Sfoglia categorie</div>
-                            <form action="CategorieServlet" method="POST">   
-                                <button class="gutter_item" type="submit" value="avventura" name="avventuraInputForm">
-                                    I più venduti
-                                </button>
-                                <button class="gutter_item" type="submit" value="ruolo" name="ruoloInputForm">
-                                    Nuove uscite
-                                </button>
-                                <button class="gutter_item" type="submit" value="strategia" name="strategiaInputForm">
-                                    In arrivo
-                                </button>
-                                <button class="gutter_item" type="submit" value="metroidvania" name="metroidvaniaInputForm">
-                                    Offerte speciali
-                                </button>
-                                <button class="gutter_item" type="submit" value="azione" name="azioneInputForm">
-                                    Titoli in VR
-                                </button>
+                        <div class="col gutter_header">Sfoglia Autori</div>
+                            <form action="<%=request.getContextPath()%>/SfogliaAutoreServlet" method="POST">   
+                               <%for(int i = 0; i < utenti.size(); i++) {%>
+                               <%if(utenti.get(i).getRuolo().ordinal() == 2){%>                     
+                               	<button class= "gutter_item mb-1" type="submit" value = "<%=utenti.get(i).getNome()%>" name = "autoreInputForm"><%=utenti.get(i).getNome()%></button>
+                               	<%}%>
+                               <%}%>
                             </form>        
                         <div class="col gutter_header">
                             Sfoglia per genere
                         </div>
                             <form action="<%=request.getContextPath()%>/SfogliaGiochiServlet" method="POST">   
-                               <button class="gutter_item" type="submit" value="avventura" name="genereInputForm">
-                                   Avventura
-                               </button>
-                               <button class="gutter_item" type="submit" value="ruolo" name="genereInputForm">
-                                   Ruolo
-                               </button>
-                               <button class="gutter_item" type="submit" value="strategia" name="genereInputForm">
-                                   Strategia
-                               </button>
-                               <button class="gutter_item" type="submit" value="metroidvania" name="genereInputForm">
-                                   Metroidvania
-                               </button>
-                               <button class="gutter_item" type="submit" value="azione" name="genereInputForm">
-                                   Azione
-                               </button>
+                               <%for(int i = 0; i < generi.size(); i++) {%>
+                               <button class= "gutter_item mb-1" type="submit" value = "<%=generi.get(i).getNome()%>" name = "genereInputForm"><%=generi.get(i).getNome()%></button>
+                               <%}%>
                            </form>                                  
                     </div>        
                 </div>  

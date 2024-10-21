@@ -18,6 +18,7 @@
     
     <% Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato"); %>
     <% List<Offerta> offerte = BusinessLogic.getAllOfferta(); %>
+    <% List<Genere> generi = BusinessLogic.getAllGenere(); %>
 
     <div class="container-fluid">
 
@@ -48,11 +49,10 @@
                         <div class="mb-3">
                             <label for="Select" class="form-label" style="color: white; margin-top: 2vh;">Genere</label>
                             <select id="Select" class="form-select" name="genereFormGioco">
-                                <option>Genere</option>
-                                <option value="Strategia">Strategia</option>
-                                <option value="Avventura">Avventura</option>
-                                <option value="Azione">Azione</option>
-                                <option value="Metroidvania">Metroidvania</option>
+                                <option value = "null">Seleziona Genere</option>
+                                <%for(int i=0; i < generi.size(); i++) {%>
+                                	<option value="<%=generi.get(i).getId() %>"><%=generi.get(i).getNome() %></option>
+                                <%} %>
                             </select>
                         </div>
 
@@ -60,7 +60,7 @@
                         <div class="mb-3">
                             <label for="offers" style="color: white;">Offerte</label>
                             <select id="select" name="offers" class="form-select">
-                            	<option>Offerta</option>
+                            	<option value = "null">Seleziona Offerta</option>
                                 <%for(int i=0; i < offerte.size(); i++) {%>
                                 	<option value="<%=offerte.get(i).getId() %>"><%=offerte.get(i).getNome() %></option>
                                 <%} %>
