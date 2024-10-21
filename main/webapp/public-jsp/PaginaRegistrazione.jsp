@@ -32,11 +32,27 @@
                     <form action="<%=request.getContextPath()%>/RegistrationLogicServlet" method="post"  class ="row g-3" id="frm">
                        
                         <div class="col-mb-12 ">
-                            <label for="emailFormInput" class="form-label">EMAIL ADDRESS</label>
+                            <label for="nomeFormInput" class="form-label">NOME</label>
+                            <input id="nomeFormInput" class="form-control" type="text" placeholder="Nome" name="nomeFormInput">
+                          </div>
+                           <div class="col-mb-12 ">
+                            <label for="cognomeFormInput" class="form-label">COGNOME</label>
+                            <input id="cognomeFormInput" class="form-control" type="text" placeholder="Cognome" name="cognomeFormInput">
+                          </div>
+                          <div class="col-mb-12 ">
+                            <label for="telefono" class="form-label">NUMERO DI TELEFONO</label>
+                            <input id="telefono" class="form-control" type="number" placeholder="012345678" name="telefono">
+                          </div>
+                           <div class="col-mb-12 ">
+                            <label for="indirizzoFormInput" class="form-label">INDIRIZZO</label>
+                            <input id="indirizzoFormInput" class="form-control" type="text" placeholder="Via Nazionale" name="indirizzoFormInput">
+                          </div>
+                        <div class="col-mb-12 ">
+                            <label for="emailFormInput" class="form-label">INDIRIZZO EMAIL</label>
                             <input id="emailFormInput" class="form-control" type="email" placeholder="rino.rano@gmail.com" name="emailFormInput">
                           </div>
                           <div class="col-mb-12 ">
-                            <label for="email2FormInput" class="form-label">CONFIRM EMAIL ADDRESS</label>
+                            <label for="email2FormInput" class="form-label">CONFERMA INDIRIZZO EMAIL</label>
                             <input id="email2FormInput" class="form-control" type="email" placeholder="rino.rano@gmail.com" name="email2FormInput">
                           </div>
                           <div class="col-mb-12 ">
@@ -59,6 +75,10 @@
                                 <option value="PUBLISHER">Publisher</option>
                             </select>
                         </div>
+                        <div class="col-mb-12 ">
+                            <label for="sitoWebFormInput" class="form-label">SITO WEB</label>
+                            <input id="sitoWebFormInput" class="form-control" type="text" placeholder="HTTP/..." name="sitoWebFormInput">
+                          </div>
                         <div id="div-2" class="col-md-12 col-auto">
                             <input type="submit" value="REGISTRATI"  class="btn btn-outline-primary" id="btn">
                         </div>
