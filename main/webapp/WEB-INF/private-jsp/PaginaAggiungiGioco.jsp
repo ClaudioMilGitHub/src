@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.elis.model.*" %>
+<%@page import="org.elis.businesslogic.BusinessLogic"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +17,7 @@
 <body>
     
     <% Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato"); %>
+    <% List<Offerta> offerte = BusinessLogic.getAllOfferta(); %>
 
     <div class="container-fluid">
 
@@ -57,11 +60,10 @@
                         <div class="mb-3">
                             <label for="offers" style="color: white;">Offerte</label>
                             <select id="select" name="offers" class="form-select">
-                                <option value="Sconto">Sconto</option>
-                                <option value="Natale">Natalizio</option>
-                                <option value="Halloween">Sconti dell'orrore</option>
-                                <option value="Black Friday">Black Friday</option>
-                                <option value="Blue Monday">Blue Monday</option>
+                            	<option>Offerta</option>
+                                <%for(int i=0; i < offerte.size(); i++) {%>
+                                	<option value="<%=offerte.get(i).getId() %>"><%=offerte.get(i).getNome() %></option>
+                                <%} %>
                             </select>
                         </div>
 

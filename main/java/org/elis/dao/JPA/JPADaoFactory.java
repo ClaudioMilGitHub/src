@@ -8,12 +8,18 @@ import org.elis.dao.OffertaDAO;
 import org.elis.dao.UtenteDAO;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 public class JPADaoFactory extends DAOFactory{
 	
+	private static EntityManagerFactory emf;
+	
 	public static EntityManager getEntityManager() {
-		return Persistence.createEntityManagerFactory("SteamProject").createEntityManager();
+		if(emf==null) {
+			emf=Persistence.createEntityManagerFactory("SteamProject");
+		}
+		return emf.createEntityManager();
 	}
 
 	@Override

@@ -85,7 +85,8 @@
 		const contextPath = '${pageContext.request.contextPath}';
 			
 	    $('.list-group-item').click(function() {
-	        var gameName = $('.list-group-item').val();
+	        var gameName = $(this).val();
+	        alert(gameName);
 	        $.ajax({
 	            type: 'POST',
 	            url: contextPath + '/DeleteGameLogicServlet',

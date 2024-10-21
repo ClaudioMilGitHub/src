@@ -80,7 +80,7 @@
                 <%for(int i = 0; i < listaGiochi.size(); i++){%>				
 					<div class="col">
 						<div class="content-cards mb-3">
-							<div class="card m-auto" style="width: 80%;">
+							<div class="card m-auto" style="width: 80%; height: 80%;">
 								<img
 									src="<%=listaGiochi.get(i).getImagePath() %>"
 									class="card-img-top" alt="game_img">

@@ -70,12 +70,12 @@ public class AddGameLogicServlet extends HttpServlet {
 		String nome = request.getParameter("nomeFormGioco");
 		String descrizione = request.getParameter("descrizioneFormGioco");
 		String genere = request.getParameter("genereFormGioco");
-//		String offerte = request.getParameter("offers");
+		String offerte = request.getParameter("offers");
 		String prezzo2 = request.getParameter("prezzoFormGioco");
 		String data = request.getParameter("releaseDateFormGioco");
 		Offerta offerta = null;
 		
-
+		System.out.println(offerte);
 		// Recupero il file immagine dal form
 		Part filePart = request.getPart("coverImage");
 		InputStream fileInputStream = filePart.getInputStream();
@@ -127,15 +127,8 @@ public class AddGameLogicServlet extends HttpServlet {
 			}
 		}
 		
-//		if(offerte != null || !offerte.isEmpty() ) {
-//			System.out.println("offerte inserite");
-//			for(Offerta o: BusinessLogic.getAllOfferta()) {
-//				if(o.getNome().equals(offerte)) {
-//					offerta = o;
-//				}
-//			}
-//		}
-		System.out.println("inizio parte finale");
+		long idOfferta = Long.parseLong(offerte);
+		offerta = BusinessLogic.getOffertaById(idOfferta);
 		Utente utenteLoggato = (Utente)request.getSession().getAttribute("utenteLoggato");
 		double prezzo = Double.parseDouble(prezzo2);
 		LocalDate dataRilascio = LocalDate.parse(data);
@@ -143,7 +136,9 @@ public class AddGameLogicServlet extends HttpServlet {
 		//Aggiungiamo il gioco al database e alle associazioni
 		Gioco giocoAggiunto = BusinessLogic.addGioco(nome, dataRilascio, descrizione, imageUrl, prezzo, offerta, utenteLoggato);
 		Genere genereGioco = BusinessLogic.getGenereByName(genere);
+		
 		BusinessLogic.aggiungiGiocoaGenere(genereGioco.getId(), giocoAggiunto.getId());
+		
 		BusinessLogic.aggiungiGiocoALibreria(utenteLoggato, giocoAggiunto);
 		
 		if(utenteLoggato.getRuolo().ordinal() == 0) {

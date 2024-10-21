@@ -28,7 +28,7 @@ if(instance == null) {
 	
 	@Override
 	public Gioco addGioco(String nome, LocalDate dataRilascio, String descrizione, String imagePath, double prezzo,
-			Offerta idOfferta, Utente utente) {
+			Offerta offerta, Utente utente) {
 		
 		Gioco g = new Gioco();
 		g.setNome(nome);
@@ -36,6 +36,7 @@ if(instance == null) {
 		g.setDescrizione(descrizione);
 		g.setImagePath(imagePath);
 		g.setPrezzo(prezzo);
+		g.setOfferta(offerta);
 		
 		EntityManager em = JPADaoFactory.getEntityManager();
 		EntityTransaction t = em.getTransaction();
