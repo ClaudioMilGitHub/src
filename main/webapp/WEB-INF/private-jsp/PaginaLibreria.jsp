@@ -4,7 +4,7 @@
 <%@page import="org.elis.businesslogic.BusinessLogic"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +22,7 @@
 <title>La Tua Libreria Giochi</title>
 </head>
 <body>
-
+	<%Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");%>
 	<div class="container-fluid min-vh-100 d-flex flex-column">
 
 		<!-- Navbar -->
@@ -44,9 +44,9 @@
 					</div>
 					<div class="col-md-6 align-content-center">
 						<div class="card-body">
-							<h3 class="card-title text-primary-emphasis text-center"><%=l.getGioco().getNome()%></h3>
+							<h3 class="card-title  text-center" ><%=l.getGioco().getNome()%></h3>
 							<p
-								class="card-text text-center align-content-center text-info-emphasis"><%=l.getGioco().getDescrizione()%></p>
+								class="card-text text-center align-content-center " style="color:#E6E3D6"><%=l.getGioco().getDescrizione()%></p>
 						</div>
 					</div>
 					<div
@@ -60,6 +60,12 @@
 									<button type="button" class="btn btn-outline-primary"
 										style="margin: 5px;">Gioca</button>
 								</a>
+								
+								<form action="<%=request.getContextPath()%>/GameReviewLogicServlet" method="POST">
+								    <input type="hidden" name="gameId" value="<%=l.getGioco().getId()%>">
+								    <input type="hidden" name="gameName" value="<%=l.getGioco().getNome()%>">
+								    <button type="submit" class="btn btn-outline-primary" style="margin: 5px;">Recensione</button>
+								</form>
 								<%} else { %>
 								<a href="<%=request.getContextPath()%>/UpdateGameLogicServlet">
 									<button type="button" class="btn btn-outline-primary"
@@ -88,5 +94,10 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
 		integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
 		crossorigin="anonymous"></script>
+	<script
+		  src="https://code.jquery.com/jquery-3.6.0.min.js"
+		  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+		  crossorigin="anonymous"></script>
+		
 </body>
 </html>

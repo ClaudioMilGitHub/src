@@ -29,6 +29,7 @@
                     <div id="box-small">
                         <h2 class="mt-5">Registrazione avvenuta con successo!</h2>
                          <p>Il tuo account è stato creato correttamente.<br> Ora puoi <a href="<%=request.getContextPath()%>/public-jsp/PaginaLogin.jsp">accedere</a>.</p>
+
                     </div>
             </div> 
                            
@@ -56,5 +57,14 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    
+    <script>
+  	
+  	 setTimeout(function() {
+     	console.log('infunction');
+         window.location.href = "<%=request.getContextPath()%>/index";
+     }, 3000); // 3000 millisecondi = 3 secondi
+     
+  	</script>
 </body>
 </html>

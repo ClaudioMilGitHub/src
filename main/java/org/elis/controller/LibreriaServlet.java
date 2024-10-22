@@ -36,7 +36,7 @@ public class LibreriaServlet extends HttpServlet {
         Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");
         
         if (utenteLoggato == null) {
-            response.sendRedirect("public-jsp/Errore.jsp");
+            response.sendRedirect("public-jsp/PaginaLogin.jsp");
             return;
         }
        

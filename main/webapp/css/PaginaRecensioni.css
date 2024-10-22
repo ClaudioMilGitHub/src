@@ -49,6 +49,9 @@ a[class^="nav-link"]{
     border-radius: 10px;
 }
 
+.card{
+	background-color: #292e39;
+}
 
 .card-body{
     background-color: #292e39;
@@ -75,4 +78,8 @@ a[class^="nav-link"]{
 
 .title{
 	color : #ffff;
+}
+
+.hide{
+	display:none;
 }

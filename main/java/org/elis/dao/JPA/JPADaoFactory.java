@@ -5,6 +5,7 @@ import org.elis.dao.GenereDAO;
 import org.elis.dao.GiocoDAO;
 import org.elis.dao.LibreriaDAO;
 import org.elis.dao.OffertaDAO;
+import org.elis.dao.RecensioneDAO;
 import org.elis.dao.UtenteDAO;
 
 import jakarta.persistence.EntityManager;
@@ -45,6 +46,11 @@ public class JPADaoFactory extends DAOFactory{
 	@Override
 	public GenereDAO getGenereDAO() {
 		return JPAGenereDao.getInstance();
+	}
+
+	@Override
+	public RecensioneDAO getRecensioneDAO() {
+		return JPARecensioneDao.getInstance();
 	}
 
 }

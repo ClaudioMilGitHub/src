@@ -81,7 +81,7 @@
 		
 		
 		$('.suspend').click(function() {
-		    var username = $(this).siblings('p').text();
+			const username = this.closest('li').querySelector('p').textContent;
 		    const operation = 'suspend';
 
 		    $.ajax({
@@ -104,7 +104,7 @@
 		});
 		
 		$('.resume').click(function() {
-		    var username = $(this).siblings('p').text();
+			const username = this.closest('li').querySelector('p').textContent;
 		    const operation = 'resume';
 
 		    $.ajax({
@@ -128,7 +128,7 @@
 
 		// Per il bottone DELETE 
 		$('.delete').click(function() {
-		    const username = $(this).siblings('p').text();
+			const username = this.closest('li').querySelector('p').textContent;
 		    const operation = 'delete';
 
 		    $.ajax({

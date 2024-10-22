@@ -122,6 +122,7 @@ public class AddGameLogicServlet extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/private-jsp/PaginaAggiungiGioco.jsp").forward(request, response);
 			return;
 		}
+		
 		for(Gioco g : BusinessLogic.getAllGiochi()) {
 			if(g.getNome().equals(nome)) {
 				System.out.println("nome già esistente");
@@ -129,8 +130,7 @@ public class AddGameLogicServlet extends HttpServlet {
 				return;
 			}
 		}
-		
-		
+			
 		if(offerte!=null) {
 			
 			try {
@@ -143,8 +143,7 @@ public class AddGameLogicServlet extends HttpServlet {
 			}
 			
 		}
-			
-		
+				
 		Utente utenteLoggato = (Utente)request.getSession().getAttribute("utenteLoggato");
 		double prezzo = Double.parseDouble(prezzo2);
 		LocalDate dataRilascio = LocalDate.parse(data);

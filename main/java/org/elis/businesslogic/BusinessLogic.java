@@ -5,12 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.elis.dao.DAOFactory;
-import org.elis.model.Genere;
-import org.elis.model.Gioco;
-import org.elis.model.Libreria;
-import org.elis.model.Offerta;
-import org.elis.model.Ricorrenza;
-import org.elis.model.Utente;
+import org.elis.model.*;
 
 public class BusinessLogic {
 	
@@ -192,5 +187,13 @@ public class BusinessLogic {
 	}
 	public static Offerta deleteOffertaById(long id) {
 		return DAOFactory.getDaoFactory(implementation).getOffertaDAO().deleteOffertaById(id);
+	}
+	
+	public static Recensione addRecensione(String testo, long idUtente, long idGioco) {
+		return DAOFactory.getDaoFactory(implementation).getRecensioneDAO().addRecensione(testo, idUtente, idGioco);
+	}
+	
+	public static List<Recensione> getAllRecensioniByGame(long idGioco) {
+		return DAOFactory.getDaoFactory(implementation).getRecensioneDAO().getAllRecensioniByGame(idGioco);
 	}
 }

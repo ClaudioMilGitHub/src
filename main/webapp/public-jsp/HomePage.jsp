@@ -59,10 +59,12 @@
                 <%for(int i = 0; i < listaGiochi.size(); i++){%>				
 					<div class="col">
 						<div class="content-cards mb-3">
-							<div class="card m-auto" style="width: 80%; height: 80%;">
-								<img
-									src="<%=listaGiochi.get(i).getImagePath() %>"
-									class="card-img-top" alt="game_img">
+							<div class="card m-auto" style="width: 80%; height: 80%;"
+							data-game-id="<%=listaGiochi.get(i).getId() %>">
+									<img
+										src="<%=listaGiochi.get(i).getImagePath() %>"
+										class="card-img-top" alt="game_img">								
+																
 								<div class="card-body">
 									<h3 class="card-title"><%=listaGiochi.get(i).getNome() %></h3>
 									<p class="card-text"><%=listaGiochi.get(i).getDescrizione() %></p>
@@ -74,7 +76,7 @@
 											<%if(test){%>
 
 												
-												<a href="#" class="btn btn-outline-primary">In libreria</a>
+												<a href="<%=request.getContextPath()%>/LibreriaServlet" class="btn btn-outline-primary">In libreria</a>
 												<%} else {%>
 														<input type="hidden" name="AddGameToLibreria" value="<%=listaGiochi.get(i).getNome() %>">
 														<button type="submit" class="btn btn-outline-primary">Acquista</button>																				
@@ -104,5 +106,6 @@
         
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
 </body>
 </html>

@@ -149,4 +149,14 @@
     <servlet-name>SfogliaAutoreServlet</servlet-name>
     <url-pattern>/SfogliaAutoreServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GameReviewLogicServlet</display-name>
+    <servlet-name>GameReviewLogicServlet</servlet-name>
+    <servlet-class>org.elis.controller.GameReviewLogicServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GameReviewLogicServlet</servlet-name>
+    <url-pattern>/GameReviewLogicServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

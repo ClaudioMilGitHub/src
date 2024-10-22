@@ -12,6 +12,7 @@ public abstract class DAOFactory {
 	public abstract LibreriaDAO getLibreriaDAO();
 	public abstract OffertaDAO getOffertaDAO();
 	public abstract GenereDAO getGenereDAO();
+	public abstract RecensioneDAO getRecensioneDAO();
 	
 	public static DAOFactory getDaoFactory(String s) {
 		

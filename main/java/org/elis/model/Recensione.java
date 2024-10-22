@@ -1,5 +1,10 @@
 package org.elis.model;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -27,8 +32,40 @@ public class Recensione {
 	 @ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(name = "gioco_id", nullable = false)
 	private Gioco gioco;
+	 
+	@CreationTimestamp
+	@Column(name="data_creazione", nullable = false)
+	private LocalDateTime dataCreazione;
+		
+	@UpdateTimestamp
+	@Column(name="data_ultima_modifica", nullable = false)
+	private LocalDateTime dataUltimaModifica;
 	
-	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public LocalDateTime getDataCreazione() {
+		return dataCreazione;
+	}
+
+	public void setDataCreazione(LocalDateTime dataCreazione) {
+		this.dataCreazione = dataCreazione;
+	}
+
+	public LocalDateTime getDataUltimaModifica() {
+		return dataUltimaModifica;
+	}
+
+	public void setDataUltimaModifica(LocalDateTime dataUltimaModifica) {
+		this.dataUltimaModifica = dataUltimaModifica;
+	}
+
+	public Recensione() {}
 	
 	public Recensione(Long id, Boolean isRecommended, String testo) {
 		this.id= id;

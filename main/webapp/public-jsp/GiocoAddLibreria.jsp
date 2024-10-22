@@ -54,7 +54,7 @@
   	 setTimeout(function() {
      	console.log('infunction');
          window.location.href = "<%=request.getContextPath()%>/index";
-     }, 1500); // 1500 millisecondi = 1.5 secondi
+     }, 3000); // 3000 millisecondi = 3 secondi
      
   	</script>
    
