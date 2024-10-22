@@ -50,6 +50,14 @@ public class JPARecensioneDao implements RecensioneDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public Recensione getRecensioneById(long idRecensione) {
+		EntityManager em = JPADaoFactory.getEntityManager();
+		Query q = em.createQuery("Select r from Recensione r where r.id = :idRecensione");
+		q.setParameter("idRecensione", idRecensione);
+		return (Recensione) q.getSingleResult();
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -60,6 +68,32 @@ public class JPARecensioneDao implements RecensioneDAO {
 		q.setParameter("idGioco", idGioco);
 		return q.getResultList();	
 	
+	}
+
+	@Override
+	public Recensione updateTestoRecensione(Recensione recensione, String newTesto) {
+		
+		EntityManager em = JPADaoFactory.getEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		recensione.setTesto(newTesto);
+		recensione = em.merge(recensione);
+		t.commit();
+		return recensione;
+	}
+
+	@Override
+	public void deleteRecensioneById(long idRecensione) {
+		
+		EntityManager em = JPADaoFactory.getEntityManager();
+		Query q = em.createQuery("SELECT r FROM Recensione r WHERE r.id = :idRecensione");
+		q.setParameter("idRecensione", idRecensione);
+		Recensione r = (Recensione) q.getSingleResult();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		em.remove(r);
+		t.commit();
+		
 	}
 
 	@Override

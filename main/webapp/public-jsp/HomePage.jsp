@@ -59,12 +59,15 @@
                 <%for(int i = 0; i < listaGiochi.size(); i++){%>				
 					<div class="col">
 						<div class="content-cards mb-3">
-							<div class="card m-auto" style="width: 80%; height: 80%;"
-							data-game-id="<%=listaGiochi.get(i).getId() %>">
+							<div class="card m-auto" style="width: 80%; height: 80%;">
+								<a href="<%=request.getContextPath()%>/GameReviewLogicServlet"
+									data-game-id = "<%=listaGiochi.get(i).getId()%>"
+									data-method = "GET"
+									class = "game-link">
 									<img
 										src="<%=listaGiochi.get(i).getImagePath() %>"
 										class="card-img-top" alt="game_img">								
-																
+								</a>								
 								<div class="card-body">
 									<h3 class="card-title"><%=listaGiochi.get(i).getNome() %></h3>
 									<p class="card-text"><%=listaGiochi.get(i).getDescrizione() %></p>
@@ -106,6 +109,34 @@
         
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	
+	<script>
+	$(document).ready(function() {
 
+		const contextPath = '${pageContext.request.contextPath}';
+		
+	    $('.game-link').click(function(e) {
+	        e.preventDefault();
+	        const gameId = $(this).data('game-id');
+	        alert(gameId);
+	        
+	        $.ajax({
+				type: 'GET',
+				url: contextPath + '/GameReviewLogicServlet',
+				data: {
+					gameId : gameId
+				},
+				success: function(response){
+					window.location.href = contextPath + '/GameReviewLogicServlet?gameId=' + gameId;
+					alert('success');
+				},
+				error: function(xhr, status, error){
+					alert('error');
+				}
+			});        
+	    });
+	});
+	</script>
 </body>
 </html>

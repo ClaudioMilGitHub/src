@@ -12,5 +12,8 @@ public interface RecensioneDAO {
 	List<Recensione> getAllRecensioniByGame(long idGioco);
 	Recensione updateRecensione();
 	void deleteRecensione();
+	Recensione getRecensioneById(long idRecensione);
+	Recensione updateTestoRecensione(Recensione recensione, String newTesto);
+	void deleteRecensioneById(long idRecensione);
 
 }

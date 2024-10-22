@@ -193,7 +193,20 @@ public class BusinessLogic {
 		return DAOFactory.getDaoFactory(implementation).getRecensioneDAO().addRecensione(testo, idUtente, idGioco);
 	}
 	
+	public static Recensione getRecensioneById(long idRecensione) {
+		return DAOFactory.getDaoFactory(implementation).getRecensioneDAO().getRecensioneById(idRecensione);
+	}
+	
+	public static Recensione updateTestoRecensione(Recensione recensione, String newTesto) {
+		return DAOFactory.getDaoFactory(implementation).getRecensioneDAO().updateTestoRecensione(recensione, newTesto);
+	}
+	
 	public static List<Recensione> getAllRecensioniByGame(long idGioco) {
 		return DAOFactory.getDaoFactory(implementation).getRecensioneDAO().getAllRecensioniByGame(idGioco);
+	}
+
+	public static void deleteRecensioneById(long idRecensione) {
+		DAOFactory.getDaoFactory(implementation).getRecensioneDAO().deleteRecensioneById(idRecensione);
+		
 	}
 }

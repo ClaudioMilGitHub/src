@@ -61,7 +61,7 @@
 				</div>
 						
 			</div>		
-			
+
 			<div class="row recensioni">
 			<%if(!listaRecensioni.isEmpty()){ %>
 				<%for(int i = 0; i<listaRecensioni.size(); i++) {%>
@@ -72,14 +72,21 @@
 						  <div class="card-body">
 						    <h4 class="card-title fw-bold" style="color:#c1dbf4"><%=listaRecensioni.get(i).getUtente().getUsername() %></h4>
 						    <p class="card-text fs-6"><%=listaRecensioni.get(i).getTesto() %></p>
-						    <%if(utenteLoggato.getId() == listaRecensioni.get(i).getUtente().getId()){ %>
-						    <a href="#" class="btn btn-primary edit-btn">Modifica</a>
-						    <%}%>
-						    <div class="edit-body ">
-						    	<textarea rows="4" cols="20">
+						    <%if(utenteLoggato != null && utenteLoggato.getId() == listaRecensioni.get(i).getUtente().getId()){ %>
+						    <button class = "btn btn-primary edit-btn mb-3">Modifica</button>
+						    <div class="edit-body mb-3 hide">
+						    	<form action = "<%=request.getContextPath()%>/GameReviewLogicServlet" method="POST">
+									
+									<input type="hidden" value="<%=listaRecensioni.get(i).getGioco().getId() %>" name = "gameIdForm" ></input>
+						    		<input type="hidden" value="<%=listaRecensioni.get(i).getId() %>" name = "reviewIdInputForm" ></input>
+						    		<textarea rows="5" cols="33" name="reviewInputForm">
 						    		
-						    	</textarea>
+						    		</textarea>
+						    		<button class = "btn btn-success" type="submit">Invia</button>
+						    		<button class = "btn btn-danger delete">Delete</button>
+						    	</form>					    	
 						    </div>
+						    <%}%>						    
 						  </div>
 						</div>
 				<%}%>
@@ -113,15 +120,41 @@
 		  crossorigin="anonymous"></script>
 		  
 	<script>
-		$(document).ready(function){
-	
-			$('edit-btn').click(function(e)){
-			e.preventDefault();
-			
-			$('edit-body').toggleClass('hide');
-			}
 		
-		}
+		$(document).ready(function(){
+		
+			const contextPath = '${pageContext.request.contextPath}';	
+			
+			$('.edit-btn').click(function(e){
+			
+				$('.edit-body').toggleClass('hide');
+			});
+			
+			$('.delete').click(function() {
+				const idRecensione = $(this).closest('form').find('input[name="reviewIdInputForm"]').val();
+			    const operation = 'delete';
+				alert(idRecensione);
+				alert(operation);
+			    $.ajax({
+		            type: 'POST',
+		            url: contextPath + '/GameReviewLogicServlet',
+		            data: { 
+		            	idRecensione: idRecensione,
+		            	operation: operation
+		            },
+		            success: function(response) {
+		                // Gestione della risposta
+		                alert('Utente eliminato con successo');
+		                location.reload();
+		            },
+		            error: function(xhr, status, error) {
+		                // Gestione degli errori
+		                alert('Errore durante l\'eliminazione:', error);
+		            }
+		        });
+			});
+		
+		});
 	
 	</script>
 
