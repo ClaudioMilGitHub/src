@@ -1,5 +1,155 @@
 package org.elis.dao.JPA;
 
+import java.util.List;
+import org.elis.dao.LibreriaDAO;
+import org.elis.model.Gioco;
+import org.elis.model.Libreria;
+import org.elis.model.Utente;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Query;
+
+public class JPALibreriaDao implements LibreriaDAO {
+
+    private JPALibreriaDao() {}
+
+    private static JPALibreriaDao instance;
+
+    public static JPALibreriaDao getInstance() {
+        if (instance == null) {
+            instance = new JPALibreriaDao();
+        }
+        return instance;
+    }
+
+    @Override
+    public Libreria aggiungiGiocoALibreria(Utente utente, Gioco gioco) {
+        Libreria l = new Libreria();
+        l.setGioco(gioco);
+        l.setUtente(utente);
+
+        EntityManager em = JPADaoFactory.getEntityManager();
+        EntityTransaction t = em.getTransaction();
+        try {
+            t.begin();
+            em.persist(l);
+            t.commit();
+        } catch (Exception e) {
+            if (t.isActive()) t.rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
+
+        return l;
+    }
+
+    @Override
+    public Libreria updateLibreriaById(long id, String nuovoNome) {
+        EntityManager em = JPADaoFactory.getEntityManager();
+        EntityTransaction t = em.getTransaction();
+        try {
+            t.begin();
+            Libreria l = em.find(Libreria.class, id);
+            if (l != null) {
+                l.getUtente().setUsername(nuovoNome);
+                em.merge(l);
+                t.commit();
+            } else {
+                System.out.println("Impossibile trovare la libreria con l'ID specificato.");
+            }
+        } catch (Exception e) {
+            if (t.isActive()) t.rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
+
+        return null;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Libreria> getLibreriaByName(String nome) {
+        EntityManager em = JPADaoFactory.getEntityManager();
+        try {
+            Query q = em.createQuery("SELECT l FROM Libreria l JOIN l.utente u WHERE u.username = :username");
+            q.setParameter("username", nome);  // Query parametrizzata per evitare SQL injection
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Libreria> getAllLibrerie() {
+        EntityManager em = JPADaoFactory.getEntityManager();
+        try {
+            Query q = em.createQuery("SELECT l FROM Libreria l");
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public void deleteLibreriaByNome(String nome) {
+        EntityManager em = JPADaoFactory.getEntityManager();
+        EntityTransaction t = em.getTransaction();
+        try {
+            Query q = em.createQuery("SELECT l FROM Libreria l JOIN l.utente u WHERE u.username = :username");
+            q.setParameter("username", nome);  // Query parametrizzata per evitare SQL injection
+            List<Libreria> librerie = q.getResultList();
+            t.begin();
+            for (Libreria l : librerie) {
+                em.remove(l);
+            }
+            t.commit();
+        } catch (Exception e) {
+            if (t.isActive()) t.rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public Libreria getLibreriaById(long id) {
+        EntityManager em = JPADaoFactory.getEntityManager();
+        try {
+            return em.find(Libreria.class, id);  // Operazione sicura
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public Libreria deleteLibreriaById(long id) {
+        EntityManager em = JPADaoFactory.getEntityManager();
+        EntityTransaction t = em.getTransaction();
+        try {
+            Query q = em.createQuery("SELECT l FROM Libreria l WHERE l.id = :id");
+            q.setParameter("id", id);  // Query parametrizzata per evitare SQL injection
+            Libreria l = (Libreria) q.getSingleResult();
+            t.begin();
+            em.remove(l);
+            t.commit();
+            return l;
+        } catch (Exception e) {
+            if (t.isActive()) t.rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
+}
+
+
+
+/*package org.elis.dao.JPA;
+
 
 import java.util.List;
 
@@ -115,4 +265,4 @@ private JPALibreriaDao() {}
 		return l;
 	}
 
-}
+} */
