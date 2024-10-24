@@ -26,13 +26,14 @@ public class JPAGiocoDao implements GiocoDAO {
 
     @Override
     public Gioco addGioco(String nome, LocalDate dataRilascio, String descrizione, String imagePath, double prezzo,
-                          Offerta idOfferta, Utente utente) {
+                          Offerta offerta, Utente utente) {
         Gioco g = new Gioco();
         g.setNome(nome);
         g.setDataRilascio(dataRilascio);
         g.setDescrizione(descrizione);
         g.setImagePath(imagePath);
         g.setPrezzo(prezzo);
+        g.setOfferta(offerta);
 
         EntityManager em = JPADaoFactory.getEntityManager();
         EntityTransaction t = em.getTransaction();

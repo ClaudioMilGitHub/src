@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="org.elis.model.*"%>
+<%@page import="org.elis.utils.PrezzoUtil"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -72,21 +73,44 @@
 										
 										<%boolean test = BusinessLogic.GameInLibreria(utenteLoggato, listaGiochi.get(i));%>
 
-											<%if(test){%>
-
-												
+											<%if(test){%>										
 												<a href="<%=request.getContextPath()%>/LibreriaServlet" class="btn btn-outline-primary">In libreria</a>
 												<%} else {%>
-														<input type="hidden" name="AddGameToLibreria" value="<%=listaGiochi.get(i).getNome() %>">
-														<button type="submit" class="btn btn-outline-primary">Acquista</button>																				
+														<div class="d-flex align-items-center gap-3">
+															<%if(listaGiochi.get(i).getOfferta() != null) {%>
+																<span class="badge text-bg-danger" style ="text-decoration:line-through;">€<%=String.format("%.2f", listaGiochi.get(i).getPrezzo()) %></span>
+																<div class = "d-flex">
+																	<span style = "color:green;"> - <%=listaGiochi.get(i).getOfferta().getSconto() * 100%></span>
+																	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-percent" viewBox="0 0 16 16" style="margin :4 0; color:green;">
+  																	<path d="M13.442 2.558a.625.625 0 0 1 0 .884l-10 10a.625.625 0 1 1-.884-.884l10-10a.625.625 0 0 1 .884 0M4.5 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5m7 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+																</svg>
+																</div>
+																
+																
+																<span class="badge text-bg-success">€<%= String.format("%.2f", listaGiochi.get(i).getPrezzo() * listaGiochi.get(i).getOfferta().getSconto()) %></span>
+															<%} else {%>
+													          <span class="badge bg-primary">€<%=String.format("%.2f",listaGiochi.get(i).getPrezzo()) %></span>
+													          <input type="hidden" name="AddGameToLibreria" value="<%=listaGiochi.get(i).getNome() %>">
+													          <button type="submit" class="btn btn-outline-primary">Acquista</button>
+													         <%}%>
+       													 </div>																			
 												<%}
 												
 										} else {%>
-											<input type="hidden" name="AddGameToLibreria" value="<%=listaGiochi.get(i).getNome() %>">
-											<button type="submit" class="btn btn-outline-primary">Acquista</button>
 											
-											
-										<%}%>
+											<%if(listaGiochi.get(i).getOfferta() != null) {%>
+													<span class="badge text-bg-danger" style ="text-decoration:line-through;">€<%=listaGiochi.get(i).getPrezzo() %></span>
+													<span style = "color:green;"> - <%=listaGiochi.get(i).getOfferta().getSconto() * 100%></span>
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-percent" viewBox="0 0 16 16" style="color:green;">
+  														<path d="M13.442 2.558a.625.625 0 0 1 0 .884l-10 10a.625.625 0 1 1-.884-.884l10-10a.625.625 0 0 1 .884 0M4.5 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5m7 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+													</svg>
+													<span class="badge text-bg-success">€<%= String.format("%.2f", listaGiochi.get(i).getPrezzo() * listaGiochi.get(i).getOfferta().getSconto()) %></span>
+												<%} else {%>
+										          <span class="badge bg-primary">€<%=String.format("%.2f",listaGiochi.get(i).getPrezzo())%></span>
+										          <input type="hidden" name="AddGameToLibreria" value="<%=listaGiochi.get(i).getNome() %>">
+										          <button type="submit" class="btn btn-outline-primary">Acquista</button>
+										         <%}%>									
+										  <%}%>
 									</form>
 								</div>
 							</div>
