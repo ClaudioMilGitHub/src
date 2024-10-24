@@ -12,7 +12,7 @@
 	<%Utente utenteLoggato = (Utente) request.getAttribute("utenteLoggato"); %>
 	
 	   <!-- Navigation bar row-->
-        <div class="row navbar mb-3">
+        <div class="row navbar mb-5">
             <nav class="navbar navbar-expand-lg">
                 <div class="container">
                     <a class="navbar-brand" href="<%=request.getContextPath()%>/index">
