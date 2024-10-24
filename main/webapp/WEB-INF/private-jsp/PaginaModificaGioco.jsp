@@ -8,13 +8,17 @@
     <meta charset="UTF-8">
     <title>Modifica Gioco</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/PaginaModificaGioco.css">
 </head>
 <body>
 
      	 <% Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato"); %>
    		 <% List<Offerta> offerte = BusinessLogic.getAllOfferta(); %>
    		 <% List<Gioco> giochi = BusinessLogic.getAllGiochi(); %>
-   		 <% List<Genere> generi = BusinessLogic.getAllGenere(); %>
+   		 <% List<Genere> generi = BusinessLogic.getAllGenere(); 
+   		 Gioco giocoSelezionato = giochi.get(0);//(Gioco)request.getAttribute("giocoSelezionato");
+   		 %>
     <div class="container-fluid">
          <!--  NavBar  -->
          <% request.setAttribute("utenteLoggato", utenteLoggato); %>
@@ -42,7 +46,7 @@
                         <!-- Nome -->
                         <div class="form-group">
                             <label for="name" style="color: white;">Nome</label>
-                            <input type="text" id="name" name="name" class="form-control">
+                            <input type="text" id="name" name="name" class="form-control" value='<%=giocoSelezionato.getNome() %>'>
                         </div>
 
                         <!-- Descrizione -->

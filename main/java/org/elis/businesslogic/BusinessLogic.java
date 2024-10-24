@@ -204,6 +204,10 @@ public class BusinessLogic {
 	public static List<Recensione> getAllRecensioniByGame(long idGioco) {
 		return DAOFactory.getDaoFactory(implementation).getRecensioneDAO().getAllRecensioniByGame(idGioco);
 	}
+	
+	public static List<Recensione> getRecensioneByUtente(Utente utente) {
+		return DAOFactory.getDaoFactory(implementation).getRecensioneDAO().getRecensioneByUtente(utente);
+	}
 
 	public static void deleteRecensioneById(long idRecensione) {
 		DAOFactory.getDaoFactory(implementation).getRecensioneDAO().deleteRecensioneById(idRecensione);

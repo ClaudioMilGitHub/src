@@ -8,7 +8,7 @@ import org.elis.model.Utente;
 public interface RecensioneDAO {
 	
 	Recensione addRecensione(String testo, long idUtente, long idGioco);
-	Recensione getRecensioneByUtente(Utente utente);
+	List<Recensione> getRecensioneByUtente(Utente utente);
 	List<Recensione> getAllRecensioniByGame(long idGioco);
 	Recensione updateRecensione();
 	void deleteRecensione();

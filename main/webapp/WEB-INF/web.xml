@@ -159,4 +159,34 @@
     <servlet-name>GameReviewLogicServlet</servlet-name>
     <url-pattern>/GameReviewLogicServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddReviewServlet</display-name>
+    <servlet-name>AddReviewServlet</servlet-name>
+    <servlet-class>org.elis.controller.AddReviewServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddReviewServlet</servlet-name>
+    <url-pattern>/AddReviewServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateReviewServlet</display-name>
+    <servlet-name>UpdateReviewServlet</servlet-name>
+    <servlet-class>org.elis.controller.UpdateReviewServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateReviewServlet</servlet-name>
+    <url-pattern>/UpdateReviewServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteReviewServlet</display-name>
+    <servlet-name>DeleteReviewServlet</servlet-name>
+    <servlet-class>org.elis.controller.DeleteReviewServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteReviewServlet</servlet-name>
+    <url-pattern>/DeleteReviewServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -26,7 +26,7 @@ public class Test {
 //		BusinessLogic.addUtente(1, "thegiannigiannos", "email03@gmail.com", "Password1235!?", "Gianno", "Gianni", "3755954847", "Via San Bernardino 25", null, "Roma", LocalDate.of(1998, 6, 29));
 //		BusinessLogic.addUtente(1, "thepincopancos", "email04@gmail.com", "Password1236!?", "Pinco", "Panco", "3755954846", "Via San Bernardino 24", null, "Milano", LocalDate.of(1999, 5, 28));
 //		BusinessLogic.addUtente(1, "thegiallogiallis", "email05@gmail.com", "Password1237!?", "Giallo", "Gialli", "3755954845", "Via San Bernardino 23", null, null, LocalDate.of(1995, 4, 27));
-		BusinessLogic.addUtente(2, "ubisoft", "ubisoft@ubisoft.com", "Password1238!?", "Ubisoft", null, "3755954844", null, "www.ubisoft.com/", "Saint-Mandé", LocalDate.of(1985, 3, 26));
+//		BusinessLogic.addUtente(2, "ubisoft", "ubisoft@ubisoft.com", "Password1238!?", "Ubisoft", null, "3755954844", null, "www.ubisoft.com/", "Saint-Mandé", LocalDate.of(1985, 3, 26));
 //		BusinessLogic.addUtente(2, "505Games", "505@505games.com", "Password1239!?", "505Games", null, "3755954843", null, "https://505games.com/", "Milano", LocalDate.of(2006, 2, 25));
 		
 		//Aggiungi giochi al database

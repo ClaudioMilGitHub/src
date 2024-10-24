@@ -46,9 +46,12 @@ public class JPARecensioneDao implements RecensioneDAO {
 	}
 
 	@Override
-	public Recensione getRecensioneByUtente(Utente utente) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Recensione> getRecensioneByUtente(Utente utente) {
+		
+		EntityManager em = JPADaoFactory.getEntityManager();
+		Query q = em.createQuery("Select r from Recensione r where r.utente = :utente");
+		q.setParameter("utente", utente);
+		return q.getResultList();
 	}
 	
 	@Override

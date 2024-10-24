@@ -27,11 +27,12 @@
 	
 	<%Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");%>
 	<%Gioco gioco =  (Gioco) request.getAttribute("gioco");%>
-	<%long idGioco = gioco.getId(); %>
-	<%List<Recensione> listaRecensioni =  BusinessLogic.getAllRecensioniByGame(idGioco);%>
+	<%List<Recensione> listaRecensioni = (List<Recensione>) request.getAttribute("listaRecensioni"); %>
+	<%boolean hasReview = (boolean) request.getAttribute("hasReview"); %>
 	<%
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	%>
+	<%String errorMessage = (String) request.getAttribute("errorMessage"); %>
 	
 	
 
@@ -73,28 +74,80 @@
 						    <h4 class="card-title fw-bold" style="color:#c1dbf4"><%=listaRecensioni.get(i).getUtente().getUsername() %></h4>
 						    <p class="card-text fs-6"><%=listaRecensioni.get(i).getTesto() %></p>
 						    <%if(utenteLoggato != null && utenteLoggato.getId() == listaRecensioni.get(i).getUtente().getId()){ %>
-						    <button class = "btn btn-primary edit-btn mb-3">Modifica</button>
+						    
+						    <button class = "btn btn-dark edit-btn mb-3">Modifica</button>
+						    
 						    <div class="edit-body mb-3 hide">
-						    	<form action = "<%=request.getContextPath()%>/GameReviewLogicServlet" method="POST">
+						    	<div class = "review-edit-form">
+						    		<form action = "<%=request.getContextPath()%>/UpdateReviewServlet" method="POST">
 									
-									<input type="hidden" value="<%=listaRecensioni.get(i).getGioco().getId() %>" name = "gameIdForm" ></input>
-						    		<input type="hidden" value="<%=listaRecensioni.get(i).getId() %>" name = "reviewIdInputForm" ></input>
-						    		<textarea rows="5" cols="33" name="reviewInputForm">
-						    		
-						    		</textarea>
-						    		<button class = "btn btn-success" type="submit">Invia</button>
-						    		<button class = "btn btn-danger delete">Delete</button>
-						    	</form>					    	
+									<div class = "review-text-form mb-3 d-flex flex-column">
+										<input type="hidden" value="<%=listaRecensioni.get(i).getGioco().getId() %>" name = "gameIdForm" ></input>
+							    		<input type="hidden" value="<%=listaRecensioni.get(i).getId() %>" name = "reviewIdInputForm" ></input>
+							    		<label for="review-text">Nuova Recensione</label>
+							    		<textarea rows="5" cols="33" name="reviewInputForm" id="review-text" class="form-control w-50 mt-1"></textarea>	
+									</div>
+	    		
+						    		<div class = "review-edit-btn mb-3">
+						    			<button class = "btn btn-success update" type="submit">	
+						    					Invia Modifiche
+						    			</button>
+						    		</div>		
+						    			
+						    	</form>
+						    	</div>
+						    	
+						    	<div class="review-delete-form">
+							    	<form action = "<%=request.getContextPath()%>/DeleteReviewServlet" method="POST">
+							    	
+										<input type="hidden" value="<%=listaRecensioni.get(i).getGioco().getId() %>" name = "gameIdForm" ></input>
+							    		<input type="hidden" value="<%=listaRecensioni.get(i).getId() %>" name = "reviewIdInputForm" ></input>    	
+							    		<div class="review-delete-btn mb-3">
+							    			<button class = "btn btn-danger" type="submit">	
+							    					Elimina Recensione
+							    			</button>
+							    		</div>	
+							    			
+							    	</form>		
+						    	</div>
+						    		    	
 						    </div>
-						    <%}%>						    
+						    <%}%>    
 						  </div>
-						</div>
+					</div>
 				<%}%>
 			<%} else { %>
-				<div>
+				
 					<h2 class="text-center" style="color:white;">Nessuna recensione pubblicata</h2>
-				</div>
-			<%} %>
+					
+				<%} %>
+					
+					<%if(!hasReview){%>
+						<div class = "new-review-btn  text-center mb-3">
+							<button class = "btn btn-success new ">Crea nuova Recensione</button>
+
+						</div>
+							<div class = "new-review-form hide text-center mb-3">
+						    	<form action = "<%=request.getContextPath()%>/AddReviewServlet" method="POST" class = "m-auto d-flex flex-column w-50">
+							    	
+							    	<input type="hidden" value="<%=gioco.getId()%>" name = "gameIdForm" ></input>						    	
+							    	<input type="hidden" value="<%=utenteLoggato.getId()%>" name = "userIdForm" ></input>
+							    	
+							    	<label for="review-text-area" style="color:white;">Recensione:</label>
+							    	<textarea rows="5" cols="33" name="reviewInputForm" class = " form-control review-text-area" id = "review-text-area"></textarea>
+							    	
+							    	
+							    	<div class = "new-review-form-btn text-center mt-3">
+							    		<button class = "btn btn-success create w-25" type="submit">Pubblica recensione</button>
+							    	</div>
+							    	
+
+						    	</form>
+						    </div>
+					<%}%>	  
+					<%if(errorMessage != null) {%>
+						<p class = "text-center" style = "color:white;"><%=errorMessage %></p>
+					<%}%>  									
 			</div>
 		</div>
 		
@@ -130,30 +183,11 @@
 				$('.edit-body').toggleClass('hide');
 			});
 			
-			$('.delete').click(function() {
-				const idRecensione = $(this).closest('form').find('input[name="reviewIdInputForm"]').val();
-			    const operation = 'delete';
-				alert(idRecensione);
-				alert(operation);
-			    $.ajax({
-		            type: 'POST',
-		            url: contextPath + '/GameReviewLogicServlet',
-		            data: { 
-		            	idRecensione: idRecensione,
-		            	operation: operation
-		            },
-		            success: function(response) {
-		                // Gestione della risposta
-		                alert('Utente eliminato con successo');
-		                location.reload();
-		            },
-		            error: function(xhr, status, error) {
-		                // Gestione degli errori
-		                alert('Errore durante l\'eliminazione:', error);
-		            }
-		        });
+			$('.new-review-btn').click(function(e){
+				
+				$('.new-review-form').toggleClass('hide');
 			});
-		
+			
 		});
 	
 	</script>

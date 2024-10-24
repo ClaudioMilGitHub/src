@@ -55,23 +55,24 @@
 						<div class="card-body">
 
 							<div class="btn-container w-50">
-								<%if(utenteLoggato.getRuolo().ordinal() == 1) {%>
+								
 								<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-									<button type="button" class="btn btn-outline-primary"
+									<button type="button" class="btn btn-dark"
 										style="margin: 5px;">Gioca</button>
 								</a>
 								
-								<form action="<%=request.getContextPath()%>/GameReviewLogicServlet" method="POST">
+								<form action="<%=request.getContextPath()%>/GameReviewLogicServlet" method="GET">
 								    <input type="hidden" name="gameId" value="<%=l.getGioco().getId()%>">
-								    <input type="hidden" name="gameName" value="<%=l.getGioco().getNome()%>">
-								    <button type="submit" class="btn btn-outline-primary" style="margin: 5px;">Recensione</button>
+								    <input type="hidden" name="utenteLoggato" value="<%=utenteLoggato.getId()%>">
+								    <button type="submit" class="btn btn-dark" style="margin: 5px;">Recensione</button>
 								</form>
-								<%} else { %>
+								
+								<%if(utenteLoggato.getRuolo().ordinal() != 1) {%>
 								<a href="<%=request.getContextPath()%>/UpdateGameLogicServlet">
-									<button type="button" class="btn btn-outline-primary"
+									<button type="button" class="btn btn-dark"
 										style="margin: 5px;">Gestisci Gioco</button>
 								</a>
-								<%} %>
+								<%}%>
 							</div>
 
 							<p class="card-text text-info-emphasis">
