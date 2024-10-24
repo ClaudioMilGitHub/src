@@ -85,3 +85,8 @@ label{
 #btn{
     margin-top: 20px;
 }
+p{
+    color: #8F98A0;
+    display: flex;
+    text-align: center;   
+}
