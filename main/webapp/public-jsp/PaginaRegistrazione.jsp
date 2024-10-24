@@ -62,7 +62,7 @@
                             </select>
                         </div>
                         <div id="div-2" class="col-md-12 col-auto">
-                            <input type="submit" value="REGISTRATI"  class="btn btn-outline-primary" id="btn">
+                            <input type="submit" value="REGISTRATI"  class="btn btn-outline-success" id="btn">
                         </div>
                         
                  

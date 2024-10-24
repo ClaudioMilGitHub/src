@@ -68,7 +68,7 @@
 
 						<div id="div-2" class="col-md-12">
 							<input type="submit" value="ACCEDI"
-								class="btn btn-outline-primary" id="btn">
+								class="btn btn-outline-success" id="btn">
 
 						</div>
 						<div id="div-2" class="col-md-12 mt-5 text-danger">
