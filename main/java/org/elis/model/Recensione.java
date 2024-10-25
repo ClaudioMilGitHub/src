@@ -34,10 +34,10 @@ public class Recensione {
 	
 	
 	 @ManyToOne(fetch = FetchType.LAZY)
-	    @JoinColumn(name = "utente_id", nullable = false)
+	    @JoinColumn(name = "utente_id", nullable = true)
 	private Utente utente;
 	 @ManyToOne(fetch = FetchType.LAZY)
-	    @JoinColumn(name = "gioco_id", nullable = false)
+	    @JoinColumn(name = "gioco_id", nullable = true)
 	private Gioco gioco;
 	 
 	@CreationTimestamp

@@ -58,13 +58,9 @@ public class UpdateGameLogicServlet extends HttpServlet {
 		String genere = request.getParameter("genere");
 		System.out.println(genere);
 		String offerte = request.getParameter("offers");
+		System.out.println("Offerta id = " + offerte);
 		String prezzo2 = request.getParameter("price");
 		String data = request.getParameter("releaseDate");
-		Offerta offerta = null;
-		
-		
-		
-			
 		
 		
 		//Controlliamo che il gioco selezionato sia nel DB
@@ -78,7 +74,7 @@ public class UpdateGameLogicServlet extends HttpServlet {
 		long id = Long.parseLong(idGame);
 		
 		//Selezioniamo il gioco da modificare
-				Gioco game = BusinessLogic.getGiocoById(id);
+		Gioco game = BusinessLogic.getGiocoById(id);
 		
 		
 		//Update nome del gioco
@@ -120,6 +116,15 @@ public class UpdateGameLogicServlet extends HttpServlet {
                 return;
             }
         }
+        
+        //Update Offerta
+        if(offerte != null && !offerte.trim().isEmpty()) {
+        	
+        	Offerta offerta = BusinessLogic.getOffertaById(Long.parseLong(offerte));
+        	BusinessLogic.updateGiocoOfferta(game, offerta);
+        	System.out.println("In IF aggiorna offerte " + offerta.getId() + offerta.getSconto());
+        }
+        
         
         //Update genere
         if(genere != null && !genere.trim().isEmpty()) {

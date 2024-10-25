@@ -209,6 +209,26 @@ public class JPAGiocoDao implements GiocoDAO {
             em.close();  // Chiusura sicura dell'EntityManager
         }
     }
+    
+    @Override
+    public Gioco updateGiocoOfferta(Gioco gioco, Offerta offerta) {
+    	
+    	EntityManager em = JPADaoFactory.getEntityManager();
+        EntityTransaction t = em.getTransaction();
+        try {
+            t.begin();
+            gioco.setOfferta(offerta);
+            gioco = em.merge(gioco);  
+            t.commit();
+            return gioco;
+            
+        } catch (Exception e) {
+            if (t.isActive()) t.rollback();
+            throw e;
+        } finally {
+            em.close();  // Chiusura sicura dell'EntityManager
+        }
+    }
 
     @Override
     public void deleteGiocoById(long id) {
@@ -217,10 +237,18 @@ public class JPAGiocoDao implements GiocoDAO {
         try {
             Gioco gioco = em.find(Gioco.class, id);
             if (gioco != null) {
-                gioco.rimuoviTuttiGliUtenti();
+            	
+            	t.begin();
+            	gioco.rimuoviTuttiGliUtenti();
                 gioco.rimuoviTuttiGeneri();
-                t.begin();
+                
+                gioco.rimuoviRecensioni();
+               
+                gioco.setOfferta(null);
+                
+                
                 em.remove(gioco);
+                
                 t.commit();
             }
         } catch (Exception e) {

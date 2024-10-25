@@ -213,4 +213,8 @@ public class BusinessLogic {
 		DAOFactory.getDaoFactory(implementation).getRecensioneDAO().deleteRecensioneById(idRecensione);
 		
 	}
+
+	public static void updateGiocoOfferta(Gioco game, Offerta offerta) {
+			
+	}
 }

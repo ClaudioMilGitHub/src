@@ -76,7 +76,7 @@
                         <div class="row">
                             <div class="col-lg-6" style="margin-top: 3vh;">
                                 <label for="coverImage" style="color: white;">Immagine di Copertina:</label>
-                                <input type="file" id="coverImage" name="coverImage" accept="image/*" required>
+                                <input type="file" id="coverImage" name="coverImage" accept="image/*">
                             </div>
                         </div>
 

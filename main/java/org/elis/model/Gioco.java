@@ -7,7 +7,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.elis.businesslogic.BusinessLogic;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.*;
@@ -46,11 +49,24 @@ public class Gioco {
 	@ManyToMany(mappedBy = "giochi")
 	private List<Utente> utenti = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "gioco", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Recensione> recensioni = new ArrayList<>();
+	
 	@ManyToOne
 	@JoinColumn(name = "offerta_id")
 	private Offerta offerta;
 	
 	public Gioco() {}
+	
+	
+
+	public List<Recensione> getRecensioni() {
+		return recensioni;
+	}
+
+	public void setRecensioni(List<Recensione> recensioni) {
+		this.recensioni = recensioni;
+	}
 
 	public long getId() {
 		return id;
@@ -162,6 +178,22 @@ public class Gioco {
 	private void rimuoviGenere(Genere genere) {
 		generi.remove(genere);
         genere.getGiochi().remove(this);
+    }
+	
+	public void rimuoviRecensioni() {
+		for (Recensione recensione : new HashSet<>(recensioni)) {
+            rimuoviRecensione(recensione);
         }
+	}
+
+	private void rimuoviRecensione(Recensione recensione) {
+		
+		recensione.setGioco(null);
+		recensione.setUtente(null);
+		recensioni.remove(recensione);
+		
+		BusinessLogic.deleteRecensioneById(recensione.getId());
+
+	}
 			
 }
